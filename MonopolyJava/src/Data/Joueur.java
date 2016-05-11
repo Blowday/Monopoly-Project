@@ -69,6 +69,7 @@ public class Joueur {
 	public void setNewPos(int p, int d1, int d2, int nbCases) {
 		// TODO - implement Joueur.setNewPos
 		throw new UnsupportedOperationException();
+                //robin
 	}
 
 }
