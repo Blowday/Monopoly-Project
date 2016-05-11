@@ -3,7 +3,17 @@ package Data;
 
 public abstract class Carreau {
 
-	private int numero;
+	private int pfsddddddddddddddgbb;
 	private String nomCarreau;
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 }
