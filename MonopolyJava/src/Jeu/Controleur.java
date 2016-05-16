@@ -5,6 +5,9 @@ import Data.*;
 
 public class Controleur {
 
+    public static void main(String[] args) {
+        
+    }
 	IHM ihm;
 	Monopoly monopoly;
 
