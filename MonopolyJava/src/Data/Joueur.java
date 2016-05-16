@@ -55,9 +55,12 @@ public class Joueur {
 	}
 
 	public int getPosC() {
-		// TODO - implement Joueur.getPosC
-		throw new UnsupportedOperationException();
+            return positionCourante.getNumero();
 	}
+        
+        public void setPosC(Carreau c) {
+            positionCourante = c;
+        }
 
 	/**
 	 * 
@@ -67,9 +70,25 @@ public class Joueur {
 	 * @param nbCases
 	 */
 	public void setNewPos(int p, int d1, int d2, int nbCases) {
+                
+                //se servir de setPosC une fois qu'on connait le carreau (peut être)
+                
 		// TODO - implement Joueur.setNewPos
 		throw new UnsupportedOperationException();
                 //robin
 	}
+        
+        
+        
+        public void afficher() {
+            System.out.println("salut je suis a la case : " + this.getPosC());
+        }
+        
+        
+        
+        
+        
+        
+        
 
 }

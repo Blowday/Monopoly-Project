@@ -3,19 +3,55 @@ package Jeu;
 import Ui.IHM;
 import Data.*;
 
-public class Controleur {
 
-    public static void main(String[] args) {
+
+
+public class Controleur {
+    
         
-    }
-	IHM ihm;
-	Monopoly monopoly;
+        //MAIN MOTEUR DE JEU 
+        public static void main(String[] args) {
+            IHM ihm = new IHM();
+            
+            
+            //Inscription des joueurs
+            
+            Monopoly monopoly = new Monopoly(ihm.inscrireJoueur());
+            
+            
+            for (Joueur temp : monopoly.getJoueurs()) {
+                temp.afficher();
+            }
+            
+            
+            //création de plateau
+                //monopoly.créerPlateau
+                
+            //Ajouter joueurs inscrits sur case départ
+                
+            //Lancer la partie !
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+            
+        }
+    
+    
+	
 
 	/**
 	 * 
 	 * @param j
 	 */
-	public void jouerUnCoup(Joueur j) {
+	public static void jouerUnCoup(Joueur j) {
 		// TODO - implement Controleur.jouerUnCoup
 		throw new UnsupportedOperationException();
 	}
@@ -24,12 +60,12 @@ public class Controleur {
 	 * 
 	 * @param j
 	 */
-	private Carreau lancerDésAvancer(Joueur j) {
+	private static Carreau lancerDésAvancer(Joueur j) {
 		// TODO - implement Controleur.lancerDésAvancer
 		throw new UnsupportedOperationException();
 	}
 
-	public int roll() {
+	public static int roll() {
 		// TODO - implement Controleur.roll
 		throw new UnsupportedOperationException();
 	}
@@ -40,9 +76,9 @@ public class Controleur {
 	 * @param d1
 	 * @param d2
 	 */
-	public void avancer(Joueur j, int d1, int d2) {
+	public static void avancer(Joueur j, int d1, int d2) {
 		// TODO - implement Controleur.avancer
 		throw new UnsupportedOperationException();
 	}
-
+        
 }
