@@ -12,6 +12,13 @@ public class Joueur {
 	private String nomJoueur;
 	private int cash = 1500;
 
+        
+        public Joueur(String s) {
+            setNom(s);
+        }
+        
+        
+        
 	/**
 	 * 
 	 * @param l
@@ -85,6 +92,9 @@ public class Joueur {
         }
         
         
+        private void setNom(String s) {
+            this.nomJoueur = s;
+        }
         
         
         

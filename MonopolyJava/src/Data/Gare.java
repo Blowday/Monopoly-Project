@@ -4,6 +4,20 @@ public class Gare extends CarreauAchetable {
 
 	private Joueur proprietaire;
 
+        
+        public Gare(String s) {
+            super(s);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 	/**
 	 * 
 	 * @param j
