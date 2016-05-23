@@ -13,6 +13,42 @@ public class IHM {
             setControleur(c);
         }
         
+        public int afficherMenu() {
+            int s;
+            Scanner sc = new Scanner(System.in);
+            
+            System.out.println("Monopoly : Que voulez vous faire ? "); 
+            System.out.println("1 : Inscrire joueur"); 
+            System.out.println("2 : Lancer partie"); 
+            System.out.println("3 : Quitter"); 
+            
+            s = sc.nextInt();
+            return s;
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
  
         
         public ArrayList<Joueur> inscrireJoueur() {

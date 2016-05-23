@@ -24,15 +24,21 @@ public class Monopoly {
             
         }
         
-        
-        
         //Méthode
+        
+        public void inscrireJoueur(ArrayList<Joueur> j) {
+            this.setJoueurs(j);
+        }
         
         private void setJoueurs(ArrayList<Joueur> j) {
             joueurs = j;
             
             for (Joueur temp : joueurs) {
                 temp.setPosC(carreaux.get(0));
+                System.out.println("le joueur ");
+                temp.afficher();
+                System.out.println(" est prêt");
+
             }
             
         }
