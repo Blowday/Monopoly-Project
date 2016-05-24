@@ -8,6 +8,7 @@ public abstract class Carreau {
 
         public Carreau(int num, String s) {
             setNom(s);
+            setNum(num);
         }
 
         

@@ -5,15 +5,9 @@ public class Gare extends CarreauAchetable {
 	private Joueur proprietaire;
 
         
-        public Gare(String s) {
-            super(s);
+        public Gare(int num, String s, int pA) {
+            super(num, s, pA, 25);
         }
-        
-        
-        
-        
-        
-        
         
         
         

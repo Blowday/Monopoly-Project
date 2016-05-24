@@ -63,22 +63,25 @@ public class Monopoly {
 				String caseType = data.get(i)[0];
 				if(caseType.compareTo("P") == 0){
 					System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(i,new ProprieteAConstruire(data.get(i)[2]));
+                                        carreaux.put(i,new ProprieteAConstruire(Integer.parseInt(data.get(i)[1]), data.get(i)[2], data.get(i)[3], Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[5])));
                                         //AJOUTER GESTION DE PRIX
 				}
 				else if(caseType.compareTo("G") == 0){
 					System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(i,new Gare(data.get(i)[2]));
+                                        carreaux.put(i,new Gare(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
 				}
 				else if(caseType.compareTo("C") == 0){
 					System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(i,new Compagnie(data.get(i)[2]));
+                                        carreaux.put(i,new Compagnie(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
 				}
 				else if(caseType.compareTo("AU") == 0){
 					System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(i,new AutreCarreau(Integer.parseInt(data.get(i)[1]),data.get(i)[2],Integer.parseInt(data.get(i)[3]))); 
-                                        if(data.get(i)[3] == null) {
+                                        System.out.println(data.get(i).length);
+                                        if(data.get(i).length == 3) {
                                             carreaux.put(i,new AutreCarreau(Integer.parseInt(data.get(i)[1]),data.get(i)[2]));
+                                        }
+                                        else {
+                                            carreaux.put(i,new AutreCarreau(Integer.parseInt(data.get(i)[1]),data.get(i)[2],Integer.parseInt(data.get(i)[3]))); 
                                         }
                                         
 				}
@@ -93,6 +96,9 @@ public class Monopoly {
 		catch(IOException e){
 			System.err.println("[buildGamePlateau()] : Error while reading file!");
 		}
+                
+            
+                
 	}
 	
 	private ArrayList<String[]> readDataFile(String filename, String token) throws FileNotFoundException, IOException

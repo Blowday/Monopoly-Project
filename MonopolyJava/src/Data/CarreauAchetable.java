@@ -4,7 +4,7 @@ public abstract class CarreauAchetable extends Carreau {
 
     private int prixAchat;
     private int prixLoyer;
-        
+    
     public CarreauAchetable(int num, String s, int pA, int pL) {
         super(num, s);
         setPrixAchat(pA);
