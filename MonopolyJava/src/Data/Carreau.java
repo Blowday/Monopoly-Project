@@ -6,7 +6,7 @@ public abstract class Carreau {
 	private int numero;
 	private String nomCarreau;
 
-        public Carreau(String s) {
+        public Carreau(int num, String s) {
             setNom(s);
         }
 
@@ -21,6 +21,10 @@ public abstract class Carreau {
         
         private void setNom(String s) {
             nomCarreau = s;
+        }
+        
+        private void setNum(int num) {
+            numero = num;
         }
         
 }

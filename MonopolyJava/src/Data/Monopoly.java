@@ -76,10 +76,11 @@ public class Monopoly {
 				}
 				else if(caseType.compareTo("AU") == 0){
 					System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(i,new AutreCarreau(data.get(i)[2])); 
-                                        //IL FAUDRA RAJOUTER DANS LE CONSTRUCTEUR DE AUTRECARREAU L'ARGENT QU'ON GAGNE/PERD EN PASSANT DESSUS
+                                        carreaux.put(i,new AutreCarreau(Integer.parseInt(data.get(i)[1]),data.get(i)[2],Integer.parseInt(data.get(i)[3]))); 
+                                        if(data.get(i)[3] == null) {
+                                            carreaux.put(i,new AutreCarreau(Integer.parseInt(data.get(i)[1]),data.get(i)[2]));
+                                        }
                                         
-                                        //!!!!
 				}
 				else
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
