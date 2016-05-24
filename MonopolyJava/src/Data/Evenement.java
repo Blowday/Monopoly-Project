@@ -20,10 +20,16 @@ public class Evenement {
     private int argentJoueur;
     private String nomCase;
 
+    //Cas 1-2
     public Evenement(int typeFenetre, int loyerCase, int argentJoueur, String nomCase) {
         this.typeFenetre = typeFenetre;
         this.loyerCase = loyerCase;
         this.argentJoueur = argentJoueur;
+        this.nomCase = nomCase;
+    }
+    //Cas 3
+    public Evenement(int typeFenetre, String nomCase){
+        this.typeFenetre = typeFenetre;
         this.nomCase = nomCase;
     }
     

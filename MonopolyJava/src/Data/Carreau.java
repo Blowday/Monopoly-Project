@@ -27,5 +27,8 @@ public abstract class Carreau {
         private void setNum(int num) {
             numero = num;
         }
+        public String getNom(){
+            return this.nomCarreau;
+        }
         
 }

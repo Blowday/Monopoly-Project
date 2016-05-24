@@ -2,8 +2,7 @@ package Data;
 
 public class Gare extends CarreauAchetable {
 
-	private Joueur proprietaire;
-
+	
         
         public Gare(int num, String s, int pA) {
             super(num, s, pA, 25);
@@ -16,56 +15,52 @@ public class Gare extends CarreauAchetable {
 	 * 
 	 * @param j
 	 */
-	public int action(Joueur j) {
-		// TODO - implement Gare.action
-		throw new UnsupportedOperationException();
-	}
-
-	private int calculLoyer() {
-		// TODO - implement Gare.calculLoyer
-		throw new UnsupportedOperationException();
-	}
-
-	private Joueur getProprietaire() {
-		return this.proprietaire;
+	public Evenement action(Joueur j) {
+		
+                
+                //si la gare n'a pas de proprietaire
+		if(null == this.getProprietaire()){
+                   return possibiliteAchat(j);
+                }
+                //si la gare a un propriétaire
+                else if(this.getProprietaire() != j){
+                    
+                    return new Evenement(2,this.calculLoyer(),j.getArgent(),this.getNom());
+                }
+                else{
+                    return new Evenement(3,this.getNom());
+                }
+                   
 	}
 
 	/**
 	 * 
 	 * @param j
 	 */
-	private void acheterPropriete(Joueur j) {
+	private Evenement possibiliteAchat(Joueur j) {
 		// TODO - implement Gare.acheterPropriete
-		throw new UnsupportedOperationException();
+		 //si le joueur a assez d'argent
+                    if(this.getPrixAchat() <= j.getArgent()){
+                        return new Evenement(1,this.getPrixAchat(),j.getArgent(),this.getNom());
+                    }
+                    //si le joueur n'a pas assez d'argent
+                    else{
+                        return new Evenement(2,this.getPrixAchat(),j.getArgent(),this.getNom());
+                    }
 	}
 
-	public int getPrixAchat() {
-		// TODO - implement Gare.getPrixAchat
-		throw new UnsupportedOperationException();
-	}
 
-	/**
-	 * 
-	 * @param j
-	 */
-	public void setProprio(Joueur j) {
-		// TODO - implement Gare.setProprio
-		throw new UnsupportedOperationException();
-	}
-
-	public int getLoyer() {
-		// TODO - implement Gare.getLoyer
-		throw new UnsupportedOperationException();
-	}
 
 	/**
 	 * 
 	 * @param loyer
 	 * @param nb
-	 */
-	public int calculPrix(int loyer, int nb) {
-		// TODO - implement Gare.calculPrix
-		throw new UnsupportedOperationException();
+         */
+          
+	public int calculLoyer(){
+		return this.getProprietaire().getNbGares()*this.getPrixLoyer();
 	}
+        
+       
 
 }
