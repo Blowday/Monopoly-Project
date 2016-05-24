@@ -21,5 +21,10 @@ public class ProprieteAConstruire extends CarreauAchetable {
             prixMaison = pM;
             prixHotel = pH;
         }
+        
+        public int calculLoyer(){
+            //a completer
+            return 0;
+        }
 
 }
