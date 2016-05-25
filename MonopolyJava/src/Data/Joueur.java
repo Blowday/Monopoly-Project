@@ -61,34 +61,30 @@ public class Joueur {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getPosC() {
-            return positionCourante.getNumero();
+	public Carreau getCarreau() {
+            return positionCourante;
 	}
         
-        public void setPosC(Carreau c) {
+        public void setCarreau(Carreau c) {
             positionCourante = c;
         }
-
-	/**
-	 * 
-	 * @param p
-	 * @param d1
-	 * @param d2
-	 * @param nbCases
-	 */
-	public void setNewPos(int p, int d1, int d2, int nbCases) {
-                
-                //se servir de setPosC une fois qu'on connait le carreau (peut être)
-                
-		// TODO - implement Joueur.setNewPos
-		throw new UnsupportedOperationException();
-                //robin
-	}
+        public int getCash() {
+            return cash;
+        }
+        
+        public String getName() {
+            return nomJoueur;
+        }
+        
+        public void passageDepart() {
+            this.cash += 200;
+        }
+     
         
         
         
         public void afficher() {
-            System.out.println("salut je suis a la case : " + this.getPosC());
+            System.out.println("salut je suis a la case : " + this.getCarreau().getNumero());
         }
         
         

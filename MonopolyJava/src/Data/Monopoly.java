@@ -34,7 +34,7 @@ public class Monopoly {
             joueurs = j;
             
             for (Joueur temp : joueurs) {
-                temp.setPosC(carreaux.get(0));
+                temp.setCarreau(carreaux.get(0));
                 System.out.println("le joueur ");
                 temp.afficher();
                 System.out.println(" est prêt");
@@ -42,6 +42,13 @@ public class Monopoly {
             }
             
         }
+        
+        public HashMap<Integer,Carreau> getCarreaux() {
+            return carreaux;
+        }
+        
+        
+        
         
         public ArrayList<Joueur> getJoueurs() {
             return joueurs;

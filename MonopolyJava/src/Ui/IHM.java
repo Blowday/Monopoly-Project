@@ -27,18 +27,14 @@ public class IHM {
             
         }
         
+        public void afficherDebutTour(Joueur j) {
+            System.out.println("Le joueur " + j.getName() + " lance les dés : ");
+        }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        public void afficherDe(int d1, int d2) {
+            System.out.println("Dé 1 : " + d1);
+            System.out.println("Dé 2 : " + d2);
+        }
         
         
         
