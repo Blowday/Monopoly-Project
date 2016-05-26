@@ -39,20 +39,20 @@ public class Controleur {
             int d1;
             int d2;
             do {
-                System.out.println(j.getCarreau().getNumero());
-                j.getCarreau().getNumero();
+                System.out.println(j.getPositionCourante().getNumero());
+                j.getPositionCourante().getNumero();
                 d1 = lanceDe();
                 d2 = lanceDe();
                 ihm.afficherDe(d1,d2);
-                if(j.getCarreau().getNumero()-1 + d1 + d2 >= 40){
+                if(j.getPositionCourante().getNumero()-1 + d1 + d2 >= 40){
                     j.passageDepart();
-                    j.setCarreau(monopoly.getCarreaux().get(  (j.getCarreau().getNumero()-1 + d1 + d2) % 40    ));
-                    System.out.println(j.getCarreau().getNumero());
+                    j.setCarreau(monopoly.getCarreaux().get(  (j.getPositionCourante().getNumero()-1 + d1 + d2) % 40    ));
+                    System.out.println(j.getPositionCourante().getNumero());
                     System.out.println("cash :" + j.getCash());
                 }
                 else {
-                    j.setCarreau(monopoly.getCarreaux().get(j.getCarreau().getNumero()-1 + d1 + d2));
-                    System.out.println(j.getCarreau().getNumero());
+                    j.setCarreau(monopoly.getCarreaux().get(j.getPositionCourante().getNumero()-1 + d1 + d2));
+                    System.out.println(j.getPositionCourante().getNumero());
                 }
                 
             }while(d1 == d2);

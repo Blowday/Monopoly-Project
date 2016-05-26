@@ -61,7 +61,7 @@ public class Joueur {
 		throw new UnsupportedOperationException();
 	}
 
-	public Carreau getCarreau() {
+	public Carreau getPositionCourante() {
             return positionCourante;
 	}
         
@@ -84,7 +84,7 @@ public class Joueur {
         
         
         public void afficher() {
-            System.out.println("salut je suis a la case : " + this.getCarreau().getNumero());
+            System.out.println("salut je suis a la case : " + this.getPositionCourante().getNumero());
         }
         
         

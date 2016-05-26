@@ -13,7 +13,7 @@ public class Monopoly {
 	private HashMap<Integer,Carreau> carreaux;
 	private ArrayList<Joueur> joueurs;
 
-        //Constructeur
+        //Constructeurs
         public Monopoly() {
             carreaux = new HashMap<>();
             creerPlateau("data.txt");
@@ -24,7 +24,7 @@ public class Monopoly {
             
         }
         
-        //Méthode
+        //Méthodes
         
         public void inscrireJoueur(ArrayList<Joueur> j) {
             this.setJoueurs(j);
