@@ -37,5 +37,9 @@ public class Evenement {
     }
     
     
+    public int getType(){
+        return typeFenetre;
+    }
+    
     
 }

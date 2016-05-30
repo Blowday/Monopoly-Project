@@ -36,7 +36,7 @@ public class Controleur {
     
     
     public void lancerPartie() {
-        
+        //rajouter une boucle pour gerer la continuité du jeu (basée sur le cash)
         for(Joueur j : monopoly.getJoueurs()) {
            do {
                jouerUnCoup(j);
@@ -78,22 +78,39 @@ public class Controleur {
         //si le joueur arrive sur un carreau achetable
         if(c instanceof CarreauAchetable){
             Evenement e = ((CarreauAchetable) c).action(j);
-            //reponse = false ne peux rien faire (pas assez d'argent / debité)
             //reponse = false n'a pas voulu acheter
             //reponse = true a voulu acheter
-            
-            boolean reponse = true;//ihm.afficherPropostion(e);
-            if (reponse){
-                ((CarreauAchetable) c).setProprio(j);
-                j.payer(((CarreauAchetable) c).getPrixAchat());
-                System.out.println("Argent joueur:"+ j.getCash());
-                System.out.println(c.getNom() +":"+((CarreauAchetable) c).getProprietaire().getName());
+            if(e.getType() == 1){
+                boolean reponse = true;//ihm.afficherPropostion(e);
+                if (reponse){
+                    ((CarreauAchetable) c).setProprio(j);
+                    j.payer(((CarreauAchetable) c).getPrixAchat());
+                    //ajout de la propriete dans la bonne liste
+                    if(c instanceof Gare){
+                        j.ajouterGare((Gare) c);
+                    }
+                    else if(c instanceof Compagnie){
+                        j.ajouterCompagnie((Compagnie) c);
+                    }
+                    else if(c instanceof ProprieteAConstruire){
+                        j.ajouterPropriete((ProprieteAConstruire) c);
+                    }
+                    System.out.println("Argent joueur:"+ j.getCash());//test
+                    System.out.println(c.getNom() +":"+((CarreauAchetable) c).getProprietaire().getName());//test
+                }
+            }
+            else if(e.getType() == 2){  //deduction du loyer
+                j.setCash(j.getCash()-((CarreauAchetable) c).calculLoyer());
+                //ihm.afficherDebit(e); a implementer
+            }
+            else if(e.getType()==3){ //j == proprio
+                //ihm.afficherJproprio(); a implementer
             }
             
         }
         //s'il arrive sur un autre carreau (a gerer plus tard)
         else{
-                   
+            System.out.println("autre carreau");
         }
     }
     

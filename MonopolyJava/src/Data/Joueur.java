@@ -5,16 +5,19 @@ import java.util.*;
 
 public class Joueur {
 
-	Collection<Gare> gares;
+	private ArrayList<Gare> mesGares;
 	private Carreau positionCourante;
-	private Collection<Compagnie> mesCompagnies;
-	private Collection<ProprieteAConstruire> mesProprietes;
+	private ArrayList<Compagnie> mesCompagnies;
+	private ArrayList<ProprieteAConstruire> mesProprietes;
 	private String nomJoueur;
 	private int cash = 1500;
 
         
         public Joueur(String s) {
             setNom(s);
+            mesProprietes = new ArrayList<>();
+            mesGares = new ArrayList<>();
+            mesCompagnies = new ArrayList<>();
         }
         
         
@@ -47,10 +50,17 @@ public class Joueur {
 		cash -= prix;
 	}
 
-	public void ajouterGare() {
-		// TODO - implement Joueur.ajouterGare
-		throw new UnsupportedOperationException();
+	public void ajouterGare(Gare g) {
+		this.mesGares.add(g);
+            
 	}
+        public void ajouterCompagnie(Compagnie comp) {
+		this.mesCompagnies.add(comp);
+            
+	}
+        public void ajouterPropriete(ProprieteAConstruire p){
+                this.mesProprietes.add(p);
+        }
 
 	public int getNbGares() {
 		// TODO - implement Joueur.getNbGares
@@ -66,6 +76,9 @@ public class Joueur {
         }
         public int getCash() {
             return cash;
+        }
+        public void setCash(int cash){
+            this.cash = cash;
         }
         
         public String getName() {
