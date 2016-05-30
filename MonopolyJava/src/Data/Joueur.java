@@ -37,18 +37,14 @@ public class Joueur {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getArgent() {
-		// TODO - implement Joueur.getArgent
-		throw new UnsupportedOperationException();
-	}
+	
 
 	/**
 	 * 
 	 * @param prix
 	 */
 	public void payer(int prix) {
-		// TODO - implement Joueur.payer
-		throw new UnsupportedOperationException();
+		cash -= prix;
 	}
 
 	public void ajouterGare() {

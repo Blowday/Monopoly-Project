@@ -34,8 +34,7 @@ public abstract class CarreauAchetable extends Carreau {
     }
     
     public void setProprio(Joueur j) {
-		// TODO - implement Gare.setProprio
-		throw new UnsupportedOperationException();
+		this.proprietaire = j;
 	}
     
     public Joueur getProprietaire() {
@@ -57,7 +56,7 @@ public abstract class CarreauAchetable extends Carreau {
                 //si la case a un propriétaire
                 else if(this.getProprietaire() != j){
                     
-                    return new Evenement(2,this.calculLoyer(),j.getArgent(),this.getNom());
+                    return new Evenement(2,this.calculLoyer(),j.getCash(),this.getNom());
                 }
                 else{
                     return new Evenement(3,this.getNom());
@@ -72,12 +71,12 @@ public abstract class CarreauAchetable extends Carreau {
 	private Evenement possibiliteAchat(Joueur j) {
 
 		 //si le joueur a assez d'argent
-                    if(this.getPrixAchat() <= j.getArgent()){
-                        return new Evenement(1,this.getPrixAchat(),j.getArgent(),this.getNom());
+                    if(this.getPrixAchat() <= j.getCash()){
+                        return new Evenement(1,this.getPrixAchat(),j.getCash(),this.getNom());
                     }
                     //si le joueur n'a pas assez d'argent
                     else{
-                        return new Evenement(2,this.getPrixAchat(),j.getArgent(),this.getNom());
+                        return new Evenement(2,this.getPrixAchat(),j.getCash(),this.getNom());
                     }
 	}
         

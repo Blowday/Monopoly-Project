@@ -15,15 +15,18 @@ public class Evenement {
         /* 1-Fenetre d'achat possible
            2-Fenetre de loyer déduit
            3-Vous êtes le porpriétaire
+           4-Pas assez d'argent pour acheter
     */
     private int loyerCase;
     private int argentJoueur;
     private String nomCase;
+    private int prixAchatCase;
 
-    //Cas 1-2
+    //Cas 1-2-4
     public Evenement(int typeFenetre, int loyerCase, int argentJoueur, String nomCase) {
         this.typeFenetre = typeFenetre;
         this.loyerCase = loyerCase;
+        this.prixAchatCase = loyerCase; //pour le cas 4
         this.argentJoueur = argentJoueur;
         this.nomCase = nomCase;
     }
@@ -32,6 +35,7 @@ public class Evenement {
         this.typeFenetre = typeFenetre;
         this.nomCase = nomCase;
     }
+    
     
     
 }
