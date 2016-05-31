@@ -11,6 +11,8 @@ public class Joueur {
 	private ArrayList<ProprieteAConstruire> mesProprietes;
 	private String nomJoueur;
 	private int cash = 1500;
+        
+        private boolean perdu;
 
         
         public Joueur(String s) {
@@ -18,6 +20,7 @@ public class Joueur {
             mesProprietes = new ArrayList<>();
             mesGares = new ArrayList<>();
             mesCompagnies = new ArrayList<>();
+            perdu = false;
         }
         
         
@@ -27,8 +30,8 @@ public class Joueur {
 	 * @param l
 	 */
 	public void payerLoyer(int l) {
-		// TODO - implement Joueur.payerLoyer
-		throw new UnsupportedOperationException();
+            this.setCash(this.getCash()-l);
+
 	}
 
 	/**
@@ -36,19 +39,9 @@ public class Joueur {
 	 * @param l
 	 */
 	public void recevoirLoyer(int l) {
-		// TODO - implement Joueur.recevoirLoyer
-		throw new UnsupportedOperationException();
+            this.setCash(this.getCash()+l);
 	}
 
-	
-
-	/**
-	 * 
-	 * @param prix
-	 */
-	public void payer(int prix) {
-		cash -= prix;
-	}
 
 	public void ajouterGare(Gare g) {
 		this.mesGares.add(g);
@@ -63,8 +56,7 @@ public class Joueur {
         }
 
 	public int getNbGares() {
-		// TODO - implement Joueur.getNbGares
-		throw new UnsupportedOperationException();
+		return this.mesGares.size();
 	}
 
 	public Carreau getPositionCourante() {
@@ -101,8 +93,24 @@ public class Joueur {
             this.nomJoueur = s;
         }
         
+        //gestion de defaite
+        public boolean getPerdu(){
+            return perdu;
+        }
         
-        
+        public void perdu(){
+            for(Gare g: mesGares){
+                g.setProprio(null);
+            }
+            for(Compagnie c: mesCompagnies){
+                c.setProprio(null);
+            }
+            for(ProprieteAConstruire p: mesProprietes){
+                p.setProprio(null);
+            }
+            
+            this.perdu = true;
+        }
         
         
 

@@ -56,7 +56,8 @@ public abstract class CarreauAchetable extends Carreau {
                 //si la case a un propriétaire
                 else if(this.getProprietaire() != j){
                     
-                    return new Evenement(2,this.calculLoyer(),j.getCash(),this.getNom());
+                    
+                    return new Evenement(2,this.calculLoyer(),j,this.getProprietaire(),this.getNom()); //fenetre informant du debit
                 }
                 else{
                     return new Evenement(3,this.getNom());
@@ -72,11 +73,11 @@ public abstract class CarreauAchetable extends Carreau {
 
 		 //si le joueur a assez d'argent
                     if(this.getPrixAchat() <= j.getCash()){
-                        return new Evenement(1,this.getPrixAchat(),j.getCash(),this.getNom());
+                        return new Evenement(1,this.getPrixAchat(),j,this.getNom());
                     }
                     //si le joueur n'a pas assez d'argent
                     else{
-                        return new Evenement(2,this.getPrixAchat(),j.getCash(),this.getNom());
+                        return new Evenement(2,this.getPrixAchat(),j,this.getNom());
                     }
 	}
         

@@ -18,18 +18,29 @@ public class Evenement {
            4-Pas assez d'argent pour acheter
     */
     private int loyerCase;
-    private int argentJoueur;
+    private Joueur joueur;
     private String nomCase;
     private int prixAchatCase;
+    private Joueur proprio;
 
-    //Cas 1-2-4
-    public Evenement(int typeFenetre, int loyerCase, int argentJoueur, String nomCase) {
+    //Cas 1-4
+    public Evenement(int typeFenetre, int loyerCase, Joueur j, String nomCase) {
         this.typeFenetre = typeFenetre;
         this.loyerCase = loyerCase;
         this.prixAchatCase = loyerCase; //pour le cas 4
-        this.argentJoueur = argentJoueur;
+        this.joueur = j;
         this.nomCase = nomCase;
     }
+    //Cas 2
+    public Evenement(int typeFenetre, int loyerCase, Joueur j, Joueur Proprio, String nomCase) {
+        this.typeFenetre = typeFenetre;
+        this.loyerCase = loyerCase;
+        this.prixAchatCase = loyerCase; //pour le cas 4
+        this.joueur = j;
+        this.nomCase = nomCase;
+        this.proprio = Proprio;
+    }
+    
     //Cas 3
     public Evenement(int typeFenetre, String nomCase){
         this.typeFenetre = typeFenetre;
@@ -39,6 +50,30 @@ public class Evenement {
     
     public int getType(){
         return typeFenetre;
+    }
+
+    public int getTypeFenetre() {
+        return typeFenetre;
+    }
+
+    public int getLoyerCase() {
+        return loyerCase;
+    }
+
+    public Joueur getJoueur(){
+        return joueur;
+    }
+
+    public String getNomCase() {
+        return nomCase;
+    }
+
+    public int getPrixAchatCase() {
+        return prixAchatCase;
+    }
+    
+    public Joueur getProprio(){
+        return proprio;
     }
     
     

@@ -16,5 +16,17 @@ public class Main {
         
         new Controleur();
         
+        
+        
     }
 }
+
+/*Notes de test
+
+    -tester si l'on peut acheter si l'on fait un double
+    -limite de joueur à 6
+    -test de payer loyer
+    -
+
+=====>CALCUL LOYER COMPAGNIE
+*/

@@ -23,8 +23,8 @@ public class ProprieteAConstruire extends CarreauAchetable {
         }
         
         public int calculLoyer(){
-            //a completer
-            return 0;
+            //a completer avec la gestion des maisons/hotel
+            return this.getPrixLoyer();
         }
 
 }
