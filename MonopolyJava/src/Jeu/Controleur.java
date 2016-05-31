@@ -23,7 +23,7 @@ public class Controleur {
             if (c == 1) {
                 this.inscrireJoueur();
             }
-            else if (c == 2) {
+            else if (c == 2 && monopoly.getJoueurs().size()>=12 && monopoly.getJoueurs().size()<=6) {
                 this.lancerPartie();
             }
         }
