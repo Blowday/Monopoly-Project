@@ -15,6 +15,7 @@ public class Monopoly {
 
         //Constructeurs
         public Monopoly() {
+            joueurs = new ArrayList<Joueur>();
             carreaux = new HashMap<>();
             creerPlateau("data.txt");
             

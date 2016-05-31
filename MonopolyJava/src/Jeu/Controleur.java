@@ -23,8 +23,14 @@ public class Controleur {
             if (c == 1) {
                 this.inscrireJoueur();
             }
-            else if (c == 2 && monopoly.getJoueurs().size()>=12 && monopoly.getJoueurs().size()<=6) {
-                this.lancerPartie();
+            else if (c == 2) {
+                if (monopoly.getJoueurs().size()>=2 && monopoly.getJoueurs().size()<=6) {
+                    this.lancerPartie();
+                }
+                else {
+                    System.out.println("Le nombre de joueurs n'est pas respecté ! (2 à 6 joueurs)");
+                }
+                
             }
         }
          
