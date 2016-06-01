@@ -13,6 +13,23 @@ public class Joueur {
 	private int cash = 1500;
         
         private boolean perdu;
+        
+        private int d1;
+
+    public int getD1() {
+        return d1;
+    }
+
+    public int getD2() {
+        return d2;
+    }
+    public void setD1(int d){
+        this.d1 = d;
+    }
+    public void setD2(int d){
+        this.d2 = d;
+    }
+        private int d2;
 
         
         public Joueur(String s) {
@@ -58,6 +75,9 @@ public class Joueur {
 	public int getNbGares() {
 		return this.mesGares.size();
 	}
+        public int getNbCompagnie(){
+            return this.mesCompagnies.size();
+        }
 
 	public Carreau getPositionCourante() {
             return positionCourante;

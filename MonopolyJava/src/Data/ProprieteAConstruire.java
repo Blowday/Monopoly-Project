@@ -27,4 +27,9 @@ public class ProprieteAConstruire extends CarreauAchetable {
             return this.getPrixLoyer();
         }
 
+    @Override
+    public int calculLoyer(int d1, int d2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

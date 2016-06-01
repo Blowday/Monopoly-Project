@@ -28,7 +28,8 @@ public class IHM {
         }
         
         public void afficherDebutTour(Joueur j) {
-            System.out.println("************************************************");
+            
+            
             System.out.println("Le joueur " + j.getName() + " lance les dés : ");
         }
         
@@ -67,7 +68,7 @@ public class IHM {
 
     public boolean afficherPropostion(Evenement e) { //fenetre de proposition d'achat
         Scanner sc = new Scanner(System.in);
-        System.out.println("---------------------------------------------------------------");
+        
         System.out.println("Vous êtes arrivé sur la case " + e.getNomCase());
         System.out.println("Cette case n'a pas de porpriétaire et coute "+e.getPrixAchatCase());
         
@@ -93,7 +94,7 @@ public class IHM {
 
     public void afficherJproprio(Evenement e) {
         System.out.println("---------------------------------------------------------------");
-        System.out.println("Vous êtes arrivé sur la case "+e.getNomCase() + "vous en êtes le propriétaire");
+        System.out.println("Vous êtes arrivé sur la case "+e.getNomCase() + " vous en êtes le propriétaire");
     }
 
     public void autreCarreau() {
@@ -101,8 +102,34 @@ public class IHM {
     }
 
         
+    public void partiePerdue(){
+        System.out.println("Partie finie");
+    }
+
+    public void nbJoueursMauvais() {
+         System.out.println("Le nombre de joueurs n'est pas respecté ! (2 à 6 joueurs)");
+    }
     
-        
+    public void lancerDes(Joueur j){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("***************************************************************");
+        System.out.print(j.getName()+", lancez les dés: (any key)");
+        sc.nextLine();
+    }
+
+    public void afficherAchat(Evenement e) {
+        System.out.println("Vous avez acheté "+e.getNomCase()+" il vous reste "+e.getJoueur().getCash());
+    }
+
+    public void passageDepart(Joueur j) {
+        System.out.println("Vous êtes passé par la case départ, vous avez: "+j.getCash());
+    }
+
+    public void afficherAchatImp(Evenement e) {
+        System.out.println("Vous êtes arrivé sur la case " + e.getNomCase());
+        System.out.println("Cette case n'a pas de porpriétaire et coute "+e.getPrixAchatCase());
+        System.out.println("Vous n'avez pas assez d'argents pour l'acheter ("+e.getJoueur().getCash()+")");
+    }
         
         
 }

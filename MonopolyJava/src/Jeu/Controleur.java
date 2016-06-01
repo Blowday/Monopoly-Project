@@ -10,8 +10,7 @@ public class Controleur {
     private Monopoly monopoly;
     private int c;
     
-    private int d1;
-    private int d2;
+    
     
     public Controleur() {
        
@@ -28,7 +27,7 @@ public class Controleur {
                     this.lancerPartie();
                 }
                 else {
-                    System.out.println("Le nombre de joueurs n'est pas respecté ! (2 à 6 joueurs)");
+                    ihm.nbJoueursMauvais();
                 }
                 
             }
@@ -42,21 +41,30 @@ public class Controleur {
     
     
     public void lancerPartie() {
-        //rajouter une boucle pour gerer la continuité du jeu (basée sur l'attribut "perdu" des joueurs =>compter les joueurs "vivants")
-        
-        for(Joueur j : monopoly.getJoueurs()) {
-           if(!j.getPerdu()){ 
-            do {
-                jouerUnCoup(j);
-                if(j.getCash() < 0){
-                    this.setD1(1);//on assure la sortie de la boucle
-                    this.setD2(0);
-                    j.perdu();//retire droit de proprio et inique que le joueur a perdu
-                }
-            }while(d1 == d2);
-           } 
+        //essayer de pouvoir relance la partie
+        int joueursVivants=0;
+        for(Joueur j: monopoly.getJoueurs()){
+            if(!j.getPerdu()){
+                joueursVivants++;
+                System.out.println(joueursVivants);
+            }
         }
-        
+        while(joueursVivants > 1){
+            for(Joueur j : monopoly.getJoueurs()) {
+               if(!j.getPerdu()){ 
+                do {
+                    ihm.lancerDes(j);
+                    jouerUnCoup(j);
+                    if(j.getCash() < 0){
+                        j.setD1(1);//on assure la sortie de la boucle
+                        j.setD2(0);
+                        j.perdu();//retire droit de proprio et inique que le joueur a perdu
+                    }
+                }while(j.getD1() == j.getD2());
+               } 
+            }
+        }
+        ihm.partiePerdue();
     }
     public Carreau lancerDesAvancer(Joueur j){
          ihm.afficherDebutTour(j);
@@ -64,19 +72,20 @@ public class Controleur {
         
                 //System.out.println(j.getPositionCourante().getNumero());
                 //j.getPositionCourante().getNumero();
-                this.setD1(roll());
-                this.setD2(roll());
-                ihm.afficherDe(d1,d2);
-                if(j.getPositionCourante().getNumero()-1 + d1 + d2 >= 40){
+                j.setD1(roll());
+                j.setD2(roll());
+                ihm.afficherDe(j.getD1(),j.getD2());
+                if(j.getPositionCourante().getNumero()-1 + j.getD1() + j.getD2() >= 40){
                     j.passageDepart();
-                    j.setCarreau(monopoly.getCarreaux().get(  (j.getPositionCourante().getNumero()-1 + d1 + d2) - 40    ));
-                    System.out.println("pos: "+j.getPositionCourante().getNumero());
-                    System.out.println("cash :" + j.getCash());
+                    ihm.passageDepart(j);
+                    j.setCarreau(monopoly.getCarreaux().get(  (j.getPositionCourante().getNumero()-1 + j.getD1()+ j.getD2()) - 40    ));
+                    //System.out.println("pos: "+j.getPositionCourante().getNumero());
+                    //System.out.println("cash :" + j.getCash());
                     
                 }
                 else {
-                    j.setCarreau(monopoly.getCarreaux().get(j.getPositionCourante().getNumero()-1 + d1 + d2));
-                    System.out.println("pos: "+j.getPositionCourante().getNumero());
+                    j.setCarreau(monopoly.getCarreaux().get(j.getPositionCourante().getNumero()-1 + j.getD1() + j.getD2()));
+                    //System.out.println("pos: "+j.getPositionCourante().getNumero());
                 }
                 return j.getPositionCourante();
                 
@@ -108,25 +117,45 @@ public class Controleur {
                         else if(c instanceof ProprieteAConstruire){
                             j.ajouterPropriete((ProprieteAConstruire) c);
                         }
-                        System.out.println("Argent joueur:"+ j.getCash());//test
-                        System.out.println(c.getNom() +":"+((CarreauAchetable) c).getProprietaire().getName());//test
+                        ihm.afficherAchat(e);
+                        //System.out.println("Argent joueur:"+ j.getCash());//test
+                        //System.out.println(c.getNom() +":"+((CarreauAchetable) c).getProprietaire().getName());//test
                     }   break;
                 case 2:
                     //deduction du loyer
-                    if(j.getCash()> ((CarreauAchetable) c).calculLoyer()){ //si le joueur peux payer
-                        
-                        j.payerLoyer(((CarreauAchetable) c).calculLoyer()); //le joueur paye
-                        ((CarreauAchetable) c).getProprietaire().recevoirLoyer(((CarreauAchetable) c).calculLoyer()); //le propriétaire recoit le loyer
+                    if(c instanceof Compagnie){ //calcul du loyer different pour compagnie
+                        if(j.getCash()> ((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())){ //si le joueur peux payer
+
+                            j.payerLoyer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())); //le joueur paye
+                            ((CarreauAchetable) c).getProprietaire().recevoirLoyer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())); //le propriétaire recoit le loyer
+                        }
+                        else{
+                            ((CarreauAchetable) c).getProprietaire().recevoirLoyer(j.getCash()); //le propriétaire recoit l'argent restant du joueur
+                            j.payerLoyer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2()));
+                        }
                     }
                     else{
-                        ((CarreauAchetable) c).getProprietaire().recevoirLoyer(j.getCash()); //le propriétaire recoit l'argent restant du joueur
-                        j.payerLoyer(((CarreauAchetable) c).calculLoyer());
-                    }   ihm.afficherDebit(e);
+                        if(j.getCash()> ((CarreauAchetable) c).calculLoyer()){ //si le joueur peux payer
+
+                            j.payerLoyer(((CarreauAchetable) c).calculLoyer()); //le joueur paye
+                            System.out.println("nomCase: "+c.getNom());
+                            System.out.println("nomProp: "+((CarreauAchetable) c).getProprietaire().getName());
+                            System.out.println("loyer:  "+((CarreauAchetable) c).calculLoyer());
+                            ((CarreauAchetable) c).getProprietaire().recevoirLoyer(((CarreauAchetable) c).calculLoyer()); //le propriétaire recoit le loyer
+                        }
+                        else{
+                            ((CarreauAchetable) c).getProprietaire().recevoirLoyer(j.getCash()); //le propriétaire recoit l'argent restant du joueur
+                            j.payerLoyer(((CarreauAchetable) c).calculLoyer());
+                        }
+                    }
+                    ihm.afficherDebit(e);
                     break;
                 case 3:
                     //j == proprio
                     ihm.afficherJproprio(e);
                     break;
+                case 4:
+                    ihm.afficherAchatImp(e);
                 default:
                     break;
             }
@@ -138,12 +167,7 @@ public class Controleur {
         }
     }
     
-    public void setD1(int d){
-        this.d1 = d;
-    }
-    public void setD2(int d){
-        this.d2 = d;
-    }
+    
     private int roll() {
         return (int) (Math.random() * (7 - 1)) + 1;
     }
