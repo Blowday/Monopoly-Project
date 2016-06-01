@@ -1,37 +1,32 @@
-package Jeu;
-import Ui.IHM;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+   package Jeu;
+import Ui.*;
 import Data.*;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author wyklandd
+ */
+public class TestPayerLoyer {
 
 
-
-public class Controleur {
-    
-    private IHM ihm;
+    private IHMPayerLoyer ihm;
     private Monopoly monopoly;
     private int c;
     
     
     
-    public Controleur() {
+    public TestPayerLoyer() {
        
-        ihm = new IHM(this);
+        ihm = new IHMPayerLoyer(this);
         monopoly = new Monopoly();
         c = 1;
-        while( c != 3) { 
-            c = ihm.afficherMenu();
-            if (c == 1) {
-                this.inscrireJoueur();
-            }
-            else if (c == 2) {
-                if (monopoly.getJoueurs().size()>=2 && monopoly.getJoueurs().size()<=6) {
-                    this.lancerPartie();
-                }
-                else {
-                    ihm.nbJoueursMauvais();
-                }
-                
-            }
-        }
+        lancerPartie();
          
     }
     
@@ -41,36 +36,27 @@ public class Controleur {
     
     
     public void lancerPartie() {
-        //essayer de pouvoir relance la partie
-        int joueursVivants;
-        do{
-            joueursVivants=0;
+        ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+        Joueur j1 = new Joueur("j1");
+        Joueur j2 = new Joueur("j2");
+        Joueur j3 = new Joueur("j3");
+        Joueur j4 = new Joueur("j4");
         
-            for(Joueur j: monopoly.getJoueurs()){
-                if(!j.getPerdu()){
-                    joueursVivants++;
-                    System.out.println(joueursVivants);
-                }
-            }
-            
-                for(Joueur j : monopoly.getJoueurs()) {
-                   if(!j.getPerdu()){ 
-                    do {
-                        ihm.lancerDes(j);
-                        jouerUnCoup(j);
-                        if(j.getCash() < 0){
-                            j.setD1(1);//on assure la sortie de la boucle
-                            j.setD2(0);
-                            j.perdu();
-                            ihm.joueurPerdu(j);//retire droit de proprio et indique que le joueur a perdu
-                        }
-                    }while(j.getD1() == j.getD2());
-                   } 
-                   
-                }
-            
-        }while(joueursVivants > 1);
-        ihm.partiePerdue();
+        joueurs.add(j1);//achat de prop
+        joueurs.add(j2);//echec payement de loyer 
+        joueurs.add(j3);//pas assez d'argent pour acheter puis echec payement 2eme loyer
+        joueurs.add(j4);
+        
+        j2.setCash(5);
+        j3.setCash(5);
+        monopoly.inscrireJoueur(joueurs);
+        
+        jouerUnCoup(j3);
+        jouerUnCoup(j1);
+        jouerUnCoup(j4);
+        jouerUnCoup(j2);
+        
+        
     }
     public Carreau lancerDesAvancer(Joueur j){
          ihm.afficherDebutTour(j);
@@ -78,8 +64,8 @@ public class Controleur {
         
                 //System.out.println(j.getPositionCourante().getNumero());
                 //j.getPositionCourante().getNumero();
-                j.setD1(roll());
-                j.setD2(roll());
+                    j.setD1(2);
+                    j.setD2(4);
                 ihm.afficherDe(j.getD1(),j.getD2());
                 if(j.getPositionCourante().getNumero()-1 + j.getD1() + j.getD2() >= 40){
                     j.passageDepart();
@@ -150,7 +136,7 @@ public class Controleur {
                         else{
                             ((CarreauAchetable) c).getProprietaire().recevoirLoyer(j.getCash()); //le propriétaire recoit l'argent restant du joueur
                             e.setLoyerCase(j.getCash());
-                            
+                          
                             j.payerLoyer(((CarreauAchetable) c).calculLoyer());
                         }
                     }

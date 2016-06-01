@@ -10,7 +10,7 @@ public class Joueur {
 	private ArrayList<Compagnie> mesCompagnies;
 	private ArrayList<ProprieteAConstruire> mesProprietes;
 	private String nomJoueur;
-	private int cash = 1500;
+	private int cash = -1;
         
         private boolean perdu;
         

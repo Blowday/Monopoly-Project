@@ -14,6 +14,7 @@ public class Main {
     public static void main(String[] args) {
         // Instancie un contrôleur qui se chargera de lancer tout ce qu'il faut
         
+        //new TestPayerLoyer();  //A REMETTRE CONTROLEUR(); 
         new Controleur();
         
         
@@ -24,9 +25,4 @@ public class Main {
 /*Notes de test
 
     -tester si l'on peut acheter si l'on fait un double
-    -limite de joueur à 6
-    -test de payer loyer
-    -
-
-=====>CALCUL LOYER COMPAGNIE
 */
