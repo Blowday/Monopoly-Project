@@ -3,6 +3,7 @@ package Data;
 public class ProprieteAConstruire extends CarreauAchetable {
 
 	private Joueur proprietaire;
+        Groupe groupe;
         int prixLoyer1;
         int prixLoyer2;
         int prixLoyer3;
@@ -13,6 +14,8 @@ public class ProprieteAConstruire extends CarreauAchetable {
         
         public ProprieteAConstruire(int num, String s, String groupe, int pA, int pL, int pL1, int pL2, int pL3, int pL4, int pL5, int pM, int pH) {
             super(num, s, pA, pL);
+            //= CouleurPropriete.valueOf(groupe);
+            
             prixLoyer1 = pL1;
             prixLoyer2 = pL2;
             prixLoyer3 = pL3;
@@ -25,6 +28,7 @@ public class ProprieteAConstruire extends CarreauAchetable {
         public int calculLoyer(){
             //a completer avec la gestion des maisons/hotel
             return this.getPrixLoyer();
+            
         }
 
     @Override

@@ -37,15 +37,15 @@ public class TestPayerLoyer {
     
     public void lancerPartie() {
         ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
-        Joueur j1 = new Joueur("j1");
-        Joueur j2 = new Joueur("j2");
-        Joueur j3 = new Joueur("j3");
-        Joueur j4 = new Joueur("j4");
+        Joueur j1 = new Joueur("jc");
+        Joueur j2 = new Joueur("robin");
+        Joueur j3 = new Joueur("antoine");
+        Joueur j4 = new Joueur("damien");
         
         joueurs.add(j1);//achat de prop
         joueurs.add(j2);//echec payement de loyer 
         joueurs.add(j3);//pas assez d'argent pour acheter puis echec payement 2eme loyer
-        joueurs.add(j4);
+        joueurs.add(j4);//payement loyer 
         
         j2.setCash(5);
         j3.setCash(5);

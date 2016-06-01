@@ -16,7 +16,23 @@ public class IHM {
         public int afficherMenu() {
             int s;
             Scanner sc = new Scanner(System.in);
-            
+            System.out.println("            .---.\n" +
+"            |#__|\n" +
+"           =;===;=\n" +
+"           / - - \\\n" +
+"          ( _'.'_ )\n" +
+"         .-`-'^'-`-.\n" +
+"        |   `>o<'   |\n" +
+"        /     :     \\\n" +
+"       /  /\\  :  /\\  \\\n" +
+"     .-'-/ / .-. \\ \\-'-.\n" +
+"      |_/ /-'   '-\\ \\_|\n" +
+"         /|   |   |\\\n" +
+"        (_|  /^\\  |_)\n" +
+"          |  | |  |\n" +
+"          |  | |  |\n" +
+"        '==='= ='==='");
+            System.out.println("__________________________________");
             System.out.println("Monopoly : Que voulez vous faire ? "); 
             System.out.println("1 : Inscrire joueur"); 
             System.out.println("2 : Lancer partie"); 
@@ -70,7 +86,7 @@ public class IHM {
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Vous êtes arrivé sur la case " + e.getNomCase());
-        System.out.println("Cette case n'a pas de porpriétaire et coute "+e.getPrixAchatCase());
+        System.out.println("Cette case n'a pas de propriétaire et coute "+e.getPrixAchatCase());
         
         System.out.println("Voulez vous l'acheter? (o/n)");
         String r = sc.nextLine();

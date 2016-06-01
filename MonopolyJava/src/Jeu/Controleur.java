@@ -49,7 +49,6 @@ public class Controleur {
             for(Joueur j: monopoly.getJoueurs()){
                 if(!j.getPerdu()){
                     joueursVivants++;
-                    System.out.println(joueursVivants);
                 }
             }
             
@@ -94,12 +93,9 @@ public class Controleur {
                     //System.out.println("pos: "+j.getPositionCourante().getNumero());
                 }
                 return j.getPositionCourante();
-                
-                
-            
-        
-        
     }
+    
+    
     public void jouerUnCoup(Joueur j){
         Carreau c = lancerDesAvancer(j);
         //si le joueur arrive sur un carreau achetable
