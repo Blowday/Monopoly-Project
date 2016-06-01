@@ -14,13 +14,13 @@ import java.util.ArrayList;
  */
 public class TestPayerLoyer {
 
-
+    //Attributs
     private IHMPayerLoyer ihm;
     private Monopoly monopoly;
     private int c;
     
     
-    
+    //Constructeurs
     public TestPayerLoyer() {
        
         ihm = new IHMPayerLoyer(this);
@@ -30,6 +30,7 @@ public class TestPayerLoyer {
          
     }
     
+    //Méthodes
     public void inscrireJoueur() {
         monopoly.inscrireJoueur(ihm.inscrireJoueur());
     }

@@ -2,8 +2,10 @@ package Data;
 
 public class AutreCarreau extends Carreau {
     
+    //Attributs
     private int prixLoyer;
     
+    //Constructeurs
     public AutreCarreau(int num, String s) {
         super(num, s);
     }

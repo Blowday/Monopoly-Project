@@ -2,21 +2,24 @@ package Data;
 
 import java.util.HashSet;
 
-public class Groupe {
+public class Groupe{
 
-	private CouleurPropriete couleur;
-        private HashSet<ProprieteAConstruire> proprietes;
-        
-        public Groupe(CouleurPropriete couleur){
-            this.couleur=couleur;
-             proprietes = new HashSet<>();
-        }
+    //Attributs
+    private CouleurPropriete couleur;
+    private HashSet<ProprieteAConstruire> proprietes;
 
-        public void addPropriete(ProprieteAConstruire pac){
-            proprietes.add(pac);
-        }
-        
-        public String getCouleur(){
-            return couleur.toString();
-        }
+    //Constructeurs
+    public Groupe(CouleurPropriete couleur) {
+        this.couleur = couleur;
+        proprietes = new HashSet<>();
+    }
+
+    //Méthodes
+    public void addPropriete(ProprieteAConstruire pac) {
+        proprietes.add(pac);
+    }
+
+    public String getCouleur() {
+        return couleur.toString();
+    }
 }

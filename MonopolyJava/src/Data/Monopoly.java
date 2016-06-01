@@ -6,20 +6,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Monopoly {
             
         //Attributs
 	private HashMap<Integer,Carreau> carreaux;
 	private ArrayList<Joueur> joueurs;
-        private HashSet<Groupe> groupes;
+        private HashMap<CouleurPropriete,Groupe> groupes;
 
         //Constructeurs
         public Monopoly() {
-            joueurs = new ArrayList<Joueur>();
+            joueurs = new ArrayList<>();
             carreaux = new HashMap<>();
-            groupes = new HashSet<>();
+            groupes = new HashMap<>();
             creerPlateau("data.txt");
             
         }
@@ -60,21 +59,21 @@ public class Monopoly {
 	private void buildGamePlateau(String dataFilename){
             //Création des groupes
             Groupe bleuFonce = new Groupe(CouleurPropriete.bleuFonce);
-            groupes.add(bleuFonce);
+            groupes.put(CouleurPropriete.bleuFonce,bleuFonce);
             Groupe orange = new Groupe(CouleurPropriete.orange);
-            groupes.add(orange);
+            groupes.put(CouleurPropriete.orange,orange);
             Groupe mauve = new Groupe(CouleurPropriete.mauve);
-            groupes.add(mauve);
+            groupes.put(CouleurPropriete.mauve,mauve);
             Groupe violet = new Groupe(CouleurPropriete.violet);
-            groupes.add(violet);
+            groupes.put(CouleurPropriete.violet,violet);
             Groupe bleuCiel = new Groupe(CouleurPropriete.bleuCiel);
-            groupes.add(bleuCiel);
+            groupes.put(CouleurPropriete.bleuCiel,bleuCiel);
             Groupe jaune = new Groupe(CouleurPropriete.jaune);
-            groupes.add(jaune);
+            groupes.put(CouleurPropriete.jaune,jaune);
             Groupe vert = new Groupe(CouleurPropriete.vert);
-            groupes.add(vert);
+            groupes.put(CouleurPropriete.vert,vert);
             Groupe rouge = new Groupe(CouleurPropriete.rouge);
-            groupes.add(rouge);
+            groupes.put(CouleurPropriete.rouge,rouge);
             
             
             try {
@@ -85,7 +84,7 @@ public class Monopoly {
                     String caseType = data.get(i)[0];
                     if (caseType.compareTo("P") == 0) {
                         //System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                        carreaux.put(i, new ProprieteAConstruire(Integer.parseInt(data.get(i)[1]), data.get(i)[2], data.get(i)[3], Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[5]), Integer.parseInt(data.get(i)[6]), Integer.parseInt(data.get(i)[7]), Integer.parseInt(data.get(i)[8]), Integer.parseInt(data.get(i)[8]), Integer.parseInt(data.get(i)[9]), Integer.parseInt(data.get(i)[10]), Integer.parseInt(data.get(i)[11])));
+                        carreaux.put(i, new ProprieteAConstruire(Integer.parseInt(data.get(i)[1]), data.get(i)[2], groupes.get(data.get(i)[3]), Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[5]), Integer.parseInt(data.get(i)[6]), Integer.parseInt(data.get(i)[7]), Integer.parseInt(data.get(i)[8]), Integer.parseInt(data.get(i)[8]), Integer.parseInt(data.get(i)[9]), Integer.parseInt(data.get(i)[10]), Integer.parseInt(data.get(i)[11])));;
                     } else if (caseType.compareTo("G") == 0) {
                         //System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                         carreaux.put(i, new Gare(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
