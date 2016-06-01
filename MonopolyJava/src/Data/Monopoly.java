@@ -15,12 +15,9 @@ public class Monopoly {
 
         //Constructeurs
         public Monopoly() {
+            joueurs = new ArrayList<Joueur>();
             carreaux = new HashMap<>();
             creerPlateau("data.txt");
-            
-            for (int i=0; i<carreaux.size(); i++) {
-                carreaux.get(i).afficher();
-            }
             
         }
         
@@ -35,8 +32,8 @@ public class Monopoly {
             
             for (Joueur temp : joueurs) {
                 temp.setCarreau(carreaux.get(0));
-                System.out.println("le joueur ");
-                temp.afficher();
+                System.out.print("le joueur ");
+                System.out.print(temp.getName());
                 System.out.println(" est prêt");
 
             }
@@ -46,9 +43,7 @@ public class Monopoly {
         public HashMap<Integer,Carreau> getCarreaux() {
             return carreaux;
         }
-        
-        
-        
+   
         
         public ArrayList<Joueur> getJoueurs() {
             return joueurs;
@@ -69,21 +64,21 @@ public class Monopoly {
 			for(int i=0; i<data.size()-1; ++i){
 				String caseType = data.get(i)[0];
 				if(caseType.compareTo("P") == 0){
-					System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
+					//System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                                         carreaux.put(i,new ProprieteAConstruire(Integer.parseInt(data.get(i)[1]), data.get(i)[2], data.get(i)[3], Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[5]),Integer.parseInt(data.get(i)[6]),Integer.parseInt(data.get(i)[7]),Integer.parseInt(data.get(i)[8]),Integer.parseInt(data.get(i)[8]),Integer.parseInt(data.get(i)[9]),Integer.parseInt(data.get(i)[10]),Integer.parseInt(data.get(i)[11])));
                                         //AJOUTER GESTION DE PRIX
 				}
 				else if(caseType.compareTo("G") == 0){
-					System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
+					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                                         carreaux.put(i,new Gare(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
 				}
 				else if(caseType.compareTo("C") == 0){
-					System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
+					//System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                                         carreaux.put(i,new Compagnie(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
 				}
 				else if(caseType.compareTo("AU") == 0){
-					System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        System.out.println(data.get(i).length);
+					//System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
+                                        //System.out.println(data.get(i).length);
                                         if(data.get(i).length == 3) {
                                             carreaux.put(i,new AutreCarreau(Integer.parseInt(data.get(i)[1]),data.get(i)[2]));
                                         }

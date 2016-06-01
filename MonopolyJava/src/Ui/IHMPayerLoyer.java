@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Ui;
 
 import Jeu.*;
@@ -5,11 +10,15 @@ import Data.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class IHM {
+/**
+ *
+ * @author wyklandd
+ */
+public class IHMPayerLoyer {
 
-	Controleur controleur;
+	TestPayerLoyer controleur;
 
-        public IHM (Controleur c) {
+        public IHMPayerLoyer (TestPayerLoyer c) {
             setControleur(c);
         }
         
@@ -62,7 +71,7 @@ public class IHM {
 
         }
         
-        private void setControleur(Controleur c) {
+        private void setControleur(TestPayerLoyer c) {
             this.controleur = c;
         }
 
@@ -103,9 +112,7 @@ public class IHM {
 
         
     public void partiePerdue(){
-        System.out.println("******************");
-        System.out.println("*  Partie finie  *");
-        System.out.println("******************");
+        System.out.println("Partie finie");
     }
 
     public void nbJoueursMauvais() {
@@ -132,10 +139,8 @@ public class IHM {
         System.out.println("Cette case n'a pas de porpriétaire et coute "+e.getPrixAchatCase());
         System.out.println("Vous n'avez pas assez d'argents pour l'acheter ("+e.getJoueur().getCash()+")");
     }
-
     public void joueurPerdu(Joueur j) {
         System.out.println(j.getName()+" n'a plus assez d'argent pour continuer l'aventure");
     }
-        
         
 }

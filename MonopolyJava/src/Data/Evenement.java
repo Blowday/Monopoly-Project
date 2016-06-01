@@ -75,6 +75,8 @@ public class Evenement {
     public Joueur getProprio(){
         return proprio;
     }
-    
+    public void setLoyerCase(int i){
+        this.loyerCase =i;
+    }
     
 }
