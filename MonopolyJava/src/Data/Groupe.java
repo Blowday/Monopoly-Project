@@ -19,7 +19,11 @@ public class Groupe{
         proprietes.add(pac);
     }
 
-    public String getCouleur() {
-        return couleur.toString();
+    public CouleurPropriete getCouleur() {
+        return couleur;
+    }
+    
+    public HashSet<ProprieteAConstruire> getProprieteAConstruires(){
+        return proprietes;
     }
 }

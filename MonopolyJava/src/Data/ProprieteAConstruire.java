@@ -25,18 +25,35 @@ public class ProprieteAConstruire extends CarreauAchetable {
         this.prixLoyer5 = pL5;
         this.prixMaison = pM;
         this.prixHotel = pH;
+        groupe.addPropriete(this);
     }
 
     //Méthodes
+    @Override
     public int calculLoyer() {
+        int nbPACJoueur = 0;
+        for (ProprieteAConstruire p : proprietaire.getProprieteAConstruires()){         //Compte le nombre de propriétés à construire du joueur appartenant au groupe de la propriété actuelle
+            if (p.getGroupe()==this.getGroupe()){
+                nbPACJoueur+=1;
+            }
+        }
+        int nbPACGroupe = groupe.getProprieteAConstruires().size();                     //Compte le nombre de propriétés à construire dans le groupe de la propriété actuelle
+        if (nbPACJoueur==nbPACGroupe){                                                  //Si joueur possède toutes les propriétés du groupe
+            return 2*this.getPrixLoyer();                                                                         //le loyer est doublé
+        } else {
+            return this.getPrixLoyer();                                                 //Sinon le loyer est simple
+        }
         //a completer avec la gestion des maisons/hotel
-        return this.getPrixLoyer();
-
     }
 
     @Override
     public int calculLoyer(int d1, int d2) {
+        //Besoins pour CarreauAchetable, mais inutile ici et jamais utilisé
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Groupe getGroupe(){
+        return groupe;
     }
 
 }

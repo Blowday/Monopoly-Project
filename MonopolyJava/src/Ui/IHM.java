@@ -131,7 +131,7 @@ public class IHM {
     public void lancerDes(Joueur j) {
         Scanner sc = new Scanner(System.in);
         System.out.println("***************************************************************");
-        System.out.print(j.getName() + ", lancez les dés: (any key)");
+        System.out.print(j.getName() + ", lancez les dés: (enter)");
         sc.nextLine();
     }
 

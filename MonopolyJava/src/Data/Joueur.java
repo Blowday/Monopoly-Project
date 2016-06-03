@@ -11,7 +11,7 @@ public class Joueur {
     private ArrayList<Compagnie> mesCompagnies;
     private ArrayList<ProprieteAConstruire> mesProprietes;
     private String nomJoueur;
-    private int cash = -1;
+    private int cash = 1500;
     private boolean perdu;
     private int d1;
     private int d2;
@@ -69,6 +69,10 @@ public class Joueur {
 
     public void ajouterPropriete(ProprieteAConstruire p) {
         this.mesProprietes.add(p);
+    }
+    
+    public ArrayList<ProprieteAConstruire> getProprieteAConstruires(){
+        return mesProprietes;
     }
 
     public int getNbGares() {
