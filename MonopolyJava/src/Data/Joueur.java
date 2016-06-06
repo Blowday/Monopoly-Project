@@ -15,6 +15,7 @@ public class Joueur {
     private boolean perdu;
     private int d1;
     private int d2;
+    private boolean enPrison;
 
     //Constructeurs
     public Joueur(String s) {
@@ -114,6 +115,15 @@ public class Joueur {
     private void setNom(String s) {
         this.nomJoueur = s;
     }
+    
+    public void setPrison(boolean b) {
+        enPrison = b;
+    }
+    
+    public boolean enPrison() {
+        return enPrison;
+    }
+    
 
     //gestion de defaite
     public boolean getPerdu() {

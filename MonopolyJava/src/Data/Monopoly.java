@@ -98,22 +98,22 @@ public class Monopoly {
                             carreaux.put(i, new Depart(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
                         }
                         else if(data.get(i)[2].compareTo("Caisse de Communauté") == 0) {
-                            //Caisse De Communauté
+                            carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
                         }
                         else if(data.get(i)[2].compareTo("Impôt sur le revenu") == 0) {
                             carreaux.put(i, new ImpotsEtTaxes(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
                         }
                         else if(data.get(i)[2].compareTo("Chance") == 0) {
-                            //chance
+                            carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
                         }
                         else if(data.get(i)[2].compareTo("Simple Visite / En Prison") == 0) {
-                            carreaux.put(i, new Prison(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
+                            carreaux.put(i, new Prison(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
                         }
                         else if(data.get(i)[2].compareTo("Parc Gratuit") == 0) {
                             carreaux.put(i, new ParcGratuit(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
                         }
                         else if(data.get(i)[2].compareTo("Allez en prison") == 0) {
-                            //aller en prison
+                            carreaux.put(i, new AllerEnPrison(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
                         }
                         else if(data.get(i)[2].compareTo("Taxe de Luxe") == 0) {
                             carreaux.put(i, new ImpotsEtTaxes(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );

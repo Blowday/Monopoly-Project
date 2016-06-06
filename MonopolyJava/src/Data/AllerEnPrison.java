@@ -9,6 +9,12 @@ package Data;
  *
  * @author wyklandd
  */
-public class CarreauCommunauté extends AutreCarreau{
+public class AllerEnPrison extends AutreCarreau {
+    
+    
+    public AllerEnPrison(int num, String s) {
+        super(num,s);
+    }
+    
     
 }
