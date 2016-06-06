@@ -151,4 +151,7 @@ public class Joueur {
         this.perdu = true;
     }
 
+
+	
+        
 }

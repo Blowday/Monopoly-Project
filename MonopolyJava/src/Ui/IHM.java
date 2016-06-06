@@ -157,5 +157,4 @@ public class IHM {
     public void joueurPerdu(Joueur j) {
         System.out.println(j.getName() + " n'a plus assez d'argent pour continuer l'aventure");
     }
-
 }
