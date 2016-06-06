@@ -104,12 +104,12 @@ public class IHM {
 
     public void afficherPassage(Evenement e) {
         System.out.println("---------------------------------------------------------------");
-        System.out.print("Vous êtes arrivé sur la case " + e.getNomCase());
+        System.out.println("Vous êtes arrivé sur la case " + e.getNomCase());
     }
     
     public void afficherDebit(Evenement e) { //fenetre de notification de débit
         afficherPassage(e);
-        System.out.println(" appartennant à " + e.getProprio().getName());
+        System.out.println("Cette case appartient à " + e.getProprio().getName());
         System.out.println("Vous avez payé " + e.getLoyerCase() + " vous avez maintenant " + e.getJoueur().getCash());
         System.out.println("Le propriétaire " + e.getProprio().getName() + " a maintenant " + e.getProprio().getCash());
     }

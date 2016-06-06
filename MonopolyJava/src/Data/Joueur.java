@@ -16,6 +16,7 @@ public class Joueur {
     private int d1;
     private int d2;
     private boolean enPrison;
+    private int compteur;
 
     //Constructeurs
     public Joueur(String s) {
@@ -124,6 +125,12 @@ public class Joueur {
         return enPrison;
     }
     
+    public void setCompteurPrison(int c) {
+        compteur = c;
+    }
+    public int getCompteurPrison() {
+        return compteur;
+    }
 
     //gestion de defaite
     public boolean getPerdu() {

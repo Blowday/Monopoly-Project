@@ -82,12 +82,20 @@ public class Controleur {
                 j.setD2(roll());
                 ihm.afficherDe(j.getD1(),j.getD2());
                 
+                //En cas de double, on sort le joueur de prison (inutile si le jouer était déjà libre)
                 if (j.getD1() == j.getD2()) {
                     j.setPrison(false);
                 }
+                //si au troisième tour toujours pas de double, le joueur paie et peut partir
+                if(j.enPrison() && j.getCompteurPrison() == 2) {
+                    j.setPrison(false);
+                    j.payerLoyer(50);
+                }
                 
+                //Un joueur en prison n'avance pas
                 if(!j.enPrison()) {
                 
+                    //si on passe par la case départ
                     if(j.getPositionCourante().getNumero()-1 + j.getD1() + j.getD2() >= 40){
                         passageDepart(j);
                         ihm.passageDepart(j);
@@ -96,13 +104,27 @@ public class Controleur {
                         //System.out.println("cash :" + j.getCash());
 
                     }
+                    //coup normal
                     else {
                         j.setCarreau(monopoly.getCarreaux().get(j.getPositionCourante().getNumero()-1 + j.getD1() + j.getD2()));
                         //System.out.println("pos: "+j.getPositionCourante().getNumero());
                     }
                 }
+                //On compte le nombre de tour que le joueur passe en prison
+                else if(j.enPrison()) {
+                    j.setCompteurPrison(j.getCompteurPrison()+1);
+                }
                 return j.getPositionCourante();
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     public void jouerUnCoup(Joueur j){
@@ -185,6 +207,7 @@ public class Controleur {
         else if(c instanceof AllerEnPrison){
             //Si le joueur tombe sur cette case, il va en Prison
             j.setPrison(true);
+            j.setCompteurPrison(0);
             ((Prison)monopoly.getCarreaux().get(10)).addJoueurEnPrison(j);
             j.setCarreau((Prison)monopoly.getCarreaux().get(10));
             

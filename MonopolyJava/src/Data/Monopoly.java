@@ -97,6 +97,7 @@ public class Monopoly {
                         if (data.get(i)[2].compareTo("Départ") == 0) {
                             carreaux.put(i, new Depart(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
                         }
+                        //A GERER ENCORZELJKFDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDG
                         else if(data.get(i)[2].compareTo("Caisse de Communauté") == 0) {
                             carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
                         }
@@ -104,6 +105,7 @@ public class Monopoly {
                             carreaux.put(i, new ImpotsEtTaxes(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
                         }
                         else if(data.get(i)[2].compareTo("Chance") == 0) {
+                        //A GERER ENCORZELJKFDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDG
                             carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
                         }
                         else if(data.get(i)[2].compareTo("Simple Visite / En Prison") == 0) {
