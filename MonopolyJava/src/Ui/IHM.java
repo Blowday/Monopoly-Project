@@ -84,7 +84,7 @@ public class IHM {
         this.controleur = c;
     }
 
-    public boolean afficherPropostion(Evenement e) { //fenetre de proposition d'achat
+    public boolean afficherProposition(Evenement e) { //fenetre de proposition d'achat
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Vous êtes arrivé sur la case " + e.getNomCase());
@@ -102,9 +102,14 @@ public class IHM {
         return "o".equals(r);
     }
 
-    public void afficherDebit(Evenement e) { //fenetre de notification de débit
+    public void afficherPassage(Evenement e) {
         System.out.println("---------------------------------------------------------------");
-        System.out.println("Vous êtes arrivé sur la case " + e.getNomCase() + " appartennant à " + e.getProprio().getName());
+        System.out.print("Vous êtes arrivé sur la case " + e.getNomCase());
+    }
+    
+    public void afficherDebit(Evenement e) { //fenetre de notification de débit
+        afficherPassage(e);
+        System.out.println(" appartennant à " + e.getProprio().getName());
         System.out.println("Vous avez payé " + e.getLoyerCase() + " vous avez maintenant " + e.getJoueur().getCash());
         System.out.println("Le propriétaire " + e.getProprio().getName() + " a maintenant " + e.getProprio().getCash());
     }

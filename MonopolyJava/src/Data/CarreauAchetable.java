@@ -26,6 +26,7 @@ public abstract class CarreauAchetable extends Carreau {
     
     
     
+    
     private void setPrixAchat(int p) {
         this.prixAchat = p;
     }

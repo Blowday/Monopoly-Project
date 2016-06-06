@@ -9,6 +9,15 @@ package Data;
  *
  * @author wyklandd
  */
-public class CarreauChance extends AutreCarreau{
+public class Depart extends AutreCarreau {
+    private int Gain;
     
+    public Depart(int num, String s, int prix) {
+        super(num,s);
+        this.Gain = prix;
+    }
+    
+    public int getGainDepart() {
+        return this.Gain;
+    }
 }

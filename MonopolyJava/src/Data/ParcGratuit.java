@@ -11,4 +11,8 @@ package Data;
  */
 public class ParcGratuit extends AutreCarreau {
     
+    
+    public ParcGratuit(int num, String s) {
+        super(num,s);
+    }
 }
