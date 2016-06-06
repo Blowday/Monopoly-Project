@@ -103,8 +103,8 @@ public class Joueur {
         return nomJoueur;
     }
 
-    public void passageDepart() {
-        this.cash += 200;
+    public void gain(int Gain) {
+        this.cash += Gain;
     }
 
     public void afficher() {

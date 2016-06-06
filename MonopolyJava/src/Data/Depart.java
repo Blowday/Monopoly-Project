@@ -9,10 +9,15 @@ package Data;
  *
  * @author wyklandd
  */
-public class ParcGratuit extends AutreCarreau {
+public class Depart extends AutreCarreau {
+    private int Gain;
     
-    
-    public ParcGratuit(int num, String s) {
+    public Depart(int num, String s, int prix) {
         super(num,s);
+        this.Gain = prix;
+    }
+    
+    public int getGainDepart() {
+        return this.Gain;
     }
 }

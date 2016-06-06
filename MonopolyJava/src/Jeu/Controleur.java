@@ -83,7 +83,7 @@ public class Controleur {
                 j.setD2(roll());
                 ihm.afficherDe(j.getD1(),j.getD2());
                 if(j.getPositionCourante().getNumero()-1 + j.getD1() + j.getD2() >= 40){
-                    j.passageDepart();
+                    passageDepart(j);
                     ihm.passageDepart(j);
                     j.setCarreau(monopoly.getCarreaux().get(  (j.getPositionCourante().getNumero()-1 + j.getD1()+ j.getD2()) - 40    ));
                     //System.out.println("pos: "+j.getPositionCourante().getNumero());
@@ -165,9 +165,9 @@ public class Controleur {
             }
             
         }
-        //s'il arrive sur un autre carreau (a gerer plus tard)
-        else{
-            ihm.autreCarreau();
+        else if(c instanceof ImpotsEtTaxes){
+            //Si on tombe sur la case Impots ou sur la case Taxes, le joueur paie le montant indiqué
+            j.payerLoyer(((ImpotsEtTaxes) c).getMontant());
         }
     }
     
@@ -176,7 +176,9 @@ public class Controleur {
         return (int) (Math.random() * (7 - 1)) + 1;
     }
     
-    
+    private void passageDepart(Joueur j) {
+        j.gain(((Depart)monopoly.getCarreaux().get(0)).getGainDepart());
+    }
     
   
 }

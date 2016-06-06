@@ -94,11 +94,31 @@ public class Monopoly {
                     } else if (caseType.compareTo("AU") == 0) {
                         //System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                         //System.out.println(data.get(i).length);
-                        if (data.get(i).length == 3) {
-                            carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
-                        } else {
-                            carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
+                        if (data.get(i)[2].compareTo("Départ") == 0) {
+                            carreaux.put(i, new Depart(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
                         }
+                        else if(data.get(i)[2].compareTo("Caisse de Communauté") == 0) {
+                            //Caisse De Communauté
+                        }
+                        else if(data.get(i)[2].compareTo("Impôt sur le revenu") == 0) {
+                            carreaux.put(i, new ImpotsEtTaxes(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
+                        }
+                        else if(data.get(i)[2].compareTo("Chance") == 0) {
+                            //chance
+                        }
+                        else if(data.get(i)[2].compareTo("Simple Visite / En Prison") == 0) {
+                            carreaux.put(i, new Prison(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
+                        }
+                        else if(data.get(i)[2].compareTo("Parc Gratuit") == 0) {
+                            carreaux.put(i, new ParcGratuit(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                        }
+                        else if(data.get(i)[2].compareTo("Allez en prison") == 0) {
+                            //aller en prison
+                        }
+                        else if(data.get(i)[2].compareTo("Taxe de Luxe") == 0) {
+                            carreaux.put(i, new ImpotsEtTaxes(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
+                        }
+                        
 
                     } else {
                         System.err.println("[buildGamePleateau()] : Invalid Data type");
