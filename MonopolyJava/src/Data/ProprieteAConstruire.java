@@ -3,7 +3,6 @@ package Data;
 public class ProprieteAConstruire extends CarreauAchetable {
 
     //Attributs
-    private Joueur proprietaire;
     private Groupe groupe;
     private int prixLoyer1;
     private int prixLoyer2;
@@ -32,7 +31,7 @@ public class ProprieteAConstruire extends CarreauAchetable {
     @Override
     public int calculLoyer() {
         int nbPACJoueur = 0;
-        for (ProprieteAConstruire p : proprietaire.getProprieteAConstruires()){         //Compte le nombre de propriétés à construire du joueur appartenant au groupe de la propriété actuelle
+        for (ProprieteAConstruire p : getProprietaire().getProprieteAConstruires()){         //Compte le nombre de propriétés à construire du joueur appartenant au groupe de la propriété actuelle
             if (p.getGroupe()==this.getGroupe()){
                 nbPACJoueur+=1;
             }

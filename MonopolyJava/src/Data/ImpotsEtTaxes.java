@@ -10,5 +10,19 @@ package Data;
  * @author wyklandd
  */
 public class ImpotsEtTaxes extends AutreCarreau{
+    //Attributs
+        private int montant;
+
+    //Constructeur
+        public ImpotsEtTaxes(int num, String s, int prix) {
+            super(num, s);
+            this.montant = prix;
+        }
+        
+    //Méthodes
+    
+        public int getMontant() {
+            return montant;
+        }
     
 }
