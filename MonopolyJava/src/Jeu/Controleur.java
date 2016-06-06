@@ -1,6 +1,7 @@
 package Jeu;
 import Ui.IHM;
 import Data.*;
+import Ui.IhmGraph;
 
 
 
@@ -11,10 +12,11 @@ public class Controleur {
     private Monopoly monopoly;
     private int c;
     
+    private IhmGraph ihmGraph;
     
     //Constructeurs
     public Controleur() {
-       
+        ihmGraph = new IhmGraph(this);
         ihm = new IHM(this);
         monopoly = new Monopoly();
         c = 1;
@@ -44,6 +46,7 @@ public class Controleur {
     
     public void lancerPartie() {
         //essayer de pouvoir relance la partie
+        ihmGraph.afficherPlateau(); ///test graph
         int joueursVivants;
         do{
             joueursVivants=0;

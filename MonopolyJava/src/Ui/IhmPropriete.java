@@ -29,7 +29,7 @@ public class IhmPropriete extends JPanel {
         this.setLayout(new BorderLayout());
         nomcase.setText(c.getNom());
         prix.setText(Integer.toString(c.getPrixAchat()));
-        couleur.setBackground(c.);
+       //couleur.setBackground(c.);
         
     }
     

@@ -34,10 +34,12 @@ public class IhmGraph extends JFrame implements Observateur {
         JPanel listeJoueurs = new JPanel(new GridBagLayout());
 
         //partie plateau a remplir
-        JPanel plateau = new JPanel(new GridBagLayout());
+        IhmPlateau plateau = new IhmPlateau();
+        
+        this.add(plateau);
         
         
-        paint(controleur.getMonopoly().getCarreaux());//generation du plateau
+        //paint(controleur.getMonopoly().getCarreaux());//generation du plateau
     
     }
     
@@ -57,7 +59,7 @@ public class IhmGraph extends JFrame implements Observateur {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void paint(HashMap<Integer,Carreau> m) { //Generation du plateau de jeu
+    /*private void paint(HashMap<Integer,Carreau> m) { //Generation du plateau de jeu
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridheight = 0;
@@ -68,11 +70,15 @@ public class IhmGraph extends JFrame implements Observateur {
             gbc.gridwidth = i;
             gbc.gridheight = 0;
             if(m.get(i) instanceof CarreauAchetable){
-                IhmPropriete carreau= new IhmPropriete(m.get(i), cote);
+                IhmPropriete carreau= new IhmPropriete(m.get(i)), cote);
             }
         } 
+    }*/
+    
+    public void afficherPlateau() {
+        setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        setSize(900, 700);
+        setVisible(true);                        
     }
-    
-    
     
 }
