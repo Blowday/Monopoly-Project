@@ -6,12 +6,13 @@ import Data.*;
 
 public class Controleur {
     
+    //Attributs
     private IHM ihm;
     private Monopoly monopoly;
     private int c;
     
     
-    
+    //Constructeurs
     public Controleur() {
        
         ihm = new IHM(this);
@@ -35,6 +36,7 @@ public class Controleur {
          
     }
     
+    //Méthodes
     public void inscrireJoueur() {
         monopoly.inscrireJoueur(ihm.inscrireJoueur());
     }
@@ -49,7 +51,6 @@ public class Controleur {
             for(Joueur j: monopoly.getJoueurs()){
                 if(!j.getPerdu()){
                     joueursVivants++;
-                    System.out.println(joueursVivants);
                 }
             }
             
@@ -94,12 +95,9 @@ public class Controleur {
                     //System.out.println("pos: "+j.getPositionCourante().getNumero());
                 }
                 return j.getPositionCourante();
-                
-                
-            
-        
-        
     }
+    
+    
     public void jouerUnCoup(Joueur j){
         Carreau c = lancerDesAvancer(j);
         //si le joueur arrive sur un carreau achetable

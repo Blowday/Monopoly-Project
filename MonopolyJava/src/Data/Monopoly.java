@@ -12,11 +12,13 @@ public class Monopoly {
         //Attributs
 	private HashMap<Integer,Carreau> carreaux;
 	private ArrayList<Joueur> joueurs;
+        private HashMap<CouleurPropriete,Groupe> groupes;
 
         //Constructeurs
         public Monopoly() {
-            joueurs = new ArrayList<Joueur>();
+            joueurs = new ArrayList<>();
             carreaux = new HashMap<>();
+            groupes = new HashMap<>();
             creerPlateau("data.txt");
             
         }
@@ -54,44 +56,56 @@ public class Monopoly {
 		buildGamePlateau(dataFilename);
 	}
 	
-	private void buildGamePlateau(String dataFilename)
-	{
-		try{
-			ArrayList<String[]> data = readDataFile(dataFilename, ",");
-                        
-			
-			//TODO: create cases instead of displaying
-			for(int i=0; i<data.size()-1; ++i){
-				String caseType = data.get(i)[0];
-				if(caseType.compareTo("P") == 0){
-					//System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(i,new ProprieteAConstruire(Integer.parseInt(data.get(i)[1]), data.get(i)[2], data.get(i)[3], Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[5]),Integer.parseInt(data.get(i)[6]),Integer.parseInt(data.get(i)[7]),Integer.parseInt(data.get(i)[8]),Integer.parseInt(data.get(i)[8]),Integer.parseInt(data.get(i)[9]),Integer.parseInt(data.get(i)[10]),Integer.parseInt(data.get(i)[11])));
-                                        //AJOUTER GESTION DE PRIX
-				}
-				else if(caseType.compareTo("G") == 0){
-					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(i,new Gare(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
-				}
-				else if(caseType.compareTo("C") == 0){
-					//System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(i,new Compagnie(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
-				}
-				else if(caseType.compareTo("AU") == 0){
-					//System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        //System.out.println(data.get(i).length);
-                                        if(data.get(i).length == 3) {
-                                            carreaux.put(i,new AutreCarreau(Integer.parseInt(data.get(i)[1]),data.get(i)[2]));
-                                        }
-                                        else {
-                                            carreaux.put(i,new AutreCarreau(Integer.parseInt(data.get(i)[1]),data.get(i)[2],Integer.parseInt(data.get(i)[3]))); 
-                                        }
-                                        
-				}
-				else
-					System.err.println("[buildGamePleateau()] : Invalid Data type");
-			}
-			
-		} 
+	private void buildGamePlateau(String dataFilename){
+            //Création des groupes
+            Groupe bleuFonce = new Groupe(CouleurPropriete.bleuFonce);
+            groupes.put(CouleurPropriete.bleuFonce,bleuFonce);
+            Groupe orange = new Groupe(CouleurPropriete.orange);
+            groupes.put(CouleurPropriete.orange,orange);
+            Groupe mauve = new Groupe(CouleurPropriete.mauve);
+            groupes.put(CouleurPropriete.mauve,mauve);
+            Groupe violet = new Groupe(CouleurPropriete.violet);
+            groupes.put(CouleurPropriete.violet,violet);
+            Groupe bleuCiel = new Groupe(CouleurPropriete.bleuCiel);
+            groupes.put(CouleurPropriete.bleuCiel,bleuCiel);
+            Groupe jaune = new Groupe(CouleurPropriete.jaune);
+            groupes.put(CouleurPropriete.jaune,jaune);
+            Groupe vert = new Groupe(CouleurPropriete.vert);
+            groupes.put(CouleurPropriete.vert,vert);
+            Groupe rouge = new Groupe(CouleurPropriete.rouge);
+            groupes.put(CouleurPropriete.rouge,rouge);
+            
+            
+            try {
+                ArrayList<String[]> data = readDataFile(dataFilename, ",");
+
+                //TODO: create cases instead of displaying
+                for (int i = 0; i < data.size() - 1; ++i) {
+                    String caseType = data.get(i)[0];
+                    if (caseType.compareTo("P") == 0) {
+                        //System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
+                        carreaux.put(i, new ProprieteAConstruire(Integer.parseInt(data.get(i)[1]), data.get(i)[2], groupes.get(CouleurPropriete.valueOf(data.get(i)[3])), Integer.parseInt(data.get(i)[4]), Integer.parseInt(data.get(i)[5]), Integer.parseInt(data.get(i)[6]), Integer.parseInt(data.get(i)[7]), Integer.parseInt(data.get(i)[8]), Integer.parseInt(data.get(i)[8]), Integer.parseInt(data.get(i)[9]), Integer.parseInt(data.get(i)[10]), Integer.parseInt(data.get(i)[11])));;
+                    } else if (caseType.compareTo("G") == 0) {
+                        //System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
+                        carreaux.put(i, new Gare(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
+                    } else if (caseType.compareTo("C") == 0) {
+                        //System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
+                        carreaux.put(i, new Compagnie(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
+                    } else if (caseType.compareTo("AU") == 0) {
+                        //System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
+                        //System.out.println(data.get(i).length);
+                        if (data.get(i).length == 3) {
+                            carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                        } else {
+                            carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[3])));
+                        }
+
+                    } else {
+                        System.err.println("[buildGamePleateau()] : Invalid Data type");
+                    }
+                }
+
+            }
 		catch(FileNotFoundException e){
 			System.err.println("[buildGamePlateau()] : File is not found!");
 		}

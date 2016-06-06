@@ -2,11 +2,12 @@ package Data;
 
 public abstract class CarreauAchetable extends Carreau {
 
+    //Attributs
     private int prixAchat;
     private int prixLoyer;
     private Joueur proprietaire;
 
-    
+    //Constructeurs
     public CarreauAchetable(int num, String s, int pA, int pL) {
         super(num, s);
         setPrixAchat(pA);
@@ -14,7 +15,7 @@ public abstract class CarreauAchetable extends Carreau {
         proprietaire = null;
     }
     
-    
+    //Méthodes
     public int getPrixAchat() {
         return prixAchat;
     }

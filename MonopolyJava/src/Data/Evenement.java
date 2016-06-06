@@ -9,8 +9,9 @@ package Data;
  *
  * @author perrinan
  */
+//classe permettant de gerer les fenetres d'evenement lors d'arrivée sur une case
 public class Evenement {
-    //classe permettant de gerer les fenetres d'evenement lors d'arrivée sur une case
+    //Attributs
     private int typeFenetre;
         /* 1-Fenetre d'achat possible
            2-Fenetre de loyer déduit
@@ -23,6 +24,7 @@ public class Evenement {
     private int prixAchatCase;
     private Joueur proprio;
 
+    //Constructeurs
     //Cas 1-4
     public Evenement(int typeFenetre, int loyerCase, Joueur j, String nomCase) {
         this.typeFenetre = typeFenetre;
@@ -47,7 +49,7 @@ public class Evenement {
         this.nomCase = nomCase;
     }
     
-    
+    //Méthodes
     public int getType(){
         return typeFenetre;
     }
