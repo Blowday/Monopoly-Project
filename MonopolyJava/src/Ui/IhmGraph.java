@@ -77,7 +77,7 @@ public class IhmGraph extends JFrame implements Observateur {
     
     public void afficherPlateau() {
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        setSize(900, 700);
+        setSize(1500, 940);
         setVisible(true);                        
     }
     
