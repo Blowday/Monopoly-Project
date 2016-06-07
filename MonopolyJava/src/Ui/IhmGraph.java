@@ -49,7 +49,7 @@ public class IhmGraph extends JFrame implements Observateur {
         
         ihmMenu = new IhmMenu();
         ihmInscription = new IhmInscription();
-        //paint(controleur.getMonopoly().getCarreaux());//generation du plateau
+        
     
     }
     
@@ -61,6 +61,7 @@ public class IhmGraph extends JFrame implements Observateur {
             
             case 1: //1--Afficher menu
                 ihmMenu.afficherMenu(); //devra renvoyer une arrayList de joueurs
+                this.afficherJeu();
         }
     }
 

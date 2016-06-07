@@ -1,6 +1,7 @@
 package Jeu;
 import Ui.IHM;
 import Data.*;
+import Ui.IhmGraph;
 import Ui.Observateur;
 
 
@@ -22,9 +23,15 @@ public class Controleur {
     public Controleur() {
        
         ihm = new IHM(this);
+        
+        ihmGraph = new IhmGraph(this);
+            
+        
+        
         monopoly = new Monopoly();
         c = 1;
-        ihmGraph.notifier(new Evenement(1));
+        
+        //ihmGraph.notifier(new Evenement(1));
         //while( c != 3) { 
             //c = ihm.afficherMenu();
            
@@ -51,6 +58,7 @@ public class Controleur {
     
     
     public void lancerPartie() {
+        ihmGraph.notifier(new Evenement(1));
         //essayer de pouvoir relance la partie
         
         //ihmGraph.afficherJeu(); ///test graph

@@ -365,16 +365,7 @@ public class IHM {
              });      
             // Définit la taille de la fenêtre en pixels
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+     
         
         
         
