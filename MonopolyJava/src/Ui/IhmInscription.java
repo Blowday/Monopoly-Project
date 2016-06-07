@@ -26,6 +26,11 @@ import javax.swing.JPanel;
 public class IhmInscription {
     private static JFrame window2;
     private JPanel panel_principal,panel_joueur,retour_Demarrer;
+    private IhmMenu ihmMenu;
+    
+    public IhmInscription(IhmMenu ihmMenu){
+        this.ihmMenu=ihmMenu;
+    }
     
     public ArrayList<Joueur> inscrireJoueur() {
         ArrayList<Joueur> jTemp = new ArrayList<>();  
@@ -187,7 +192,7 @@ public class IhmInscription {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     window2.setVisible(false);
-                    //afficherMenu();
+                    ihmMenu.afficherMenu();
                     
                 }
              });

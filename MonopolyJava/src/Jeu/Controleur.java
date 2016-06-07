@@ -20,7 +20,7 @@ public class Controleur {
     }
     
     //Constructeurs
-    public Controleur() {
+    public Controleur() throws InterruptedException {
        
         ihm = new IHM(this);
         

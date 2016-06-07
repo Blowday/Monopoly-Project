@@ -40,7 +40,7 @@ public class IhmMenu {
     public IhmMenu(){
         
         
-            this.ihmInscription = new IhmInscription();
+            this.ihmInscription = new IhmInscription(this);
             panel_accueil = new JPanel();
             panel_accueil.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();

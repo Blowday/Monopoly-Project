@@ -5,7 +5,6 @@
  */
 package Ui;
 import Data.Carreau;
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -32,11 +31,7 @@ public class IhmPlateau extends JPanel implements MouseListener{
         addMouseListener(this);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters            
-    }
+    
     
     @Override
     public void mousePressed(MouseEvent e) {
