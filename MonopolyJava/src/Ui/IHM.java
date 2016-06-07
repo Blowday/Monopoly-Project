@@ -31,7 +31,7 @@ public class IHM {
     //Attributs
     private Controleur controleur;
     public static JFrame window1,window2;
-	private JPanel panel_accueil,panel_principal,panel_joueur,retour_Demarrer;
+    private JPanel panel_accueil,panel_principal,panel_joueur,retour_Demarrer;
     //Constructeurs
     public IHM(Controleur c) {
         setControleur(c);
@@ -79,7 +79,7 @@ public class IHM {
             Font font1 = new Font("Arial",Font.BOLD,100);
             jouer.setFont(font1);
            
-            panel_accueil.add(jouer,c);
+            //panel_accueil.add(jouer,c);
             
             
             //espace entre les boutons
@@ -293,8 +293,7 @@ public class IHM {
                     panel_joueur.add(joueur6,c1);
                     
                     
-                    //Bordure : Rentrer Joueur
-                    panel_joueur.setBorder(BorderFactory.createTitledBorder("Rentrer les joueurs :"));
+                    
                     
             //****Bouton****
                     
@@ -344,7 +343,7 @@ public class IHM {
             c0.gridx=1;
             c0.gridy=4;
             c0.ipady=80;
-            panel_accueil.add(new JLabel("  "),c0);
+            panel_principal.add(new JLabel("  "),c0);
             
             //bouton
             c0.gridx=1;
@@ -363,7 +362,8 @@ public class IHM {
                     afficherMenu();
                     
                 }
-             });
+             });      
+            // Définit la taille de la fenêtre en pixels
         
         
         

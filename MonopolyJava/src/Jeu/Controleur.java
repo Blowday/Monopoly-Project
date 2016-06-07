@@ -1,7 +1,7 @@
 package Jeu;
 import Ui.IHM;
 import Data.*;
-import Ui.IhmGraph;
+import Ui.Observateur;
 
 
 
@@ -12,29 +12,35 @@ public class Controleur {
     private Monopoly monopoly;
     private int c;
     
-    private IhmGraph ihmGraph;
+    private Observateur ihmGraph;
+    
+    public void setObservateur(Observateur ob){
+        this.ihmGraph = ob;
+    }
     
     //Constructeurs
     public Controleur() {
-        ihmGraph = new IhmGraph(this);
+       
         ihm = new IHM(this);
         monopoly = new Monopoly();
         c = 1;
-        while( c != 3) { 
-            c = ihm.afficherMenu();
-            if (c == 1) {
-                this.inscrireJoueur();
-            }
-            else if (c == 2) {
-                if (monopoly.getJoueurs().size()>=2 && monopoly.getJoueurs().size()<=6) {
+        ihmGraph.notifier(new Evenement(1));
+        //while( c != 3) { 
+            //c = ihm.afficherMenu();
+           
+            //if (c == 1) {
+                //this.inscrireJoueur();
+           //}
+            //else if (c == 2) {
+                //if (monopoly.getJoueurs().size()>=2 && monopoly.getJoueurs().size()<=6) {
                     this.lancerPartie();
-                }
-                else {
-                    ihm.nbJoueursMauvais();
-                }
+                //}
+    //else {
+                   // ihm.nbJoueursMauvais();
+                //}
                 
-            }
-        }
+            //}
+       // }
          
     }
     
@@ -46,7 +52,9 @@ public class Controleur {
     
     public void lancerPartie() {
         //essayer de pouvoir relance la partie
-        ihmGraph.afficherPlateau(); ///test graph
+        
+        //ihmGraph.afficherJeu(); ///test graph
+        
         int joueursVivants;
         do{
             joueursVivants=0;
