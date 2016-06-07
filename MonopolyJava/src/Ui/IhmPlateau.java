@@ -6,6 +6,7 @@
 package Ui;
 import Data.Carreau;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -40,5 +41,7 @@ public class IhmPlateau extends JPanel{
         g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters            
     }
     
-    
+    public void mousePressed(MouseEvent e) {
+        
+    }
 }
