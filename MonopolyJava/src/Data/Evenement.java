@@ -25,6 +25,9 @@ public class Evenement {
     private Joueur proprio;
 
     //Constructeurs
+    public Evenement(String nomCase) {
+        this.nomCase = nomCase;
+    }
     //Cas 1-4
     public Evenement(int typeFenetre, int loyerCase, Joueur j, String nomCase) {
         this.typeFenetre = typeFenetre;
