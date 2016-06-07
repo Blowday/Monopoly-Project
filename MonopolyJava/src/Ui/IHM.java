@@ -2,14 +2,36 @@ package Ui;
 
 import Jeu.*;
 import Data.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
+import javax.swing.border.BevelBorder;
 
 public class IHM {
-
+    
     //Attributs
     private Controleur controleur;
-
+    public static JFrame window1,window2;
+    private JPanel panel_accueil,panel_principal,panel_joueur,retour_Demarrer;
     //Constructeurs
     public IHM(Controleur c) {
         setControleur(c);
@@ -18,6 +40,127 @@ public class IHM {
     //Méthodes
     public int afficherMenu() {
         int s;
+        
+           
+            panel_accueil = new JPanel();
+            panel_accueil.setLayout(new GridBagLayout());
+            GridBagConstraints c = new GridBagConstraints();
+      
+            
+            
+            window1 = new JFrame("Monopoly");
+            window1.setSize(900, 700);
+            //window1.setContentPane(new JLabel(new ImageIcon("fond.png").getImage()));
+     
+            
+            // Définit la taille de la fenêtre en pixels
+            c.gridx=1;
+            c.gridy=1;
+            
+            //image
+            JLabel image = new JLabel(new ImageIcon("image_debut.png"));
+            panel_accueil.add(image,c);
+            
+            //espace entre les boutons
+            c.gridx=1;
+            c.gridy=2;
+            c.ipady=80;
+            panel_accueil.add(new JLabel("  "),c);
+            
+            
+            //jouer
+            c.gridx=1;
+            c.gridy=3;
+            c.ipadx=400;
+            c.ipady=50;
+            JButton jouer = new JButton ("Jouer");
+            jouer.setBackground(Color.GREEN);
+            //taille
+            Font font1 = new Font("Arial",Font.BOLD,100);
+            jouer.setFont(font1);
+           
+            //panel_accueil.add(jouer,c);
+            
+            
+            //espace entre les boutons
+            c.gridx=1;
+            c.gridy=4;
+            c.ipady=15;
+            panel_accueil.add(new JLabel("  "),c);
+            
+            
+            
+            //quitter
+            c.gridx=1;
+            c.gridy=5;
+            c.ipadx=200;
+            c.ipady=25;
+            JButton quitter = new JButton ("Quitter");
+            quitter.setBackground(Color.RED);
+            //taille
+            Font font2 = new Font("Arial",Font.BOLD,70);
+            quitter.setFont(font2);        
+            
+            
+            panel_accueil.add(quitter,c);
+            window1.add(panel_accueil);
+            
+           
+            
+            jouer.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    inscrireJoueur();
+                    window1.setVisible(false);
+                    
+                }
+             });
+            
+            
+            quitter.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    int reponse = JOptionPane.showConfirmDialog(window1,
+                        "Voulez-vous quitter le Monopoly",
+                        "Confirmation",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                        if(reponse == JOptionPane.YES_OPTION ){
+                            System.exit(0);
+                        }
+            }
+             });  
+            
+            
+            
+            //message de validation quand on appuie sur la croix pour fermer
+            window1.addWindowListener( new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    
+                    int reponse = JOptionPane.showConfirmDialog(window1,
+                    "Voulez-vous quitter le Monopoly",
+                    "Confirmation",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+                    if(reponse == JOptionPane.YES_OPTION ){
+                        window1.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+                    }
+                    if(reponse == JOptionPane.NO_OPTION ){
+                            window1.setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+                    }
+		}
+            });
+            
+            //fond
+            //window1.add(new JLabel(new ImageIcon("dollar.jpg")));
+            window1.setVisible(true);
+            
+            
+            
+            
+            
+            
+            
         Scanner sc = new Scanner(System.in);
         System.out.println("            .---.\n"
                 + "            |#__|\n"
@@ -45,7 +188,7 @@ public class IHM {
         return s;
 
     }
-
+      
     public void afficherDebutTour(Joueur j) {
 
         System.out.println("Le joueur " + j.getName() + " lance les dés : ");
@@ -57,8 +200,183 @@ public class IHM {
     }
 
     public ArrayList<Joueur> inscrireJoueur() {
-        ArrayList<Joueur> jTemp = new ArrayList<>();
-        String s;
+        ArrayList<Joueur> jTemp = new ArrayList<>();  
+        
+ 
+        window2 = new JFrame("Inscrire joueur");
+        window2.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);     
+        window2.setSize(900, 700);
+        
+        
+        panel_principal  = new JPanel();
+        panel_principal.setLayout(new GridBagLayout());
+        GridBagConstraints c0 = new GridBagConstraints();
+        
+  
+        panel_joueur = new JPanel();
+        panel_joueur.setLayout(new GridBagLayout());
+        GridBagConstraints c1 = new GridBagConstraints();
+        
+        retour_Demarrer = new JPanel();
+        retour_Demarrer.setLayout(new GridBagLayout());
+        GridBagConstraints c2 = new GridBagConstraints();
+        
+
+        
+        
+            //****joueur****
+            
+                    //joueur 1
+                    c1.gridx=1;
+                    c1.gridy=1;
+                    JLabel ljoueur1 = new JLabel("joueur 1:");
+                    panel_joueur.add(ljoueur1,c1);
+                    
+                    c1.gridx=2;
+                    c1.gridy=1;
+                    TextField joueur1 = new TextField(20);
+                    panel_joueur.add(joueur1,c1);
+        
+                    //joueur 2        
+                    c1.gridx=1;
+                    c1.gridy=2;
+                    JLabel ljoueur2 = new JLabel("joueur 2:");
+                    panel_joueur.add(ljoueur2,c1);
+                    
+                    c1.gridx=2;
+                    c1.gridy=2;
+                    TextField joueur2 = new TextField(20);
+                    panel_joueur.add(joueur2,c1);
+                    
+                    //joueur 3                   
+                    c1.gridx=1;
+                    c1.gridy=3;
+                    JLabel ljoueur3 = new JLabel("joueur 3:");
+                    panel_joueur.add(ljoueur3,c1);
+                    
+                    c1.gridx=2;
+                    c1.gridy=3;
+                    TextField joueur3 = new TextField(20);
+                    panel_joueur.add(joueur3,c1);
+                    
+                    //joueur 4
+                    c1.gridx=1;
+                    c1.gridy=4;
+                    JLabel ljoueur4 = new JLabel("joueur 4:");
+                    panel_joueur.add(ljoueur4,c1);
+                    
+                    c1.gridx=2;
+                    c1.gridy=4;
+                    TextField joueur4 = new TextField(20);
+                    panel_joueur.add(joueur4,c1);
+                    
+                    //joueur 5
+                    c1.gridx=1;
+                    c1.gridy=5;
+                    JLabel ljoueur5 = new JLabel("joueur 5:");
+                    panel_joueur.add(ljoueur5,c1);
+                    
+                    c1.gridx=2;
+                    c1.gridy=5;
+                    TextField joueur5 = new TextField(20);
+                    panel_joueur.add(joueur5,c1);
+                    
+                    //joueur 6
+                    c1.gridx=1;
+                    c1.gridy=6;
+                    JLabel ljoueur6 = new JLabel("joueur 6:");
+                    panel_joueur.add(ljoueur6,c1);
+                    
+                    c1.gridx=2;
+                    c1.gridy=6;
+                    TextField joueur6 = new TextField(20);
+                    panel_joueur.add(joueur6,c1);
+                    
+                    
+                    
+                    
+            //****Bouton****
+                    
+             //retour
+            c2.gridx=1;
+            c2.gridy=1;
+            c2.ipadx=50;
+            JButton retour = new JButton ("retour");
+            retour_Demarrer.add(retour,c2);      
+            
+            //espace entre retour et demarer
+            c2.gridx=2;
+            c2.gridy=1;
+            c2.ipadx=300;
+            retour_Demarrer.add(new JLabel("  "),c2);        
+                    
+                    
+            //demarer        
+            c2.gridx=3;
+            c2.gridy=1;
+            c2.ipadx=50;
+            JButton demarrer = new JButton ("demarrer");
+            retour_Demarrer.add(demarrer,c2);        
+                    
+            
+            //****assemblage****
+            
+            //image
+            c0.gridx=1;
+            c0.gridy=1;
+            JLabel image = new JLabel(new ImageIcon("image_debut.png"));
+            panel_principal.add(image,c0);
+            
+            //espace entre image et joueur
+            c0.gridx=1;
+            c0.gridy=2;
+            c0.ipady=80;
+            panel_principal.add(new JLabel("  "),c0);
+            
+            //joueur
+            c0.gridx=1;
+            c0.gridy=3;
+            panel_principal.add(panel_joueur,c0);
+            
+            
+            //espace entre joueur et bouton
+            c0.gridx=1;
+            c0.gridy=4;
+            c0.ipady=80;
+            panel_principal.add(new JLabel("  "),c0);
+            
+            //bouton
+            c0.gridx=1;
+            c0.gridy=5;
+            panel_principal.add(retour_Demarrer,c0);
+            
+        window2.add(panel_principal);
+        
+        
+        
+        //boutton retour
+        retour.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    window2.setVisible(false);
+                    afficherMenu();
+                    
+                }
+             });      
+            // Définit la taille de la fenêtre en pixels
+        
+     
+        
+        
+        
+        
+        window2.setVisible(true);            
+                    
+
+        
+        
+        
+  /*      String s;
         Scanner sc = new Scanner(System.in);
         System.out.println("Nom de joueur: ");
         String n = sc.nextLine();
@@ -75,7 +393,7 @@ public class IHM {
             s = sc.nextLine();
 
         } while (s.equals("o") && jTemp.size() < 6);
-
+*/
         return jTemp;
 
     }

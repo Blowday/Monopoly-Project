@@ -21,13 +21,22 @@ import javax.swing.*;
  */
 public class IhmGraph extends JFrame implements Observateur {
     
+    private IhmMenu ihmMenu;
+    private IhmInscription ihmInscription;
+    
     private JPanel jeu;
     private JPanel plateau;
     private JPanel listeJoueurs;
     
+    private Controleur controleur;
+    
+    
+    
     public IhmGraph(Controleur controleur){
         super("Monopoly");
         
+        this.controleur = controleur;
+        controleur.setObservateur(this);
         
         JPanel jeu = new JPanel(new BorderLayout());
           //liste des joueurs
@@ -38,8 +47,9 @@ public class IhmGraph extends JFrame implements Observateur {
         
         this.add(plateau);
         
+        ihmMenu = new IhmMenu();
+        ihmInscription = new IhmInscription();
         
-        //paint(controleur.getMonopoly().getCarreaux());//generation du plateau
     
     }
     
@@ -49,35 +59,17 @@ public class IhmGraph extends JFrame implements Observateur {
        
         switch(e.getType()){
             
-            case 1: //1--inscription des joueurs
-                this.afficherMenuInscription(); //renvoie une arrayList de joueurs
+            case 1: //1--Afficher menu
+                ihmMenu.afficherMenu(); //devra renvoyer une arrayList de joueurs
+                this.afficherJeu();
         }
     }
 
-    
-    private void afficherMenuInscription() {//menu d'inscription des joueurs
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    /*private void paint(HashMap<Integer,Carreau> m) { //Generation du plateau de jeu
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridheight = 0;
-        gbc.gridwidth = 0;
-        
-        int cote = 1;
-        for(int i = 0; i < 10; i++){ //generation du premier côté
-            gbc.gridwidth = i;
-            gbc.gridheight = 0;
-            if(m.get(i) instanceof CarreauAchetable){
-                IhmPropriete carreau= new IhmPropriete(m.get(i)), cote);
-            }
-        } 
-    }*/
     
-    public void afficherPlateau() {
+    public void afficherJeu() {
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        setSize(900, 700);
+        setSize(1500, 940);
         setVisible(true);                        
     }
     
