@@ -13,6 +13,8 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -24,9 +26,10 @@ public class IhmGraph extends JFrame implements Observateur {
     private IhmMenu ihmMenu;
     private IhmInscription ihmInscription;
     
-    private JPanel jeu;
-    private JPanel plateau;
+    private IhmPlateau plateau;
     private JPanel listeJoueurs;
+    private IhmDe de1;
+    private IhmDe de2;
     
     private Controleur controleur;
     
@@ -34,6 +37,7 @@ public class IhmGraph extends JFrame implements Observateur {
     
     public IhmGraph(Controleur controleur){
         super("Monopoly");
+        this.setLayout(new BorderLayout());
         
         this.controleur = controleur;
         controleur.setObservateur(this);
@@ -45,12 +49,16 @@ public class IhmGraph extends JFrame implements Observateur {
         //partie plateau a remplir
         IhmPlateau plateau = new IhmPlateau();
         
-        this.add(plateau);
+        this.add(plateau, BorderLayout.CENTER);
         
         ihmMenu = new IhmMenu();
-        ihmInscription = new IhmInscription();
         
-    
+        de1 = new IhmDe();
+        de2 = new IhmDe();
+        this.add(de1, BorderLayout.EAST);
+        this.add(de2, BorderLayout.EAST);
+        //this.add(de2);
+        
     }
     
     public void notifier(Evenement e){
@@ -62,6 +70,9 @@ public class IhmGraph extends JFrame implements Observateur {
             case 1: //1--Afficher menu
                 ihmMenu.afficherMenu(); //devra renvoyer une arrayList de joueurs
                 this.afficherJeu();
+                de1.animation(5);
+                de2.animation(5);
+        
         }
     }
 
@@ -69,8 +80,9 @@ public class IhmGraph extends JFrame implements Observateur {
     
     public void afficherJeu() {
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        setSize(1500, 940);
-        setVisible(true);                        
+        setSize(1350, 940);
+        setVisible(true); 
+        
     }
     
 }
