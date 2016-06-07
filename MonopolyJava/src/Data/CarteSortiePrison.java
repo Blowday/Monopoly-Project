@@ -9,12 +9,9 @@ package Data;
  *
  * @author wyklandd
  */
-public class AllerEnPrison extends AutreCarreau {
+public class CarteSortiePrison extends Carte {
     
-    
-    public AllerEnPrison(int num, String s) {
-        super(num,s);
-    }
-    
-    
+    public CarteSortiePrison(TypeCarte t, String s) {
+        super(t,s);
+    }  
 }

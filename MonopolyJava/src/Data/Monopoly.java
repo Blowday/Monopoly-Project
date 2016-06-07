@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Monopoly {
             
@@ -13,13 +14,17 @@ public class Monopoly {
 	private HashMap<Integer,Carreau> carreaux;
 	private ArrayList<Joueur> joueurs;
         private HashMap<CouleurPropriete,Groupe> groupes;
+        private HashSet<Carte> cartesChance;
+        private HashSet<Carte> cartesCommunaute;
 
         //Constructeurs
         public Monopoly() {
             joueurs = new ArrayList<>();
             carreaux = new HashMap<>();
             groupes = new HashMap<>();
-            creerPlateau("data.txt");
+            cartesChance = new HashSet<>();
+            cartesCommunaute = new HashSet<>();
+            creerPlateau("data.txt", "dataChance.txt", "dataCommunauté.txt");
             
         }
         
@@ -52,11 +57,11 @@ public class Monopoly {
         }
             
         
-        public void creerPlateau(String dataFilename){
-		buildGamePlateau(dataFilename);
+        public void creerPlateau(String dataFilename, String df2, String df3){
+		buildGamePlateau(dataFilename, df2, df3);
 	}
 	
-	private void buildGamePlateau(String dataFilename){
+	private void buildGamePlateau(String dataFilename, String df2, String df3){
             //Création des groupes
             Groupe bleuFonce = new Groupe(CouleurPropriete.bleuFonce);
             groupes.put(CouleurPropriete.bleuFonce,bleuFonce);
@@ -80,7 +85,7 @@ public class Monopoly {
                 ArrayList<String[]> data = readDataFile(dataFilename, ",");
 
                 //TODO: create cases instead of displaying
-                for (int i = 0; i < data.size() - 1; ++i) {
+                for (int i = 0; i < data.size(); ++i) {
                     String caseType = data.get(i)[0];
                     if (caseType.compareTo("P") == 0) {
                         //System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
@@ -120,7 +125,6 @@ public class Monopoly {
                         else if(data.get(i)[2].compareTo("Taxe de Luxe") == 0) {
                             carreaux.put(i, new ImpotsEtTaxes(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
                         }
-                        
 
                     } else {
                         System.err.println("[buildGamePleateau()] : Invalid Data type");
@@ -134,10 +138,100 @@ public class Monopoly {
 		catch(IOException e){
 			System.err.println("[buildGamePlateau()] : Error while reading file!");
 		}
-                
             
-                
+            //Lecture du fichier de cartes chance
+            try {
+                ArrayList<String[]> data2 = readDataFile(df2, ";");
+
+                for (int i = 0; i < data2.size(); ++i) {
+                    
+                    String caseType = data2.get(i)[0];
+                    //Pour les cartes paiement
+                    if (caseType.compareTo("P") == 0) {
+                        cartesChance.add(new CartePaiement(TypeCarte.chance, data2.get(i)[1], Integer.parseInt(data2.get(i)[2])));
+                    }
+                    
+                    //Pour les cartes Reparation
+                    else if (caseType.compareTo("Prep") == 0) {
+                        cartesChance.add(new CarteReparation(TypeCarte.chance, data2.get(i)[1], Integer.parseInt(data2.get(i)[2]), Integer.parseInt(data2.get(i)[3])));
+                    } 
+                    
+                    //Pour les cartes Deplacement (sans passer par la case départ si case prison)
+                    else if (caseType.compareTo("D") == 0) {
+                        cartesChance.add(new CarteDeplacement(TypeCarte.chance, data2.get(i)[1], Integer.parseInt(data2.get(i)[2])));
+                    } 
+                    
+                    //Pour les cartes sortie prison
+                    else if (caseType.compareTo("LP") == 0) {
+                        cartesChance.add(new CarteSortiePrison(TypeCarte.chance, data2.get(i)[1]));
+                    }
+                    
+                    //Pour les cartes Aller en prison
+                    else if (caseType.compareTo("PR") == 0) {
+                        cartesChance.add(new CarteSortiePrison(TypeCarte.chance, data2.get(i)[1]));
+                    } 
+                    
+                    //En cas de valeur inconnue
+                    else {
+                        System.err.println("[buildGamePleateau()] : Invalid Data type");
+                    }
+                }
+
+            }
+		catch(FileNotFoundException e){
+			System.err.println("[buildGamePlateau()] : File is not found!");
+		}
+		catch(IOException e){
+			System.err.println("[buildGamePlateau()] : Error while reading file!");
+		}
+            
+            //Lecture du fichier de cartes ccommunauté
+            try {
+                ArrayList<String[]> data3 = readDataFile(df3, ";");
+
+                for (int i = 0; i < data3.size(); ++i) {
+                    
+                    String caseType = data3.get(i)[0];
+                    //Pour les cartes paiement
+                    if (caseType.compareTo("P") == 0) {
+                        cartesCommunaute.add(new CartePaiement(TypeCarte.chance, data3.get(i)[1], Integer.parseInt(data3.get(i)[2])));
+                    }
+                    
+                    //Pour les cartes Deplacement (sans passer par la case départ si case prison)
+                    else if (caseType.compareTo("D") == 0) {
+                        cartesCommunaute.add(new CarteDeplacement(TypeCarte.chance, data3.get(i)[1], Integer.parseInt(data3.get(i)[2])));
+                    } 
+                    
+                    //Pour les cartes sortie prison
+                    else if (caseType.compareTo("LP") == 0) {
+                        cartesCommunaute.add(new CarteSortiePrison(TypeCarte.chance, data3.get(i)[1]));
+                    }
+                    
+                    //Pour les cartes Aller en prison
+                    else if (caseType.compareTo("PR") == 0) {
+                        cartesCommunaute.add(new CarteSortiePrison(TypeCarte.chance, data3.get(i)[1]));
+                    } 
+                    
+                    //En cas de valeur inconnue
+                    else {
+                        System.err.println("[buildGamePleateau()] : Invalid Data type");
+                    }
+                }
+
+            }
+		catch(FileNotFoundException e){
+			System.err.println("[buildGamePlateau()] : File is not found!");
+		}
+		catch(IOException e){
+			System.err.println("[buildGamePlateau()] : Error while reading file!");
+		}
+            
+            
+      
+            
 	}
+        
+        
 	
 	private ArrayList<String[]> readDataFile(String filename, String token) throws FileNotFoundException, IOException
 	{

@@ -9,12 +9,7 @@ package Data;
  *
  * @author wyklandd
  */
-public class AllerEnPrison extends AutreCarreau {
-    
-    
-    public AllerEnPrison(int num, String s) {
-        super(num,s);
-    }
-    
-    
+public enum TypeCarte {
+    chance,
+    communauté;
 }

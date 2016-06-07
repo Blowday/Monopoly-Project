@@ -9,12 +9,16 @@ package Data;
  *
  * @author wyklandd
  */
-public class AllerEnPrison extends AutreCarreau {
+public class CartePaiement extends Carte {
+    
+
+    //Il peut être positif ou négatif
+    private int montant;
     
     
-    public AllerEnPrison(int num, String s) {
-        super(num,s);
+    public CartePaiement(TypeCarte t, String s, int m) {
+        super(t, s);
+        this.montant = m;
     }
-    
     
 }
