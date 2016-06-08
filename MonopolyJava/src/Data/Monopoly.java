@@ -45,7 +45,6 @@ public class Monopoly {
                 System.out.println(" est prêt");
 
             }
-            
         }
         
         public HashMap<Integer,Carreau> getCarreaux() {

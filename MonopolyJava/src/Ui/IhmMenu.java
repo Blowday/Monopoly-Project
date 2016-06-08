@@ -43,7 +43,7 @@ public class IhmMenu {
     private IhmGraph ihmGraph;
     
     private ArrayList<Joueur> jtemp;
-    
+    private ImageIcon icon;
     
     
 
@@ -121,7 +121,7 @@ public class IhmMenu {
             jouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    //ihmInscription.inscrireJoueur();
+
                     ihmGraph.menuInscription();
                     window1.setVisible(false);
                     
@@ -173,10 +173,12 @@ public class IhmMenu {
                 
             }
             
-            
+            panel_accueil.setOpaque(false);
             window1.add(panel_accueil,BorderLayout.NORTH);
             
-            
+            //icon
+            icon = new ImageIcon("policier.gif");
+            window1.setIconImage(icon.getImage());
             
 
     }
@@ -204,19 +206,7 @@ public class IhmMenu {
 	
 	return panel;
 }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     public ArrayList<Joueur> afficherMenu() {
         window1.setVisible(true);
         return jtemp;

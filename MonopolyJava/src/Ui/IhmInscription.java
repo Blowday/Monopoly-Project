@@ -18,6 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -30,7 +33,7 @@ public class IhmInscription {
     private IhmGraph ihmGraph;
     
     private ArrayList<Joueur> jTemp;
-    
+    private ImageIcon icon;
 
     
     
@@ -48,6 +51,11 @@ public class IhmInscription {
         window2.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);     
         window2.setSize(900, 700);
         
+        //icon
+        icon = new ImageIcon("policier.gif");
+        window2.setIconImage(icon.getImage());
+        
+        
         
         panel_principal  = new JPanel();
         panel_principal.setLayout(new GridBagLayout());
@@ -62,76 +70,86 @@ public class IhmInscription {
         retour_Demarrer.setLayout(new GridBagLayout());
         GridBagConstraints c2 = new GridBagConstraints();
         
-
+        
         
         
             //****joueur****
             
-                    //joueur 1
-                    c1.gridx=1;
-                    c1.gridy=1;
-                    ljoueur1 = new JLabel("joueur 1:");
-                    panel_joueur.add(ljoueur1,c1);
+            c1.weighty= 1;
+            
+            
+            //joueur 1
+            c1.gridx=1;
+            c1.gridy=1;
+            ljoueur1 = new JLabel("joueur 1:");
+            panel_joueur.add(ljoueur1,c1);
                     
-                    c1.gridx=2;
-                    c1.gridy=1;
-                    joueur1 = new JTextField(20);
-                    panel_joueur.add(joueur1,c1);
+            c1.gridx=2;
+            c1.gridy=1;
+            joueur1 = new JTextField(20);
+            joueur1.setDocument(new JTextFieldLimit(10));
+            panel_joueur.add(joueur1,c1);
+            
         
-                    //joueur 2        
-                    c1.gridx=1;
-                    c1.gridy=2;
-                    ljoueur2 = new JLabel("joueur 2:");
-                    panel_joueur.add(ljoueur2,c1);
+            //joueur 2        
+            c1.gridx=1;
+            c1.gridy=2;
+            ljoueur2 = new JLabel("joueur 2:");
+            panel_joueur.add(ljoueur2,c1);
+                   
+            c1.gridx=2;
+            c1.gridy=2;
+            joueur2 = new JTextField(20);
+            joueur2.setDocument(new JTextFieldLimit(10));
+            panel_joueur.add(joueur2,c1);
                     
-                    c1.gridx=2;
-                    c1.gridy=2;
-                    joueur2 = new JTextField(20);
-                    panel_joueur.add(joueur2,c1);
+            //joueur 3                   
+            c1.gridx=1;
+            c1.gridy=3;
+            ljoueur3 = new JLabel("joueur 3:");
+            panel_joueur.add(ljoueur3,c1);
+                   
+            c1.gridx=2;
+            c1.gridy=3;
+            joueur3 = new JTextField(20);
+            joueur3.setDocument(new JTextFieldLimit(10));
+            panel_joueur.add(joueur3,c1);
                     
-                    //joueur 3                   
-                    c1.gridx=1;
-                    c1.gridy=3;
-                    ljoueur3 = new JLabel("joueur 3:");
-                    panel_joueur.add(ljoueur3,c1);
+            //joueur 4
+            c1.gridx=1;
+            c1.gridy=4;
+            ljoueur4 = new JLabel("joueur 4:");
+            panel_joueur.add(ljoueur4,c1);
                     
-                    c1.gridx=2;
-                    c1.gridy=3;
-                    joueur3 = new JTextField(20);
-                    panel_joueur.add(joueur3,c1);
+            c1.gridx=2;
+            c1.gridy=4;
+            joueur4 = new JTextField(20);
+            joueur4.setDocument(new JTextFieldLimit(10));
+            panel_joueur.add(joueur4,c1);
                     
-                    //joueur 4
-                    c1.gridx=1;
-                    c1.gridy=4;
-                    ljoueur4 = new JLabel("joueur 4:");
-                    panel_joueur.add(ljoueur4,c1);
+            //joueur 5
+            c1.gridx=1;
+            c1.gridy=5;
+            ljoueur5 = new JLabel("joueur 5:");
+            panel_joueur.add(ljoueur5,c1);
                     
-                    c1.gridx=2;
-                    c1.gridy=4;
-                    joueur4 = new JTextField(20);
-                    panel_joueur.add(joueur4,c1);
+            c1.gridx=2;
+            c1.gridy=5;
+            joueur5 = new JTextField(20);
+            joueur5.setDocument(new JTextFieldLimit(10));
+            panel_joueur.add(joueur5,c1);
                     
-                    //joueur 5
-                    c1.gridx=1;
-                    c1.gridy=5;
-                    ljoueur5 = new JLabel("joueur 5:");
-                    panel_joueur.add(ljoueur5,c1);
-                    
-                    c1.gridx=2;
-                    c1.gridy=5;
-                    joueur5 = new JTextField(20);
-                    panel_joueur.add(joueur5,c1);
-                    
-                    //joueur 6
-                    c1.gridx=1;
-                    c1.gridy=6;
-                    ljoueur6 = new JLabel("joueur 6:");
-                    panel_joueur.add(ljoueur6,c1);
-                    
-                    c1.gridx=2;
-                    c1.gridy=6;
-                    joueur6 = new JTextField(20);
-                    panel_joueur.add(joueur6,c1);
+             //joueur 6
+            c1.gridx=1;
+            c1.gridy=6;
+            ljoueur6 = new JLabel("joueur 6:");
+            panel_joueur.add(ljoueur6,c1);
+                   
+            c1.gridx=2;
+            c1.gridy=6;
+            joueur6 = new JTextField(20);
+            joueur6.setDocument(new JTextFieldLimit(10));
+            panel_joueur.add(joueur6,c1);
                     
                     
                     
@@ -241,13 +259,21 @@ public class IhmInscription {
                         else{
                             window2.setVisible(false);
                             ihmGraph.setJoueurs(jTemp);
-                            ihmGraph.afficherJeu();
-                            //ihmGraph.lancerPartie();
+                            ihmGraph.initListeJoueur(jTemp);
+                            ihmGraph.getListeJoueurs().updateUI();
+                            //ihmGraph.afficherJeu();
+                            ihmGraph.lancerPartie();
                         }
                 }
             });
+        
+        
+        
+        
          window2.add(panel_principal);
     }
+    
+    
     
     public void inscrireJoueur() {
 
@@ -261,5 +287,21 @@ public class IhmInscription {
         window2.setVisible(true);
     }
 
-    
+//nombre de caractère maximale dans un JTextField   
+public class JTextFieldLimit extends PlainDocument {
+  private int limit;
+
+  JTextFieldLimit(int limit) {
+   super();
+   this.limit = limit;
+   }
+
+  public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
+    if (str == null) return;
+
+    if ((getLength() + str.length()) <= limit) {
+      super.insertString(offset, str, attr);
+    }
+  }
+}
 }

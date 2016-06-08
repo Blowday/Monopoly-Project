@@ -5,20 +5,26 @@
  */
 package Ui;
 
-import Data.Carreau;
-import Data.CarreauAchetable;
+
 import Data.Evenement;
 import Data.Joueur;
 import Jeu.Controleur;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 
 /**
  *
@@ -30,12 +36,12 @@ public class IhmGraph extends JFrame implements Observateur {
     private IhmInscription ihmInscription;
     
     private IhmPlateau plateau;
-    private JPanel listeJoueurs;
+
     private IhmDe de1;
     private IhmDe de2;
     
     private Controleur controleur;
-
+    private ImageIcon icon;
     
     //initListeJoueur
     private JPanel panel_joueur,panel_joueur1,panel_joueur2,panel_joueur3,panel_joueur4,panel_joueur5,panel_joueur6;
@@ -46,7 +52,7 @@ public class IhmGraph extends JFrame implements Observateur {
     public IhmGraph(Controleur controleur){
         super("Monopoly");
         this.setLayout(new BorderLayout());
-
+       
         
         this.controleur = controleur;
         controleur.setObservateur(this);
@@ -58,8 +64,7 @@ public class IhmGraph extends JFrame implements Observateur {
 
         
         JPanel jeu = new JPanel(new BorderLayout());
-          //liste des joueurs
-        JPanel listeJoueurs = new JPanel(new GridBagLayout());
+
 
         //partie plateau a remplir
         IhmPlateau plateau = new IhmPlateau();
@@ -70,8 +75,18 @@ public class IhmGraph extends JFrame implements Observateur {
         
         
         informationTour();
-        initListeJoueur(/*controleur.getJoueurs()*/);
+        initListeJoueur(new ArrayList());
         
+        music();
+        
+         
+    //icon
+    icon = new ImageIcon("policier.gif");
+    this.setIconImage(icon.getImage());
+        
+    }
+    public JPanel getListeJoueurs(){
+        return panel_joueur;
     }
 
     public Controleur getControleur() {
@@ -97,7 +112,8 @@ public class IhmGraph extends JFrame implements Observateur {
             case 2:
                 ihmInscription.inscrireJoueur();
                 break;
-            
+            case 3:
+                this.afficherJeu();
         }
     }
 
@@ -117,7 +133,7 @@ public class IhmGraph extends JFrame implements Observateur {
         controleur.lancerPartie();
     }
     
-    public void initListeJoueur(/*ArrayList<Joueur> joueurs*/){
+    public void initListeJoueur(ArrayList<Joueur> joueurs){
 
             panel_joueur = new JPanel();
             panel_joueur.setLayout(new GridBagLayout());
@@ -165,40 +181,43 @@ public class IhmGraph extends JFrame implements Observateur {
             
             
             
-            for (int i=0; i<5 /*controleur.getJoueurs().size()*/ ; i++){
+            /*for (int i=0; i<joueurs.size() ; i++){
                 c.gridx=1;
                 c.gridy=i+1;
-                listPanel.get(i).add(new JLabel("nom joueur"+(i+1))); 
+                listPanel.get(i).add(new JLabel(joueurs.get(i).getName()+":"));
+                listPanel.get(i).add(new JLabel(Integer.toString(joueurs.get(i).getCash())+"$"));
                 listPanel.get(i).setBorder(BorderFactory.createTitledBorder(""));
                 panel_joueur.add(listPanel.get(i),c);
-                this.add(panel_joueur,BorderLayout.WEST);
+                
                 
             }
+            this.add(panel_joueur,BorderLayout.WEST);*/
             
             
-        /*for (int i=0; i<5*2 ; i++){
+        for (int i=0; i<joueurs.size()*2 ; i++){
                
              if ((i % 2) == 0){   
                 c.gridx=1;
                 c.gridy=i+1;
-                listPanel.get(i/2).add(new JLabel("nom joueur"+((i+1)/2))); 
-                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder(""));
-                panel_joueur.add(listPanel.get(i),c);
-                this.add(panel_joueur,BorderLayout.WEST);
+                c.anchor = GridBagConstraints.LINE_START;
+                listPanel.get(i/2).add(new JLabel(joueurs.get(i/2).getName()+":")); 
+                listPanel.get(i/2).add(new JLabel(Integer.toString(joueurs.get(i/2).getCash())+"$"));
+                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder("joueur "+(i/2+1)+":"));
+                panel_joueur.add(listPanel.get(i/2),c);
             }
             else{
-                
                 c.gridx=1;
                 c.gridy=i+1;
-                c.ipady=5;
+                c.ipady=10;
                 panel_joueur.add(new JLabel("  "),c);
-                        
-                this.add(panel_joueur,BorderLayout.WEST);
-                i=i+1;
             }
-        } */   
             
+        }   
+        this.add(panel_joueur,BorderLayout.WEST);   
     }
+    
+    
+    
     
     public void informationTour(){
         panel_information = new JPanel();
@@ -215,7 +234,7 @@ public class IhmGraph extends JFrame implements Observateur {
         
 
 
-        //*****dès*****
+        //*****dés*****
         
         de1 = new IhmDe();
         de2 = new IhmDe();
@@ -236,11 +255,11 @@ public class IhmGraph extends JFrame implements Observateur {
         c1.gridy=1;
         panel_de.add(de2,c1);
         
-        //bouton lancer dès
+        //bouton lancer dés
         c1.gridx=1;
         c1.gridy=2;
         
-        lancer_des = new JButton ("lancer les dès");
+        lancer_des = new JButton ("lancer les dés");
         panel_de.add(lancer_des,c1);
         
         panel_information.add(panel_de);
@@ -273,10 +292,42 @@ public class IhmGraph extends JFrame implements Observateur {
     
     
     
+        lancer_des.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            controleur.lancerDesAvancer(controleur.getjCourant());
+            de1.animation(controleur.getjCourant().getD1());
+            de2.animation(controleur.getjCourant().getD2());
+        }
+        });  
     
-    
-    
+        
     }
+     public static void music() 
+    {       
+        AudioPlayer MGP = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData MD;
+
+        ContinuousAudioDataStream loop = null;
+
+        try
+        {
+            InputStream test = new FileInputStream("music.wav");
+            BGM = new AudioStream(test);
+            AudioPlayer.player.start(BGM);
+            //MD = BGM.getData();
+            //loop = new ContinuousAudioDataStream(MD);
+
+        }
+        catch(FileNotFoundException e){
+        }
+        catch(IOException error)
+        {
+        }
+        MGP.start(loop);
+    }
+
 }
 
     

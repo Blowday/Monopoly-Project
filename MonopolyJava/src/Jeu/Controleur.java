@@ -16,6 +16,8 @@ public class Controleur {
     
     private Observateur ihmGraph;
     
+    private Joueur jCourant;
+    private int numJoueur=-1;
     
     
     public void setObservateur(Observateur ob){
@@ -75,19 +77,30 @@ public class Controleur {
         
         //ihmGraph.afficherJeu(); ///test graph
         ihmGraph.notifier(new Evenement(3));
-        
         int joueursVivants;
-        do{
-            joueursVivants=0;
         
-            for(Joueur j: monopoly.getJoueurs()){
-                if(!j.getPerdu()){
-                    joueursVivants++;
-                }
+        joueursVivants=0;
+        for(Joueur j: monopoly.getJoueurs()){
+                
+            if(!j.getPerdu()){
+                joueursVivants++;
             }
+           
+        }
+        
+        if(joueursVivants > 1){
+            joueurSuivant();
+            
+        }
+        else{ 
+            //ihmgraph.notifier(new Evenement()) notification de fin de 
+        }
+       /*
             
             for(Joueur j : monopoly.getJoueurs()) {
+            
                 if(!j.getPerdu()){
+                    jCourant = j;
                     do {    
                         ihm.lancerDes(j);
                         jouerUnCoup(j);
@@ -102,17 +115,24 @@ public class Controleur {
             }
             
         }while(joueursVivants > 1);
-        ihm.partiePerdue();
+        ihm.partiePerdue();*/
+        this.joueurSuivant();
+        
+        
     }
+
+    
     public Carreau lancerDesAvancer(Joueur j){
-         ihm.afficherDebutTour(j);
+         //ihm.afficherDebutTour(j);
           
         
                 //System.out.println(j.getPositionCourante().getNumero());
                 //j.getPositionCourante().getNumero();
                 j.setD1(roll());
                 j.setD2(roll());
-                ihm.afficherDe(j.getD1(),j.getD2());
+                ihm.afficherDe(j.getD1(),j.getD2()); //a enlever
+                
+                ihmGraph.notifier(new Evenement(4));
                 
                 //En cas de double, on sort le joueur de prison (inutile si le jouer était déjà libre)
                 if (j.getD1() == j.getD2()) {
@@ -128,7 +148,7 @@ public class Controleur {
                 if(!j.enPrison()) {
                 
                     //si on passe par la case départ
-                    if(j.getPositionCourante().getNumero()-1 + j.getD1() + j.getD2() >= 40){
+                    if(j.getPositionCourante().getNumero()-1 + j.getD1()+j.getD2() >= 40){
                         passageDepart(j);
                         ihm.passageDepart(j);
                         j.setCarreau(monopoly.getCarreaux().get(  (j.getPositionCourante().getNumero()-1 + j.getD1()+ j.getD2()) - 40 ));
@@ -313,5 +333,25 @@ public class Controleur {
 
     }
 
+
+    public Monopoly getMonopoly() {
+        return monopoly;
+    }
+    public Joueur getjCourant() {
+        return jCourant;
+    }
+
+    public void joueurSuivant(){
+        
+        
+      
+        numJoueur += 1; 
+        if(numJoueur == monopoly.getJoueurs().size()+1){
+            numJoueur = 0;
+        }
+        jCourant = monopoly.getJoueurs().get(numJoueur);
+        
+       
+    }
   
 }
