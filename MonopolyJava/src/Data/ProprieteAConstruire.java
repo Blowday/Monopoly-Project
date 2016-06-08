@@ -4,6 +4,8 @@ public class ProprieteAConstruire extends CarreauAchetable {
 
     //Attributs
     private Groupe groupe;
+    private int nbMaisons;
+    private int nbHotels;
     private int prixLoyer1;
     private int prixLoyer2;
     private int prixLoyer3;
@@ -24,35 +26,64 @@ public class ProprieteAConstruire extends CarreauAchetable {
         this.prixLoyer5 = pL5;
         this.prixMaison = pM;
         this.prixHotel = pH;
+        setNbHotels(0);
+        setNbMaisons(0);
         groupe.addPropriete(this);
     }
 
     //Méthodes
-    @Override
     public int calculLoyer() {
         int nbPACJoueur = 0;
-        for (ProprieteAConstruire p : getProprietaire().getProprieteAConstruires()){         //Compte le nombre de propriétés à construire du joueur appartenant au groupe de la propriété actuelle
-            if (p.getGroupe()==this.getGroupe()){
-                nbPACJoueur+=1;
+        if (nbMaisons==0 && nbHotels==0){                                                   //Si terrain nu
+            for (ProprieteAConstruire p : getProprietaire().getProprieteAConstruires()){    //Compte le nombre de propriétés à construire du joueur appartenant au groupe de la propriété actuelle
+                if (p.getGroupe()==this.getGroupe()){
+                    nbPACJoueur+=1;
+                }
             }
-        }
-        int nbPACGroupe = groupe.getProprieteAConstruires().size();                     //Compte le nombre de propriétés à construire dans le groupe de la propriété actuelle
-        if (nbPACJoueur==nbPACGroupe){                                                  //Si joueur possède toutes les propriétés du groupe
-            return 2*this.getPrixLoyer();                                                                         //le loyer est doublé
+            int nbPACGroupe = groupe.getProprieteAConstruires().size();                     //Compte le nombre de propriétés à construire dans le groupe de la propriété actuelle
+            if (nbPACJoueur==nbPACGroupe){                                                  //Si joueur possède toutes les propriétés du groupe
+                return 2*this.getPrixLoyer();                                                                         //le loyer est doublé
+            } else {
+                return this.getPrixLoyer();                                                 //Sinon le loyer est simple
+            }
+        } else if (nbMaisons==1){
+            return prixLoyer1;
+        } else if (nbMaisons==2){
+            return prixLoyer2;
+        } else if (nbMaisons==3){
+            return prixLoyer3;
+        } else if (nbMaisons==4){
+            return prixLoyer4;
         } else {
-            return this.getPrixLoyer();                                                 //Sinon le loyer est simple
+            return prixLoyer5;
         }
         //a completer avec la gestion des maisons/hotel
     }
 
     @Override
     public int calculLoyer(int d1, int d2) {
-        //Besoins pour CarreauAchetable, mais inutile ici et jamais utilisé
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return calculLoyer();
     }
     
     public Groupe getGroupe(){
         return groupe;
     }
 
+    public int getNbMaisons() {
+        return nbMaisons;
+    }
+
+    public void setNbMaisons(int nbMaisons) {
+        this.nbMaisons = nbMaisons;
+    }
+
+    public int getNbHotels() {
+        return nbHotels;
+    }
+
+    public void setNbHotels(int nbHotels) {
+        this.nbHotels = nbHotels;
+    }
+    
+    
 }

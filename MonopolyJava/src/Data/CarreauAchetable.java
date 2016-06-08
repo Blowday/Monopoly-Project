@@ -57,15 +57,8 @@ public abstract class CarreauAchetable extends Carreau {
                 }
                 //si la case a un propriétaire
                 else if(this.getProprietaire() != j){
-                    
-                    if(this instanceof Compagnie){
-                        return new Evenement(2,this.calculLoyer(j.getD1(),j.getD2()),j,this.getProprietaire(),this.getNom()); //fenetre informant du debit
-                    }
-                    else{
-                        return new Evenement(2,this.calculLoyer(),j,this.getProprietaire(),this.getNom()); //fenetre informant du debit
-                    }
-                }
-                else{
+                    return new Evenement(2,this.calculLoyer(j.getD1(),j.getD2()),j,this.getProprietaire(),this.getNom()); //fenetre informant du debit
+                } else {
                     return new Evenement(3,this.getNom());
                 }
                    
@@ -87,6 +80,5 @@ public abstract class CarreauAchetable extends Carreau {
                     }
 	}
         
-        public abstract int calculLoyer();
         public abstract int calculLoyer(int d1,int d2);
 }
