@@ -9,10 +9,16 @@ package Data;
  *
  * @author wyklandd
  */
-public class ParcGratuit extends AutreCarreau {
+public class CartePaiement extends Carte {
+    
+
+    //Il peut être positif ou négatif
+    private int montant;
     
     
-    public ParcGratuit(int num, String s) {
-        super(num,s);
+    public CartePaiement(TypeCarte t, String s, int m) {
+        super(t, s);
+        this.montant = m;
     }
+    
 }

@@ -76,7 +76,7 @@ public class IhmDe extends JPanel{
             this.add(de);
             this.updateUI();
             try {
-                // Wait for 1 second.
+
                 Thread.sleep(i*10);
             } catch (InterruptedException ex) {
             }
@@ -111,6 +111,7 @@ public class IhmDe extends JPanel{
         
         this.add(de);
         System.out.println("rajouté");
+        
   
     }
 }

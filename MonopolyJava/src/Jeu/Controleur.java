@@ -21,7 +21,7 @@ public class Controleur {
     }
     
     //Constructeurs
-    public Controleur() throws InterruptedException {
+    public Controleur(){
        
         ihm = new IHM(this);
         
@@ -53,8 +53,9 @@ public class Controleur {
     }
     
     //Méthodes
-    public void inscrireJoueur() {
-        monopoly.inscrireJoueur(ihm.inscrireJoueur());
+    public void inscrireJoueur(ArrayList<Joueur> jtemp) {
+        //monopoly.inscrireJoueur(ihm.inscrireJoueur());  partie texte
+        monopoly.inscrireJoueur(jtemp);
     }
     
     
@@ -240,9 +241,11 @@ public class Controleur {
         j.gain(((Depart)monopoly.getCarreaux().get(0)).getGainDepart());
     }
 
+
     public ArrayList<Joueur> getJoueurs() {
         return monopoly.getJoueurs();
     }
+
     
   
 }

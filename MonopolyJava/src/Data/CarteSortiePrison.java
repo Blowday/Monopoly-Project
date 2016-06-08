@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ui;
-
-import Data.Evenement;
+package Data;
 
 /**
  *
- * @author perrinan
+ * @author wyklandd
  */
-public interface Observateur {
-    public void notifier(Evenement e);
+public class CarteSortiePrison extends Carte {
+    
+    public CarteSortiePrison(TypeCarte t, String s) {
+        super(t,s);
+    }  
 }

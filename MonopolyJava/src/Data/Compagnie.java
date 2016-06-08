@@ -11,7 +11,10 @@ public class Compagnie extends CarreauAchetable {
     }
     
     //Méthodes
-    @Override
+    public int calculLoyer(){
+        return 0;
+    }
+    
     public int calculLoyer(int d1, int d2){
         if(this.getProprietaire().getNbCompagnie() ==2){
             return d1*d2*10;
@@ -21,4 +24,5 @@ public class Compagnie extends CarreauAchetable {
         }
     }
 
+   
 }

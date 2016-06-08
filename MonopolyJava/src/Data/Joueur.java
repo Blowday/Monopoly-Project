@@ -11,7 +11,7 @@ public class Joueur {
     private ArrayList<Compagnie> mesCompagnies;
     private ArrayList<ProprieteAConstruire> mesProprietes;
     private String nomJoueur;
-    private int cash = 1500;
+    private int cash = 100000;
     private boolean perdu;
     private int d1;
     private int d2;
@@ -131,6 +131,21 @@ public class Joueur {
     public int getCompteurPrison() {
         return compteur;
     }
+    
+    public boolean possedeLaRue(ProprieteAConstruire c) {
+               
+        int nbPACGroupe = ((ProprieteAConstruire)c).getGroupe().getProprieteAConstruires().size(); 
+        int compteur =0;
+        for(int i=0; i<mesProprietes.size(); i++) {
+            if (mesProprietes.get(i).getGroupe().equals(c.getGroupe())) {
+                compteur +=1;
+            }
+        }
+        
+        return nbPACGroupe == compteur;
+        
+    }
+    
 
     //gestion de defaite
     public boolean getPerdu() {

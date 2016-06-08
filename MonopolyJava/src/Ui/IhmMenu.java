@@ -5,16 +5,24 @@
  */
 package Ui;
 
+import Data.Joueur;
 import static Ui.IHM.window1;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,6 +42,7 @@ public class IhmMenu {
     
     private IhmInscription ihmInscription;
     
+    private ArrayList<Joueur> jtemp;
     
     
     
@@ -45,6 +54,7 @@ public class IhmMenu {
             panel_accueil.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
       
+            
             
             
             window1 = new JFrame("Monopoly");
@@ -100,14 +110,15 @@ public class IhmMenu {
             
             
             panel_accueil.add(quitter,c);
-            window1.add(panel_accueil);
+            
+            
             
            
             
             jouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    ihmInscription.inscrireJoueur();
+                    jtemp = ihmInscription.inscrireJoueur();
                     window1.setVisible(false);
                     
                 }
@@ -150,14 +161,61 @@ public class IhmMenu {
             
             //fond
             //window1.add(new JLabel(new ImageIcon("dollar.jpg")));
+            //window1.pack();
+            //window1.add(fond,BorderLayout.CENTER);
+            try {
+                JPanel panel = setBackgroundImage(window1, new File("dollar.jpg"));
+            } catch (IOException e){
+                
+            }
             
-            //window1.setVisible(true);
-      
+            
+            window1.add(panel_accueil,BorderLayout.NORTH);
+            
+            
+            
 
     }
-
-    public void afficherMenu() {
+    
+    
+    
+    public static JPanel setBackgroundImage(JFrame frame, final File img) throws IOException{
+    JPanel panel = new JPanel()
+	{
+		private static final long serialVersionUID = 1;
+		
+                
+		private BufferedImage buf= ImageIO.read(img);
+                
+		
+		@Override
+		protected void paintComponent(Graphics g)
+		{
+			super.paintComponent(g);
+			g.drawImage(buf, 0,0, null);
+		}
+	};
+	
+	frame.setContentPane(panel);
+	
+	return panel;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public ArrayList<Joueur> afficherMenu() {
         window1.setVisible(true);
+        return jtemp;
     }
     
 }

@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ui;
-
-import Data.Evenement;
+package Data;
 
 /**
  *
- * @author perrinan
+ * @author wyklandd
  */
-public interface Observateur {
-    public void notifier(Evenement e);
+public enum TypeCarte {
+    chance,
+    communauté;
 }

@@ -134,21 +134,21 @@ public class IhmInscription {
             c2.gridx=1;
             c2.gridy=1;
             c2.ipadx=50;
-            JButton retour = new JButton ("retour");
+            JButton retour = new JButton ("Retour");
             retour_Demarrer.add(retour,c2);      
             
-            //espace entre retour et demarer
+            //espace entre retour et demarrer
             c2.gridx=2;
             c2.gridy=1;
             c2.ipadx=300;
             retour_Demarrer.add(new JLabel("  "),c2);        
                     
                     
-            //demarer        
+            //demarrer        
             c2.gridx=3;
             c2.gridy=1;
             c2.ipadx=50;
-            JButton demarrer = new JButton ("demarrer");
+            JButton demarrer = new JButton ("Démarrer");
             retour_Demarrer.add(demarrer,c2);        
                     
             
@@ -187,7 +187,7 @@ public class IhmInscription {
         
         
         
-        //boutton retour
+        //bouton retour
         retour.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){

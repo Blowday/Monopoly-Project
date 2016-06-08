@@ -29,7 +29,7 @@ public class ProprieteAConstruire extends CarreauAchetable {
 
     //Méthodes
     @Override
-    public int calculLoyer(int d1, int d2) {
+    public int calculLoyer() {
         int nbPACJoueur = 0;
         for (ProprieteAConstruire p : getProprietaire().getProprieteAConstruires()){         //Compte le nombre de propriétés à construire du joueur appartenant au groupe de la propriété actuelle
             if (p.getGroupe()==this.getGroupe()){
@@ -43,6 +43,12 @@ public class ProprieteAConstruire extends CarreauAchetable {
             return this.getPrixLoyer();                                                 //Sinon le loyer est simple
         }
         //a completer avec la gestion des maisons/hotel
+    }
+
+    @Override
+    public int calculLoyer(int d1, int d2) {
+        //Besoins pour CarreauAchetable, mais inutile ici et jamais utilisé
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public Groupe getGroupe(){

@@ -16,5 +16,5 @@ public class AllerEnPrison extends AutreCarreau {
         super(num,s);
     }
     
-
+    
 }
