@@ -254,14 +254,7 @@ public class Controleur {
         j.gain(((Depart)monopoly.getCarreaux().get(0)).getGainDepart());
     }
 
-<<<<<<< HEAD
 
-    public ArrayList<Joueur> getJoueurs() {
-        return monopoly.getJoueurs();
-    }
-
-    
-=======
     private void jouerUneCarte(Joueur j, TypeCarte type) {
         Carte carte = monopoly.tirerUneCarte(type);
         
@@ -298,6 +291,6 @@ public class Controleur {
         }
 
     }
->>>>>>> b5626a4f15a423c93a9dd9603a57bb54fcb08030
+
   
 }
