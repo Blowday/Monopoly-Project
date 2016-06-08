@@ -241,6 +241,8 @@ public class IhmInscription {
                         else{
                             window2.setVisible(false);
                             ihmGraph.setJoueurs(jTemp);
+                            ihmGraph.afficherJeu();
+                            ihmGraph.lancerPartie();
                         }
                 }
             });

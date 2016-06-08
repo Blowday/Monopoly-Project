@@ -91,11 +91,7 @@ public class IhmGraph extends JFrame implements Observateur {
             case 2:
                 ihmInscription.inscrireJoueur();
                 break;
-            case 3:
-                this.afficherJeu();
-                break;
-            case 4:
-                ihmInscription.inscrireJoueurEr();
+            
         }
     }
 
@@ -105,11 +101,14 @@ public class IhmGraph extends JFrame implements Observateur {
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         setSize(1350, 940);
         setVisible(true); 
-        
     }
 
     public void menuInscription(){
         controleur.inscrireJoueur();
+    }
+
+    public void lancerPartie() {
+        controleur.lancerPartie();
     }
     
 }

@@ -12,7 +12,7 @@ public class Controleur {
     //Attributs
     private IHM ihm;
     private Monopoly monopoly;
-    private int c;
+
     
     private Observateur ihmGraph;
     
@@ -28,12 +28,7 @@ public class Controleur {
         ihm = new IHM(this);
         
         ihmGraph = new IhmGraph(this);
-   
-        
-        
         monopoly = new Monopoly();
-        c = 1;
-        
         this.menu();
         
         //ihmGraph.notifier(new Evenement(1));
@@ -45,7 +40,7 @@ public class Controleur {
            //}
             //else if (c == 2) {
                 //if (monopoly.getJoueurs().size()>=2 && monopoly.getJoueurs().size()<=6) {
-                    this.lancerPartie();
+
                 //}
     //else {
                    // ihm.nbJoueursMauvais();
