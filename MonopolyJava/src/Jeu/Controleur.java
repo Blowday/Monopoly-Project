@@ -274,13 +274,18 @@ public class Controleur {
             // On gère ici la carte anniversaire (et pas dans la carte car besoin des autres joueurs)
         }
         else if(carte instanceof CarteSortiePrison) {
-            // On gère ici l'ajout pour un joueur d'une carte sortie de prison, la carte est mise de côté jusqu'a ce qu'il s'en serve
-            //il peut en avoir 2 (chance et communauté)
+            
         }
         else if(carte instanceof CarteReparation) {
             // On gère ici la carte reparation
         }
         else if(carte instanceof CarteAllerEnPrison) {
+            j.setPrison(true);
+            j.setCompteurPrison(0);
+            ((Prison)monopoly.getCarreaux().get(10)).addJoueurEnPrison(j);
+            j.setCarreau((Prison)monopoly.getCarreaux().get(10));
+            
+            System.out.println("Vous êtes en prison");
             
         }
         else if(carte instanceof CarteDeplacement) {
@@ -300,6 +305,9 @@ public class Controleur {
         }
         else {
             ((CartePaiement)carte).action(j);
+        }
+        if(!(carte instanceof CarteSortiePrison)) {
+            monopoly.remettreCarte(carte);
         }
 
     }
