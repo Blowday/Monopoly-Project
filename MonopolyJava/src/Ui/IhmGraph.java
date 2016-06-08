@@ -199,13 +199,13 @@ public class IhmGraph extends JFrame implements Observateur {
              if ((i % 2) == 0){   
                 c.gridx=1;
                 c.gridy=i+1;
+                c.anchor = GridBagConstraints.LINE_START;
                 listPanel.get(i/2).add(new JLabel(joueurs.get(i/2).getName()+":")); 
                 listPanel.get(i/2).add(new JLabel(Integer.toString(joueurs.get(i/2).getCash())+"$"));
                 listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder("joueur "+(i/2+1)+":"));
                 panel_joueur.add(listPanel.get(i/2),c);
             }
             else{
-                
                 c.gridx=1;
                 c.gridy=i+1;
                 c.ipady=10;

@@ -18,6 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -67,10 +70,13 @@ public class IhmInscription {
         retour_Demarrer.setLayout(new GridBagLayout());
         GridBagConstraints c2 = new GridBagConstraints();
         
-
+        
         
         
             //****joueur****
+            
+            c1.weighty= 1;
+            
             
             //joueur 1
             c1.gridx=1;
@@ -81,7 +87,9 @@ public class IhmInscription {
             c1.gridx=2;
             c1.gridy=1;
             joueur1 = new JTextField(20);
+            joueur1.setDocument(new JTextFieldLimit(10));
             panel_joueur.add(joueur1,c1);
+            
         
             //joueur 2        
             c1.gridx=1;
@@ -92,6 +100,7 @@ public class IhmInscription {
             c1.gridx=2;
             c1.gridy=2;
             joueur2 = new JTextField(20);
+            joueur2.setDocument(new JTextFieldLimit(10));
             panel_joueur.add(joueur2,c1);
                     
             //joueur 3                   
@@ -103,6 +112,7 @@ public class IhmInscription {
             c1.gridx=2;
             c1.gridy=3;
             joueur3 = new JTextField(20);
+            joueur3.setDocument(new JTextFieldLimit(10));
             panel_joueur.add(joueur3,c1);
                     
             //joueur 4
@@ -114,6 +124,7 @@ public class IhmInscription {
             c1.gridx=2;
             c1.gridy=4;
             joueur4 = new JTextField(20);
+            joueur4.setDocument(new JTextFieldLimit(10));
             panel_joueur.add(joueur4,c1);
                     
             //joueur 5
@@ -125,6 +136,7 @@ public class IhmInscription {
             c1.gridx=2;
             c1.gridy=5;
             joueur5 = new JTextField(20);
+            joueur5.setDocument(new JTextFieldLimit(10));
             panel_joueur.add(joueur5,c1);
                     
              //joueur 6
@@ -136,6 +148,7 @@ public class IhmInscription {
             c1.gridx=2;
             c1.gridy=6;
             joueur6 = new JTextField(20);
+            joueur6.setDocument(new JTextFieldLimit(10));
             panel_joueur.add(joueur6,c1);
                     
                     
@@ -260,6 +273,8 @@ public class IhmInscription {
          window2.add(panel_principal);
     }
     
+    
+    
     public void inscrireJoueur() {
 
        
@@ -272,5 +287,21 @@ public class IhmInscription {
         window2.setVisible(true);
     }
 
-    
+//nombre de caractère maximale dans un JTextField   
+public class JTextFieldLimit extends PlainDocument {
+  private int limit;
+
+  JTextFieldLimit(int limit) {
+   super();
+   this.limit = limit;
+   }
+
+  public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
+    if (str == null) return;
+
+    if ((getLength() + str.length()) <= limit) {
+      super.insertString(offset, str, attr);
+    }
+  }
+}
 }
