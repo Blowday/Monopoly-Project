@@ -30,7 +30,7 @@ public class IhmInscription {
     private IhmGraph ihmGraph;
     
     private ArrayList<Joueur> jTemp;
-    
+    private ImageIcon icon;
 
     
     
@@ -47,6 +47,11 @@ public class IhmInscription {
           
         window2.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);     
         window2.setSize(900, 700);
+        
+        //icon
+        icon = new ImageIcon("policier.gif");
+        window2.setIconImage(icon.getImage());
+        
         
         
         panel_principal  = new JPanel();
@@ -67,71 +72,71 @@ public class IhmInscription {
         
             //****joueur****
             
-                    //joueur 1
-                    c1.gridx=1;
-                    c1.gridy=1;
-                    ljoueur1 = new JLabel("joueur 1:");
-                    panel_joueur.add(ljoueur1,c1);
+            //joueur 1
+            c1.gridx=1;
+            c1.gridy=1;
+            ljoueur1 = new JLabel("joueur 1:");
+            panel_joueur.add(ljoueur1,c1);
                     
-                    c1.gridx=2;
-                    c1.gridy=1;
-                    joueur1 = new JTextField(20);
-                    panel_joueur.add(joueur1,c1);
+            c1.gridx=2;
+            c1.gridy=1;
+            joueur1 = new JTextField(20);
+            panel_joueur.add(joueur1,c1);
         
-                    //joueur 2        
-                    c1.gridx=1;
-                    c1.gridy=2;
-                    ljoueur2 = new JLabel("joueur 2:");
-                    panel_joueur.add(ljoueur2,c1);
+            //joueur 2        
+            c1.gridx=1;
+            c1.gridy=2;
+            ljoueur2 = new JLabel("joueur 2:");
+            panel_joueur.add(ljoueur2,c1);
+                   
+            c1.gridx=2;
+            c1.gridy=2;
+            joueur2 = new JTextField(20);
+            panel_joueur.add(joueur2,c1);
                     
-                    c1.gridx=2;
-                    c1.gridy=2;
-                    joueur2 = new JTextField(20);
-                    panel_joueur.add(joueur2,c1);
+            //joueur 3                   
+            c1.gridx=1;
+            c1.gridy=3;
+            ljoueur3 = new JLabel("joueur 3:");
+            panel_joueur.add(ljoueur3,c1);
+                   
+            c1.gridx=2;
+            c1.gridy=3;
+            joueur3 = new JTextField(20);
+            panel_joueur.add(joueur3,c1);
                     
-                    //joueur 3                   
-                    c1.gridx=1;
-                    c1.gridy=3;
-                    ljoueur3 = new JLabel("joueur 3:");
-                    panel_joueur.add(ljoueur3,c1);
+            //joueur 4
+            c1.gridx=1;
+            c1.gridy=4;
+            ljoueur4 = new JLabel("joueur 4:");
+            panel_joueur.add(ljoueur4,c1);
                     
-                    c1.gridx=2;
-                    c1.gridy=3;
-                    joueur3 = new JTextField(20);
-                    panel_joueur.add(joueur3,c1);
+            c1.gridx=2;
+            c1.gridy=4;
+            joueur4 = new JTextField(20);
+            panel_joueur.add(joueur4,c1);
                     
-                    //joueur 4
-                    c1.gridx=1;
-                    c1.gridy=4;
-                    ljoueur4 = new JLabel("joueur 4:");
-                    panel_joueur.add(ljoueur4,c1);
+            //joueur 5
+            c1.gridx=1;
+            c1.gridy=5;
+            ljoueur5 = new JLabel("joueur 5:");
+            panel_joueur.add(ljoueur5,c1);
                     
-                    c1.gridx=2;
-                    c1.gridy=4;
-                    joueur4 = new JTextField(20);
-                    panel_joueur.add(joueur4,c1);
+            c1.gridx=2;
+            c1.gridy=5;
+            joueur5 = new JTextField(20);
+            panel_joueur.add(joueur5,c1);
                     
-                    //joueur 5
-                    c1.gridx=1;
-                    c1.gridy=5;
-                    ljoueur5 = new JLabel("joueur 5:");
-                    panel_joueur.add(ljoueur5,c1);
-                    
-                    c1.gridx=2;
-                    c1.gridy=5;
-                    joueur5 = new JTextField(20);
-                    panel_joueur.add(joueur5,c1);
-                    
-                    //joueur 6
-                    c1.gridx=1;
-                    c1.gridy=6;
-                    ljoueur6 = new JLabel("joueur 6:");
-                    panel_joueur.add(ljoueur6,c1);
-                    
-                    c1.gridx=2;
-                    c1.gridy=6;
-                    joueur6 = new JTextField(20);
-                    panel_joueur.add(joueur6,c1);
+             //joueur 6
+            c1.gridx=1;
+            c1.gridy=6;
+            ljoueur6 = new JLabel("joueur 6:");
+            panel_joueur.add(ljoueur6,c1);
+                   
+            c1.gridx=2;
+            c1.gridy=6;
+            joueur6 = new JTextField(20);
+            panel_joueur.add(joueur6,c1);
                     
                     
                     
@@ -248,6 +253,10 @@ public class IhmInscription {
                         }
                 }
             });
+        
+        
+        
+        
          window2.add(panel_principal);
     }
     
