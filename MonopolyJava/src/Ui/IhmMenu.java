@@ -121,7 +121,7 @@ public class IhmMenu {
             jouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    //ihmInscription.inscrireJoueur();
+
                     ihmGraph.menuInscription();
                     window1.setVisible(false);
                     
@@ -173,7 +173,7 @@ public class IhmMenu {
                 
             }
             
-            
+            panel_accueil.setOpaque(false);
             window1.add(panel_accueil,BorderLayout.NORTH);
             
             //icon

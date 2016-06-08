@@ -261,8 +261,8 @@ public class IhmInscription {
                             ihmGraph.setJoueurs(jTemp);
                             ihmGraph.initListeJoueur(jTemp);
                             ihmGraph.getListeJoueurs().updateUI();
-                            ihmGraph.afficherJeu();
-                            //ihmGraph.lancerPartie();
+                            //ihmGraph.afficherJeu();
+                            ihmGraph.lancerPartie();
                         }
                 }
             });
