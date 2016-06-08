@@ -102,7 +102,7 @@ public class IhmGraph extends JFrame implements Observateur {
                 ihmInscription.inscrireJoueur();
                 break;
             case 3:
-                //ihmInscription.lancerDes();
+                this.afficherJeu();
         }
     }
 
@@ -285,7 +285,8 @@ public class IhmGraph extends JFrame implements Observateur {
         @Override
         public void actionPerformed(ActionEvent e){
             controleur.lancerDesAvancer(controleur.getjCourant());
-          
+            de1.animation(controleur.getjCourant().getD1());
+            de2.animation(controleur.getjCourant().getD2());
         }
         });  
     

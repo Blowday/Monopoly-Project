@@ -17,6 +17,8 @@ public class Controleur {
     private Observateur ihmGraph;
     
     private Joueur jCourant;
+    private int numJoueur=-1;
+    
     
     public void setObservateur(Observateur ob){
         this.ihmGraph = ob;
@@ -29,7 +31,6 @@ public class Controleur {
         
         ihmGraph = new IhmGraph(this);
         monopoly = new Monopoly();
-        jCourant = new Joueur(""); 
         this.menu();
         
         //ihmGraph.notifier(new Evenement(1));
@@ -76,19 +77,28 @@ public class Controleur {
         
         //ihmGraph.afficherJeu(); ///test graph
         ihmGraph.notifier(new Evenement(3));
-        
         int joueursVivants;
-        do{
-            joueursVivants=0;
         
-            for(Joueur j: monopoly.getJoueurs()){
+        joueursVivants=0;
+        for(Joueur j: monopoly.getJoueurs()){
                 
-                if(!j.getPerdu()){
-                    joueursVivants++;
-                }
+            if(!j.getPerdu()){
+                joueursVivants++;
             }
+           
+        }
+        
+        if(joueursVivants > 1){
+            joueurSuivant();
+            
+        }
+        else{ 
+            //ihmgraph.notifier(new Evenement()) notification de fin de 
+        }
+       /*
             
             for(Joueur j : monopoly.getJoueurs()) {
+            
                 if(!j.getPerdu()){
                     jCourant = j;
                     do {    
@@ -105,14 +115,15 @@ public class Controleur {
             }
             
         }while(joueursVivants > 1);
-        ihm.partiePerdue();
+        ihm.partiePerdue();*/
+        this.joueurSuivant();
+        
+        
     }
 
-    public Joueur getjCourant() {
-        return jCourant;
-    }
+    
     public Carreau lancerDesAvancer(Joueur j){
-         ihm.afficherDebutTour(j);
+         //ihm.afficherDebutTour(j);
           
         
                 //System.out.println(j.getPositionCourante().getNumero());
@@ -137,7 +148,7 @@ public class Controleur {
                 if(!j.enPrison()) {
                 
                     //si on passe par la case départ
-                    if(j.getPositionCourante().getNumero()-1 + j.getD1() + j.getD2() >= 40){
+                    if(j.getPositionCourante().getNumero()-1 + j.getD1()+j.getD2() >= 40){
                         passageDepart(j);
                         ihm.passageDepart(j);
                         j.setCarreau(monopoly.getCarreaux().get(  (j.getPositionCourante().getNumero()-1 + j.getD1()+ j.getD2()) - 40 ));
@@ -313,7 +324,21 @@ public class Controleur {
     public Monopoly getMonopoly() {
         return monopoly;
     }
+    public Joueur getjCourant() {
+        return jCourant;
+    }
 
-
+    public void joueurSuivant(){
+        
+        
+      
+        numJoueur += 1; 
+        if(numJoueur == monopoly.getJoueurs().size()+1){
+            numJoueur = 0;
+        }
+        jCourant = monopoly.getJoueurs().get(numJoueur);
+        
+       
+    }
   
 }
