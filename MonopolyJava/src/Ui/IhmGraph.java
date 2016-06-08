@@ -5,22 +5,26 @@
  */
 package Ui;
 
-import Data.Carreau;
-import Data.CarreauAchetable;
+
 import Data.Evenement;
 import Data.Joueur;
 import Jeu.Controleur;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 
 /**
  *
@@ -37,7 +41,7 @@ public class IhmGraph extends JFrame implements Observateur {
     private IhmDe de2;
     
     private Controleur controleur;
-
+    private ImageIcon icon;
     
     //initListeJoueur
     private JPanel panel_joueur,panel_joueur1,panel_joueur2,panel_joueur3,panel_joueur4,panel_joueur5,panel_joueur6;
@@ -48,7 +52,7 @@ public class IhmGraph extends JFrame implements Observateur {
     public IhmGraph(Controleur controleur){
         super("Monopoly");
         this.setLayout(new BorderLayout());
-
+       
         
         this.controleur = controleur;
         controleur.setObservateur(this);
@@ -72,6 +76,13 @@ public class IhmGraph extends JFrame implements Observateur {
         
         informationTour();
         initListeJoueur(new ArrayList());
+        
+        music();
+        
+         
+    //icon
+    icon = new ImageIcon("policier.gif");
+    this.setIconImage(icon.getImage());
         
     }
     public JPanel getListeJoueurs(){
@@ -190,14 +201,14 @@ public class IhmGraph extends JFrame implements Observateur {
                 c.gridy=i+1;
                 listPanel.get(i/2).add(new JLabel(joueurs.get(i/2).getName()+":")); 
                 listPanel.get(i/2).add(new JLabel(Integer.toString(joueurs.get(i/2).getCash())+"$"));
-                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder(""));
+                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder("joueur "+(i/2+1)+":"));
                 panel_joueur.add(listPanel.get(i/2),c);
             }
             else{
                 
                 c.gridx=1;
                 c.gridy=i+1;
-                c.ipady=5;
+                c.ipady=10;
                 panel_joueur.add(new JLabel("  "),c);
             }
             
@@ -290,8 +301,33 @@ public class IhmGraph extends JFrame implements Observateur {
         }
         });  
     
-    
+        
     }
+     public static void music() 
+    {       
+        AudioPlayer MGP = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData MD;
+
+        ContinuousAudioDataStream loop = null;
+
+        try
+        {
+            InputStream test = new FileInputStream("music.wav");
+            BGM = new AudioStream(test);
+            AudioPlayer.player.start(BGM);
+            //MD = BGM.getData();
+            //loop = new ContinuousAudioDataStream(MD);
+
+        }
+        catch(FileNotFoundException e){
+        }
+        catch(IOException error)
+        {
+        }
+        MGP.start(loop);
+    }
+
 }
 
     
