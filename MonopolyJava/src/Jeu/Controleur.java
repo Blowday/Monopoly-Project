@@ -3,6 +3,7 @@ import Ui.IHM;
 import Data.*;
 import Ui.IhmGraph;
 import Ui.Observateur;
+import java.util.ArrayList;
 
 
 
@@ -175,7 +176,7 @@ public class Controleur {
                     }   break;
                 case 2:
                     //deduction du loyer
-                    if(c instanceof Compagnie){ //calcul du loyer different pour compagnie
+
                         if(j.getCash()> ((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())){ //si le joueur peux payer
 
                             j.payerLoyer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())); //le joueur paye
@@ -186,20 +187,7 @@ public class Controleur {
                             e.setLoyerCase(j.getCash());
                             j.payerLoyer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2()));
                         }
-                    }
-                    else{
-                        if(j.getCash()> ((CarreauAchetable) c).calculLoyer()){ //si le joueur peux payer
-
-                            j.payerLoyer(((CarreauAchetable) c).calculLoyer()); //le joueur paye
-                            ((CarreauAchetable) c).getProprietaire().recevoirLoyer(((CarreauAchetable) c).calculLoyer()); //le propriétaire recoit le loyer
-                        }
-                        else{
-                            ((CarreauAchetable) c).getProprietaire().recevoirLoyer(j.getCash()); //le propriétaire recoit l'argent restant du joueur
-                            e.setLoyerCase(j.getCash());
-                            
-                            j.payerLoyer(((CarreauAchetable) c).calculLoyer());
-                        }
-                    }
+        
                     ihm.afficherDebit(e);
                     break;
                 case 3:
@@ -250,6 +238,10 @@ public class Controleur {
     
     private void passageDepart(Joueur j) {
         j.gain(((Depart)monopoly.getCarreaux().get(0)).getGainDepart());
+    }
+
+    public ArrayList<Joueur> getJoueurs() {
+        return monopoly.getJoueurs();
     }
     
   
