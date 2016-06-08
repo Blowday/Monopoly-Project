@@ -52,6 +52,11 @@ public class Evenement {
         this.nomCase = nomCase;
     }
     
+    //ihm graphique
+    public Evenement(int type){
+        this.typeFenetre = type;
+    }
+    
     //Méthodes
     public int getType(){
         return typeFenetre;

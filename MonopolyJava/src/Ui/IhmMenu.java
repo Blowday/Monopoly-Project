@@ -5,6 +5,7 @@
  */
 package Ui;
 
+import Data.Joueur;
 import static Ui.IHM.window1;
 import java.awt.Color;
 import java.awt.Font;
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,6 +35,8 @@ public class IhmMenu {
     private JPanel panel_accueil;
     
     private IhmInscription ihmInscription;
+    
+    private ArrayList<Joueur> jtemp;
     
     
     
@@ -107,7 +111,7 @@ public class IhmMenu {
             jouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    ihmInscription.inscrireJoueur();
+                    jtemp = ihmInscription.inscrireJoueur();
                     window1.setVisible(false);
                     
                 }
@@ -156,8 +160,9 @@ public class IhmMenu {
 
     }
 
-    public void afficherMenu() {
+    public ArrayList<Joueur> afficherMenu() {
         window1.setVisible(true);
+        return jtemp;
     }
     
 }

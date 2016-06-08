@@ -38,6 +38,7 @@ public class IhmGraph extends JFrame implements Observateur {
     public IhmGraph(Controleur controleur){
         super("Monopoly");
         this.setLayout(new BorderLayout());
+
         
         this.controleur = controleur;
         controleur.setObservateur(this);
@@ -67,8 +68,8 @@ public class IhmGraph extends JFrame implements Observateur {
        
         switch(e.getType()){
             
-            case 1: //1--Afficher menu
-                ihmMenu.afficherMenu(); //devra renvoyer une arrayList de joueurs
+            case 1: //1--initialisation du jeu(Afficher menu et lancer le jeu)
+                controleur.inscrireJoueur(ihmMenu.afficherMenu()); //devra renvoyer une arrayList de joueurs
                 this.afficherJeu();
                 de1.animation(5);
                 de2.animation(5);
