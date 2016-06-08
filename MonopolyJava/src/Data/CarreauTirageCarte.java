@@ -9,23 +9,17 @@ package Data;
  *
  * @author wyklandd
  */
-public abstract class Carte {
-    //Type de la carte (chance ou communauté)
+public class CarreauTirageCarte extends AutreCarreau {
+    
     private TypeCarte type;
     
-    //String de texte de la carte
-    private String string;
-    
-    public Carte(TypeCarte t, String s) {
+    public CarreauTirageCarte(int num, String s, TypeCarte t) {
+        super(num,s);
         this.type = t;
-        this.string = s;
     }
     
-    public String getText() {
-        return string;
-    }
     public TypeCarte getType() {
         return type;
-    }  
+    }
     
 }

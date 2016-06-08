@@ -19,4 +19,8 @@ public class CarteDeplacement extends Carte {
         this.deplacement = d;
     }
     
+    public int getDeplacement() {
+        return deplacement;
+    }
+    
 }
