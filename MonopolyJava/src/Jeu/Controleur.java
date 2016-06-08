@@ -16,7 +16,7 @@ public class Controleur {
     
     private Observateur ihmGraph;
     
-    
+    private Joueur jCourant;
     
     public void setObservateur(Observateur ob){
         this.ihmGraph = ob;
@@ -29,6 +29,7 @@ public class Controleur {
         
         ihmGraph = new IhmGraph(this);
         monopoly = new Monopoly();
+        jCourant = new Joueur(""); 
         this.menu();
         
         //ihmGraph.notifier(new Evenement(1));
@@ -81,6 +82,7 @@ public class Controleur {
             joueursVivants=0;
         
             for(Joueur j: monopoly.getJoueurs()){
+                
                 if(!j.getPerdu()){
                     joueursVivants++;
                 }
@@ -88,6 +90,7 @@ public class Controleur {
             
             for(Joueur j : monopoly.getJoueurs()) {
                 if(!j.getPerdu()){
+                    jCourant = j;
                     do {    
                         ihm.lancerDes(j);
                         jouerUnCoup(j);
@@ -104,6 +107,10 @@ public class Controleur {
         }while(joueursVivants > 1);
         ihm.partiePerdue();
     }
+
+    public Joueur getjCourant() {
+        return jCourant;
+    }
     public Carreau lancerDesAvancer(Joueur j){
          ihm.afficherDebutTour(j);
           
@@ -112,7 +119,9 @@ public class Controleur {
                 //j.getPositionCourante().getNumero();
                 j.setD1(roll());
                 j.setD2(roll());
-                ihm.afficherDe(j.getD1(),j.getD2());
+                ihm.afficherDe(j.getD1(),j.getD2()); //a enlever
+                
+                ihmGraph.notifier(new Evenement(4));
                 
                 //En cas de double, on sort le joueur de prison (inutile si le jouer était déjà libre)
                 if (j.getD1() == j.getD2()) {
@@ -254,14 +263,7 @@ public class Controleur {
         j.gain(((Depart)monopoly.getCarreaux().get(0)).getGainDepart());
     }
 
-<<<<<<< HEAD
 
-    public ArrayList<Joueur> getJoueurs() {
-        return monopoly.getJoueurs();
-    }
-
-    
-=======
     private void jouerUneCarte(Joueur j, TypeCarte type) {
         Carte carte = monopoly.tirerUneCarte(type);
         
@@ -298,6 +300,10 @@ public class Controleur {
         }
 
     }
->>>>>>> b5626a4f15a423c93a9dd9603a57bb54fcb08030
+
+    public Monopoly getMonopoly() {
+        return monopoly;
+    }
+
   
 }

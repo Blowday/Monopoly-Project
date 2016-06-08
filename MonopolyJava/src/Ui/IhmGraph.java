@@ -14,6 +14,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -30,7 +32,7 @@ public class IhmGraph extends JFrame implements Observateur {
     private IhmInscription ihmInscription;
     
     private IhmPlateau plateau;
-    private JPanel listeJoueurs;
+
     private IhmDe de1;
     private IhmDe de2;
     
@@ -58,8 +60,7 @@ public class IhmGraph extends JFrame implements Observateur {
 
         
         JPanel jeu = new JPanel(new BorderLayout());
-          //liste des joueurs
-        JPanel listeJoueurs = new JPanel(new GridBagLayout());
+
 
         //partie plateau a remplir
         IhmPlateau plateau = new IhmPlateau();
@@ -70,8 +71,11 @@ public class IhmGraph extends JFrame implements Observateur {
         
         
         informationTour();
-        initListeJoueur(/*controleur.getJoueurs()*/);
+        initListeJoueur(new ArrayList());
         
+    }
+    public JPanel getListeJoueurs(){
+        return panel_joueur;
     }
 
     public Controleur getControleur() {
@@ -97,7 +101,8 @@ public class IhmGraph extends JFrame implements Observateur {
             case 2:
                 ihmInscription.inscrireJoueur();
                 break;
-            
+            case 3:
+                //ihmInscription.lancerDes();
         }
     }
 
@@ -117,7 +122,7 @@ public class IhmGraph extends JFrame implements Observateur {
         controleur.lancerPartie();
     }
     
-    public void initListeJoueur(/*ArrayList<Joueur> joueurs*/){
+    public void initListeJoueur(ArrayList<Joueur> joueurs){
 
             panel_joueur = new JPanel();
             panel_joueur.setLayout(new GridBagLayout());
@@ -165,26 +170,28 @@ public class IhmGraph extends JFrame implements Observateur {
             
             
             
-            for (int i=0; i<5 /*controleur.getJoueurs().size()*/ ; i++){
+            /*for (int i=0; i<joueurs.size() ; i++){
                 c.gridx=1;
                 c.gridy=i+1;
-                listPanel.get(i).add(new JLabel("nom joueur"+(i+1))); 
+                listPanel.get(i).add(new JLabel(joueurs.get(i).getName()+":"));
+                listPanel.get(i).add(new JLabel(Integer.toString(joueurs.get(i).getCash())+"$"));
                 listPanel.get(i).setBorder(BorderFactory.createTitledBorder(""));
                 panel_joueur.add(listPanel.get(i),c);
-                this.add(panel_joueur,BorderLayout.WEST);
+                
                 
             }
+            this.add(panel_joueur,BorderLayout.WEST);*/
             
             
-        /*for (int i=0; i<5*2 ; i++){
+        for (int i=0; i<joueurs.size()*2 ; i++){
                
              if ((i % 2) == 0){   
                 c.gridx=1;
                 c.gridy=i+1;
-                listPanel.get(i/2).add(new JLabel("nom joueur"+((i+1)/2))); 
+                listPanel.get(i/2).add(new JLabel(joueurs.get(i/2).getName()+":")); 
+                listPanel.get(i/2).add(new JLabel(Integer.toString(joueurs.get(i/2).getCash())+"$"));
                 listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder(""));
-                panel_joueur.add(listPanel.get(i),c);
-                this.add(panel_joueur,BorderLayout.WEST);
+                panel_joueur.add(listPanel.get(i/2),c);
             }
             else{
                 
@@ -192,13 +199,14 @@ public class IhmGraph extends JFrame implements Observateur {
                 c.gridy=i+1;
                 c.ipady=5;
                 panel_joueur.add(new JLabel("  "),c);
-                        
-                this.add(panel_joueur,BorderLayout.WEST);
-                i=i+1;
             }
-        } */   
             
+        }   
+        this.add(panel_joueur,BorderLayout.WEST);   
     }
+    
+    
+    
     
     public void informationTour(){
         panel_information = new JPanel();
@@ -215,7 +223,7 @@ public class IhmGraph extends JFrame implements Observateur {
         
 
 
-        //*****dès*****
+        //*****dés*****
         
         de1 = new IhmDe();
         de2 = new IhmDe();
@@ -236,11 +244,11 @@ public class IhmGraph extends JFrame implements Observateur {
         c1.gridy=1;
         panel_de.add(de2,c1);
         
-        //bouton lancer dès
+        //bouton lancer dés
         c1.gridx=1;
         c1.gridy=2;
         
-        lancer_des = new JButton ("lancer les dès");
+        lancer_des = new JButton ("lancer les dés");
         panel_de.add(lancer_des,c1);
         
         panel_information.add(panel_de);
@@ -273,7 +281,13 @@ public class IhmGraph extends JFrame implements Observateur {
     
     
     
-    
+        lancer_des.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            controleur.lancerDesAvancer(controleur.getjCourant());
+          
+        }
+        });  
     
     
     }
