@@ -242,7 +242,7 @@ public class IhmInscription {
                             window2.setVisible(false);
                             ihmGraph.setJoueurs(jTemp);
                             ihmGraph.afficherJeu();
-                            ihmGraph.lancerPartie();
+                            //ihmGraph.lancerPartie();
                         }
                 }
             });
