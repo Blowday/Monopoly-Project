@@ -12,7 +12,7 @@ public class Controleur {
     //Attributs
     private IHM ihm;
     private Monopoly monopoly;
-    private int c;
+
     
     private Observateur ihmGraph;
     
@@ -28,12 +28,7 @@ public class Controleur {
         ihm = new IHM(this);
         
         ihmGraph = new IhmGraph(this);
-   
-        
-        
         monopoly = new Monopoly();
-        c = 1;
-        
         this.menu();
         
         //ihmGraph.notifier(new Evenement(1));
@@ -45,7 +40,7 @@ public class Controleur {
            //}
             //else if (c == 2) {
                 //if (monopoly.getJoueurs().size()>=2 && monopoly.getJoueurs().size()<=6) {
-                    this.lancerPartie();
+
                 //}
     //else {
                    // ihm.nbJoueursMauvais();
@@ -154,18 +149,14 @@ public class Controleur {
                 return j.getPositionCourante();
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public void jouerUnCoup(Joueur j){
+    public void jouerUnCoup(Joueur j) {
         Carreau c = lancerDesAvancer(j);
+        jouerUnCoup(j,c);
+    }
+    
+    
+    public void jouerUnCoup(Joueur j, Carreau c){
+        
         //si le joueur arrive sur un carreau achetable
         if(c instanceof CarreauAchetable){
             Evenement e = ((CarreauAchetable) c).action(j);
@@ -242,6 +233,12 @@ public class Controleur {
             System.out.println("Vous êtes en prison");
             
         }
+        else if(c instanceof CarreauTirageCarte) {
+            
+            this.jouerUneCarte(j, ((CarreauTirageCarte) c).getType());
+            
+            
+        }
         else {
             Evenement e = new Evenement(c.getNom());
             ihm.afficherPassage(e);
@@ -257,11 +254,50 @@ public class Controleur {
         j.gain(((Depart)monopoly.getCarreaux().get(0)).getGainDepart());
     }
 
+<<<<<<< HEAD
 
     public ArrayList<Joueur> getJoueurs() {
         return monopoly.getJoueurs();
     }
 
     
+=======
+    private void jouerUneCarte(Joueur j, TypeCarte type) {
+        Carte carte = monopoly.tirerUneCarte(type);
+        
+        if(carte instanceof CarteAnniversaire) {
+            // On gère ici la carte anniversaire (et pas dans la carte car besoin des autres joueurs)
+        }
+        else if(carte instanceof CarteSortiePrison) {
+            // On gère ici l'ajout pour un joueur d'une carte sortie de prison, la carte est mise de côté jusqu'a ce qu'il s'en serve
+            //il peut en avoir 2 (chance et communauté)
+        }
+        else if(carte instanceof CarteReparation) {
+            // On gère ici la carte reparation
+        }
+        else if(carte instanceof CarteAllerEnPrison) {
+            
+        }
+        else if(carte instanceof CarteDeplacement) {
+            
+            int d = ((CarteDeplacement)carte).getDeplacement();
+            
+            if(d>=0) {
+                if(j.getPositionCourante().getNumero()-1 > d) {
+                    passageDepart(j);
+                }
+                j.setCarreau(monopoly.getCarreaux().get(d));
+            }
+            else {
+                j.setCarreau(monopoly.getCarreaux().get(j.getPositionCourante().getNumero()-1 +d));
+            }
+            jouerUnCoup(j, monopoly.getCarreaux().get(d));
+        }
+        else {
+            ((CartePaiement)carte).action(j);
+        }
+
+    }
+>>>>>>> b5626a4f15a423c93a9dd9603a57bb54fcb08030
   
 }

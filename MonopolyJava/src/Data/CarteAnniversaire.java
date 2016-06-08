@@ -9,7 +9,9 @@ package Data;
  *
  * @author wyklandd
  */
-public enum TypeCarte {
-    chance,
-    communaute;
+public class CarteAnniversaire extends Carte{
+    
+    public CarteAnniversaire(TypeCarte t, String s) {
+        super(t,s);
+    }
 }

@@ -21,4 +21,8 @@ public class CartePaiement extends Carte {
         this.montant = m;
     }
     
+    public void action(Joueur j) {
+        j.recevoirLoyer(montant);
+    }
+    
 }

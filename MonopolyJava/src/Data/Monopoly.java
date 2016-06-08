@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class Monopoly {
             
@@ -14,17 +15,17 @@ public class Monopoly {
 	private HashMap<Integer,Carreau> carreaux;
 	private ArrayList<Joueur> joueurs;
         private HashMap<CouleurPropriete,Groupe> groupes;
-        private HashSet<Carte> cartesChance;
-        private HashSet<Carte> cartesCommunaute;
+        private LinkedList<Carte> cartesChance;
+        private LinkedList<Carte> cartesCommunaute;
 
         //Constructeurs
         public Monopoly() {
             joueurs = new ArrayList<>();
             carreaux = new HashMap<>();
             groupes = new HashMap<>();
-            cartesChance = new HashSet<>();
-            cartesCommunaute = new HashSet<>();
-            creerPlateau("data.txt", "dataChance.txt", "dataCommunauté.txt");
+            cartesChance = new LinkedList<>();
+            cartesCommunaute = new LinkedList<>();
+            creerPlateau("data.txt", "dataChance.txt", "dataCommunaute.txt");
             
         }
         
@@ -102,16 +103,14 @@ public class Monopoly {
                         if (data.get(i)[2].compareTo("Départ") == 0) {
                             carreaux.put(i, new Depart(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
                         }
-                        //A GERER ENCORZELJKFDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDG
                         else if(data.get(i)[2].compareTo("Caisse de Communauté") == 0) {
-                            carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                            carreaux.put(i, new CarreauTirageCarte(Integer.parseInt(data.get(i)[1]), data.get(i)[2], TypeCarte.communaute));
                         }
                         else if(data.get(i)[2].compareTo("Impôt sur le revenu") == 0) {
                             carreaux.put(i, new ImpotsEtTaxes(Integer.parseInt(data.get(i)[1]), data.get(i)[2], Integer.parseInt(data.get(i)[1])) );
                         }
                         else if(data.get(i)[2].compareTo("Chance") == 0) {
-                        //A GERER ENCORZELJKFDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDG
-                            carreaux.put(i, new AutreCarreau(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
+                            carreaux.put(i, new CarreauTirageCarte(Integer.parseInt(data.get(i)[1]), data.get(i)[2], TypeCarte.chance));
                         }
                         else if(data.get(i)[2].compareTo("Simple Visite / En Prison") == 0) {
                             carreaux.put(i, new Prison(Integer.parseInt(data.get(i)[1]), data.get(i)[2]));
@@ -173,7 +172,8 @@ public class Monopoly {
                     
                     //En cas de valeur inconnue
                     else {
-                        System.err.println("[buildGamePleateau()] : Invalid Data type");
+                        
+                        System.err.println("[buildGamePleateau()] : Invalid Data type (carte chance)");
                     }
                 }
 
@@ -185,7 +185,7 @@ public class Monopoly {
 			System.err.println("[buildGamePlateau()] : Error while reading file!");
 		}
             
-            //Lecture du fichier de cartes ccommunauté
+            //Lecture du fichier de cartes communauté
             try {
                 ArrayList<String[]> data3 = readDataFile(df3, ";");
 
@@ -194,27 +194,32 @@ public class Monopoly {
                     String caseType = data3.get(i)[0];
                     //Pour les cartes paiement
                     if (caseType.compareTo("P") == 0) {
-                        cartesCommunaute.add(new CartePaiement(TypeCarte.chance, data3.get(i)[1], Integer.parseInt(data3.get(i)[2])));
+                        cartesCommunaute.add(new CartePaiement(TypeCarte.communaute, data3.get(i)[1], Integer.parseInt(data3.get(i)[2])));
                     }
                     
                     //Pour les cartes Deplacement (sans passer par la case départ si case prison)
                     else if (caseType.compareTo("D") == 0) {
-                        cartesCommunaute.add(new CarteDeplacement(TypeCarte.chance, data3.get(i)[1], Integer.parseInt(data3.get(i)[2])));
+                        cartesCommunaute.add(new CarteDeplacement(TypeCarte.communaute, data3.get(i)[1], Integer.parseInt(data3.get(i)[2])));
                     } 
                     
                     //Pour les cartes sortie prison
                     else if (caseType.compareTo("LP") == 0) {
-                        cartesCommunaute.add(new CarteSortiePrison(TypeCarte.chance, data3.get(i)[1]));
+                        cartesCommunaute.add(new CarteSortiePrison(TypeCarte.communaute, data3.get(i)[1]));
                     }
                     
                     //Pour les cartes Aller en prison
                     else if (caseType.compareTo("PR") == 0) {
-                        cartesCommunaute.add(new CarteSortiePrison(TypeCarte.chance, data3.get(i)[1]));
-                    } 
+                        cartesCommunaute.add(new CarteSortiePrison(TypeCarte.communaute, data3.get(i)[1]));
+                    }
+                    //Pour la carte anniversaire
+                    else if (caseType.compareTo("AN") == 0) {
+                        cartesCommunaute.add(new CarteAnniversaire(TypeCarte.communaute, data3.get(i)[1]));
+                    }
                     
                     //En cas de valeur inconnue
                     else {
-                        System.err.println("[buildGamePleateau()] : Invalid Data type");
+                        
+                        System.err.println("[buildGamePleateau()] : Invalid Data type (carte communauté)");
                     }
                 }
 
@@ -227,7 +232,7 @@ public class Monopoly {
 		}
             
             
-      
+            this.shuffleDeck();
             
 	}
         
@@ -247,6 +252,45 @@ public class Monopoly {
 		return data;
 	}
         
+        private void shuffleDeck() {
+            LinkedList<Carte> temp = new LinkedList<>();
+           
+            for(int i=0; i<16; i++) {
+                int card = (int) (Math.random() * (16-i));
+                temp.addLast(cartesChance.remove(card));
+            }
+            cartesChance = temp;
+                        
+            LinkedList<Carte> temp2 = new LinkedList<>();
+           
+            for(int i=0; i<16; i++) {
+                int card = (int) (Math.random() * (16-i));
+                temp2.addLast(cartesCommunaute.remove(card));
+            }
+            cartesCommunaute = temp2;
+           
+        }
         
+        public Carte tirerUneCarte(TypeCarte type) {
+            
+            if(type == TypeCarte.chance) {
+                return cartesChance.pollFirst();
+            }
+            else {
+                return cartesCommunaute.pollFirst();
+            }
+            
+        }
+        
+        public void remettreCarte(Carte c) {
+            
+            if(c.getType() == TypeCarte.chance) {
+                cartesChance.addLast(c);
+            }
+            else {
+                cartesCommunaute.addLast(c);
+            }
+            
+        }
         
 }
