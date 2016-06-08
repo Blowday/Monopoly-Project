@@ -40,16 +40,19 @@ public class IhmMenu {
     private static JFrame window1;
     private JPanel panel_accueil;
     
-    private IhmInscription ihmInscription;
+    private IhmGraph ihmGraph;
     
     private ArrayList<Joueur> jtemp;
     
     
     
-    public IhmMenu(){
+
+    
+    public IhmMenu(IhmGraph ihmGraph){
+            this.ihmGraph = ihmGraph;
+
         
-        
-            this.ihmInscription = new IhmInscription(this);
+            
             panel_accueil = new JPanel();
             panel_accueil.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
@@ -118,7 +121,8 @@ public class IhmMenu {
             jouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    jtemp = ihmInscription.inscrireJoueur();
+                    //ihmInscription.inscrireJoueur();
+                    ihmGraph.menuInscription();
                     window1.setVisible(false);
                     
                 }
@@ -216,6 +220,10 @@ public class IhmMenu {
     public ArrayList<Joueur> afficherMenu() {
         window1.setVisible(true);
         return jtemp;
+    }
+
+    void setIhmgraph(IhmGraph ihmGraph) {
+        this.ihmGraph = ihmGraph;
     }
     
 }

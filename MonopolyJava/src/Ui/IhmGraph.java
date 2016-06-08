@@ -35,15 +35,14 @@ public class IhmGraph extends JFrame implements Observateur {
     private IhmDe de2;
     
     private Controleur controleur;
+
     
     //initListeJoueur
     private JPanel panel_joueur,panel_joueur1,panel_joueur2,panel_joueur3,panel_joueur4,panel_joueur5,panel_joueur6;
     //informationTour
     private JPanel panel_information,panel_de,panel_tour;
-    JButton lancer_des,achat_maison,fin_du_tour;
-    
-    
-    
+    JButton lancer_des,fin_du_tour;
+
     public IhmGraph(Controleur controleur){
         super("Monopoly");
         this.setLayout(new BorderLayout());
@@ -51,6 +50,12 @@ public class IhmGraph extends JFrame implements Observateur {
         
         this.controleur = controleur;
         controleur.setObservateur(this);
+        
+        this.ihmMenu = new IhmMenu(this);
+
+        
+        this.ihmInscription = new IhmInscription(ihmMenu,this);
+
         
         JPanel jeu = new JPanel(new BorderLayout());
           //liste des joueurs
@@ -61,12 +66,19 @@ public class IhmGraph extends JFrame implements Observateur {
         
         this.add(plateau, BorderLayout.CENTER);
         
-        ihmMenu = new IhmMenu();
+
         
         
         informationTour();
         initListeJoueur(/*controleur.getJoueurs()*/);
         
+    }
+
+    public Controleur getControleur() {
+        return controleur;
+    }
+    public void setJoueurs(ArrayList<Joueur> jTemp){
+        controleur.setJoueur(jTemp);
     }
     
     public void notifier(Evenement e){
@@ -76,11 +88,20 @@ public class IhmGraph extends JFrame implements Observateur {
         switch(e.getType()){
             
             case 1: //1--initialisation du jeu(Afficher menu et lancer le jeu)
-                controleur.inscrireJoueur(ihmMenu.afficherMenu()); //devra renvoyer une arrayList de joueurs
+                ihmMenu.afficherMenu();
+                //controleur.inscrireJoueur(ihmInscription.inscrireJoueur()); //devra renvoyer une arrayList de joueurs
+                //this.afficherJeu();
+                //de1.animation(5);
+                //de2.animation(5);
+                break;
+            case 2:
+                ihmInscription.inscrireJoueur();
+                break;
+            case 3:
                 this.afficherJeu();
-                de1.animation(5);
-                de2.animation(5);
-        
+                break;
+            case 4:
+                ihmInscription.inscrireJoueurEr();
         }
     }
 
@@ -91,6 +112,10 @@ public class IhmGraph extends JFrame implements Observateur {
         setSize(1350, 940);
         setVisible(true); 
         
+    }
+
+    public void menuInscription(){
+        controleur.inscrireJoueur();
     }
     
     public void initListeJoueur(/*ArrayList<Joueur> joueurs*/){
@@ -173,7 +198,7 @@ public class IhmGraph extends JFrame implements Observateur {
                 i=i+1;
             }
         } */   
-               
+            
     }
     
     public void informationTour(){
@@ -228,14 +253,6 @@ public class IhmGraph extends JFrame implements Observateur {
         c2.gridy=1;
         panel_tour.add(new JLabel("info tour"));
         
-        //bouton achat maison
-        c2.gridx=1;
-        c2.gridy=2;
-        achat_maison = new JButton ("Acheter maison");
-        panel_tour.add(achat_maison,c2);
-        
-        
-        
         //bouton fin du tour
         c2.gridx=1;
         c2.gridy=2;
@@ -246,11 +263,11 @@ public class IhmGraph extends JFrame implements Observateur {
         //mettre tous dans panel_information
         c.gridx=1;
         c.gridy=1;
-        panel_information.add(panel_de);
+        panel_information.add(panel_de,c);
         
         c.gridx=1;
         c.gridy=2;
-        panel_information.add(panel_tour);
+        panel_information.add(panel_tour,c);
     
         this.add(panel_information,BorderLayout.EAST);
     

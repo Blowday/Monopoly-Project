@@ -16,6 +16,8 @@ public class Controleur {
     
     private Observateur ihmGraph;
     
+    
+    
     public void setObservateur(Observateur ob){
         this.ihmGraph = ob;
     }
@@ -26,11 +28,13 @@ public class Controleur {
         ihm = new IHM(this);
         
         ihmGraph = new IhmGraph(this);
-            
+   
         
         
         monopoly = new Monopoly();
         c = 1;
+        
+        this.menu();
         
         //ihmGraph.notifier(new Evenement(1));
         //while( c != 3) { 
@@ -53,17 +57,29 @@ public class Controleur {
     }
     
     //Méthodes
-    public void inscrireJoueur(ArrayList<Joueur> jtemp) {
+    public void menu(){
+        ihmGraph.notifier(new Evenement(1)); //le controleur demande l'affichage du menu de demarrage
+    }
+    
+    public void inscrireJoueur() {
+        //monopoly.inscrireJoueur(ihm.inscrireJoueur());  partie texte
+        
+        ihmGraph.notifier(new Evenement(2));
+   
+    }
+    
+    public void setJoueur(ArrayList<Joueur> jtemp) {
         //monopoly.inscrireJoueur(ihm.inscrireJoueur());  partie texte
         monopoly.inscrireJoueur(jtemp);
     }
     
     
     public void lancerPartie() {
-        ihmGraph.notifier(new Evenement(1));
+
         //essayer de pouvoir relance la partie
         
         //ihmGraph.afficherJeu(); ///test graph
+        ihmGraph.notifier(new Evenement(3));
         
         int joueursVivants;
         do{
