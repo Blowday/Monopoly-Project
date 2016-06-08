@@ -5,7 +5,6 @@
  */
 package Ui;
 import Data.Carreau;
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -32,11 +31,7 @@ public class IhmPlateau extends JPanel implements MouseListener{
         addMouseListener(this);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters            
-    }
+    
     
     @Override
     public void mousePressed(MouseEvent e) {
@@ -62,11 +57,11 @@ public class IhmPlateau extends JPanel implements MouseListener{
         //Convertir les coordonnées en numéros de case
         
         int num=0;
-        if (y==0){                      //carreaux du haut du plateau
+        if (y==0){                       //carreaux du haut du plateau
             num=x;
         } else if (y==10){               //carreaux du bas du plateau
             num=y*3-x;
-        } else if (x==0){               //carreaux à gauche du plateau
+        } else if (x==0){                //carreaux à gauche du plateau
             num=NB_CASES-y;
         } else if (x==10){               //carreaux à droite du plateau
             num=x+y;
@@ -76,9 +71,9 @@ public class IhmPlateau extends JPanel implements MouseListener{
         if (num>=NB_CASES){
             num-=NB_CASES;
         }
-        if (num==20 && (x!=0 || y!=0)){
+        /*if (num==20 && (x!=0 || y!=0)){
             num=-1;
-        }
+        }*/
         System.out.println(num);
     }
 

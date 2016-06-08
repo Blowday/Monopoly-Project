@@ -361,6 +361,7 @@ public class IHM {
                     window2.setVisible(false);
                     afficherMenu();
                     
+                    
                 }
              });      
             // Définit la taille de la fenêtre en pixels

@@ -52,13 +52,6 @@ public class Evenement {
         this.nomCase = nomCase;
     }
     
-    //evenements graphiques
-    public Evenement(int type) {
-        this.typeFenetre = type;
-    }
-    
-    
-    
     //Méthodes
     public int getType(){
         return typeFenetre;
