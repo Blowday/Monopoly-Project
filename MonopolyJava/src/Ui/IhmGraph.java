@@ -8,10 +8,12 @@ package Ui;
 import Data.Carreau;
 import Data.CarreauAchetable;
 import Data.Evenement;
+import Data.Joueur;
 import Jeu.Controleur;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,9 +34,7 @@ public class IhmGraph extends JFrame implements Observateur {
     private IhmDe de2;
     
     private Controleur controleur;
-    
-    
-    
+
     public IhmGraph(Controleur controleur){
         super("Monopoly");
         this.setLayout(new BorderLayout());
@@ -42,6 +42,12 @@ public class IhmGraph extends JFrame implements Observateur {
         
         this.controleur = controleur;
         controleur.setObservateur(this);
+        
+        this.ihmMenu = new IhmMenu(this);
+
+        
+        this.ihmInscription = new IhmInscription(ihmMenu,this);
+
         
         JPanel jeu = new JPanel(new BorderLayout());
           //liste des joueurs
@@ -52,7 +58,7 @@ public class IhmGraph extends JFrame implements Observateur {
         
         this.add(plateau, BorderLayout.CENTER);
         
-        ihmMenu = new IhmMenu();
+
         
         de1 = new IhmDe();
         de2 = new IhmDe();
@@ -60,6 +66,13 @@ public class IhmGraph extends JFrame implements Observateur {
         this.add(de2, BorderLayout.EAST);
         //this.add(de2);
         
+    }
+
+    public Controleur getControleur() {
+        return controleur;
+    }
+    public void setJoueurs(ArrayList<Joueur> jTemp){
+        controleur.setJoueur(jTemp);
     }
     
     public void notifier(Evenement e){
@@ -69,11 +82,20 @@ public class IhmGraph extends JFrame implements Observateur {
         switch(e.getType()){
             
             case 1: //1--initialisation du jeu(Afficher menu et lancer le jeu)
-                controleur.inscrireJoueur(ihmMenu.afficherMenu()); //devra renvoyer une arrayList de joueurs
+                ihmMenu.afficherMenu();
+                //controleur.inscrireJoueur(ihmInscription.inscrireJoueur()); //devra renvoyer une arrayList de joueurs
+                //this.afficherJeu();
+                //de1.animation(5);
+                //de2.animation(5);
+                break;
+            case 2:
+                ihmInscription.inscrireJoueur();
+                break;
+            case 3:
                 this.afficherJeu();
-                de1.animation(5);
-                de2.animation(5);
-        
+                break;
+            case 4:
+                ihmInscription.inscrireJoueurEr();
         }
     }
 
@@ -84,6 +106,10 @@ public class IhmGraph extends JFrame implements Observateur {
         setSize(1350, 940);
         setVisible(true); 
         
+    }
+
+    public void menuInscription(){
+        controleur.inscrireJoueur();
     }
     
 }

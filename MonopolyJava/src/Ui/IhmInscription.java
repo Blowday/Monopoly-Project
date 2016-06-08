@@ -6,10 +6,8 @@
 package Ui;
 
 import Data.Joueur;
-import static Ui.IHM.window2;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,7 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -27,16 +27,24 @@ public class IhmInscription {
     private static JFrame window2;
     private JPanel panel_principal,panel_joueur,retour_Demarrer;
     private IhmMenu ihmMenu;
+    private IhmGraph ihmGraph;
     
-    public IhmInscription(IhmMenu ihmMenu){
+    private ArrayList<Joueur> jTemp;
+    
+
+    
+    
+    JTextField joueur1,joueur2,joueur3,joueur4,joueur5,joueur6;
+    JLabel ljoueur1,ljoueur2,ljoueur3,ljoueur4,ljoueur5,ljoueur6;
+    
+    
+    
+    public IhmInscription(IhmMenu ihmMenu, IhmGraph ihmGraph){
         this.ihmMenu=ihmMenu;
-    }
-    
-    public ArrayList<Joueur> inscrireJoueur() {
-        ArrayList<Joueur> jTemp = new ArrayList<>();  
-        
- 
+        this.ihmGraph = ihmGraph;
+        this.jTemp = new ArrayList();
         window2 = new JFrame("Inscrire joueur");
+          
         window2.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);     
         window2.setSize(900, 700);
         
@@ -62,67 +70,67 @@ public class IhmInscription {
                     //joueur 1
                     c1.gridx=1;
                     c1.gridy=1;
-                    JLabel ljoueur1 = new JLabel("joueur 1:");
+                    ljoueur1 = new JLabel("joueur 1:");
                     panel_joueur.add(ljoueur1,c1);
                     
                     c1.gridx=2;
                     c1.gridy=1;
-                    TextField joueur1 = new TextField(20);
+                    joueur1 = new JTextField(20);
                     panel_joueur.add(joueur1,c1);
         
                     //joueur 2        
                     c1.gridx=1;
                     c1.gridy=2;
-                    JLabel ljoueur2 = new JLabel("joueur 2:");
+                    ljoueur2 = new JLabel("joueur 2:");
                     panel_joueur.add(ljoueur2,c1);
                     
                     c1.gridx=2;
                     c1.gridy=2;
-                    TextField joueur2 = new TextField(20);
+                    joueur2 = new JTextField(20);
                     panel_joueur.add(joueur2,c1);
                     
                     //joueur 3                   
                     c1.gridx=1;
                     c1.gridy=3;
-                    JLabel ljoueur3 = new JLabel("joueur 3:");
+                    ljoueur3 = new JLabel("joueur 3:");
                     panel_joueur.add(ljoueur3,c1);
                     
                     c1.gridx=2;
                     c1.gridy=3;
-                    TextField joueur3 = new TextField(20);
+                    joueur3 = new JTextField(20);
                     panel_joueur.add(joueur3,c1);
                     
                     //joueur 4
                     c1.gridx=1;
                     c1.gridy=4;
-                    JLabel ljoueur4 = new JLabel("joueur 4:");
+                    ljoueur4 = new JLabel("joueur 4:");
                     panel_joueur.add(ljoueur4,c1);
                     
                     c1.gridx=2;
                     c1.gridy=4;
-                    TextField joueur4 = new TextField(20);
+                    joueur4 = new JTextField(20);
                     panel_joueur.add(joueur4,c1);
                     
                     //joueur 5
                     c1.gridx=1;
                     c1.gridy=5;
-                    JLabel ljoueur5 = new JLabel("joueur 5:");
+                    ljoueur5 = new JLabel("joueur 5:");
                     panel_joueur.add(ljoueur5,c1);
                     
                     c1.gridx=2;
                     c1.gridy=5;
-                    TextField joueur5 = new TextField(20);
+                    joueur5 = new JTextField(20);
                     panel_joueur.add(joueur5,c1);
                     
                     //joueur 6
                     c1.gridx=1;
                     c1.gridy=6;
-                    JLabel ljoueur6 = new JLabel("joueur 6:");
+                    ljoueur6 = new JLabel("joueur 6:");
                     panel_joueur.add(ljoueur6,c1);
                     
                     c1.gridx=2;
                     c1.gridy=6;
-                    TextField joueur6 = new TextField(20);
+                    joueur6 = new JTextField(20);
                     panel_joueur.add(joueur6,c1);
                     
                     
@@ -183,11 +191,8 @@ public class IhmInscription {
             c0.gridy=5;
             panel_principal.add(retour_Demarrer,c0);
             
-        window2.add(panel_principal);
-        
-        
-        
-        //bouton retour
+            
+              //bouton retour
         retour.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
@@ -197,31 +202,62 @@ public class IhmInscription {
                 }
              });
         
-        window2.setVisible(true);            
+        demarrer.addActionListener(new ActionListener(){
+            @Override
+                public void actionPerformed(ActionEvent e){
                     
-
-        
-        
-        
-  /*      String s;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nom de joueur: ");
-        String n = sc.nextLine();
-
-        jTemp.add(new Joueur(n));
-
-        do {
-
-            System.out.println("Nom de joueur: ");
-            n = sc.nextLine();
-            jTemp.add(new Joueur(n));
-
-            System.out.println("Nouveau joueur? (o/n)");
-            s = sc.nextLine();
-
-        } while (s.equals("o") && jTemp.size() < 6);
-*/
-        return jTemp;
-
+                    
+                    
+                        jTemp.clear();
+               
+                        if(!joueur1.getText().equals("")){
+                            Joueur j = new Joueur(joueur1.getText());
+                            jTemp.add(j);
+                        }
+                        if(!joueur2.getText().equals("")){
+                            Joueur j = new Joueur(joueur2.getText());
+                            jTemp.add(j);
+                        }
+                        if(!joueur3.getText().equals("")){
+                            Joueur j = new Joueur(joueur3.getText());
+                            jTemp.add(j);
+                        }
+                        if(!joueur4.getText().equals("")){
+                            Joueur j = new Joueur(joueur4.getText());
+                            jTemp.add(j);
+                        }
+                        if(!joueur5.getText().equals("")){
+                            Joueur j = new Joueur(joueur5.getText());
+                            jTemp.add(j);
+                        }
+                        if(!joueur6.getText().equals("")){
+                            Joueur j = new Joueur(joueur6.getText());
+                            jTemp.add(j);
+                        }
+                            
+                        if(jTemp.size()<2){
+                            JOptionPane.showMessageDialog(window2, "Il faut au moins deux joueurs!");
+                        }
+                        else{
+                            window2.setVisible(false);
+                            ihmGraph.setJoueurs(jTemp);
+                        }
+                }
+            });
+         window2.add(panel_principal);
     }
+    
+    public void inscrireJoueur() {
+
+       
+        window2.setVisible(true);     
+ 
+      
+    }
+
+    void inscrireJoueurEr() {
+        window2.setVisible(true);
+    }
+
+    
 }
