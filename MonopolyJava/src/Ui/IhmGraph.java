@@ -167,9 +167,8 @@ public class IhmGraph extends JFrame implements Observateur {
                 c.gridx=1;
                 c.gridy=i+1;
                 c.anchor = GridBagConstraints.LINE_START;
-                listPanel.get(i/2).add(new JLabel(joueurs.get(i/2).getName()+":")); 
-                listPanel.get(i/2).add(new JLabel(Integer.toString(joueurs.get(i/2).getCash())+"$"));
-                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder("joueur "+(i/2+1)+":"));
+                listPanel.get(i/2).add(new JLabel("<html>"+joueurs.get(i/2).getName()+"<span>:</span>"+"<br>"+"<span>argent: </span>"+joueurs.get(i/2).getCash()+"<span>$</span>"+"</html>")); 
+                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder("<html>joueur"+(i/2+1)+":</html>"));
                 panel_joueur.add(listPanel.get(i/2),c);
             }
             else{
@@ -180,7 +179,9 @@ public class IhmGraph extends JFrame implements Observateur {
             }
             
         }   
-        this.add(panel_joueur,BorderLayout.WEST);   
+        this.add(panel_joueur,BorderLayout.WEST); 
+        //new JLabel("<html><span>mon texte bla bla bla bla bla bla</span></html>");
+        //"<html>valeur: "+ valeur +"</br>"+ "valeur2: "+ valeur2+"</br></html>"
     }
     
     
