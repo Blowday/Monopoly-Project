@@ -122,6 +122,7 @@ public class IhmGraph extends JFrame implements Observateur {
     public void afficherJeu() {
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         setSize(1350, 940);
+        this.setLocationRelativeTo(null);
         setVisible(true); 
     }
 
@@ -143,7 +144,7 @@ public class IhmGraph extends JFrame implements Observateur {
             panel_joueur2 = new JPanel();
             panel_joueur2.setLayout(new GridBagLayout());
             panel_joueur3 = new JPanel();
-            panel_joueur3.setLayout(new GridBagLayout());;
+            panel_joueur3.setLayout(new GridBagLayout());
             panel_joueur4 = new JPanel();
             panel_joueur4.setLayout(new GridBagLayout());
             panel_joueur5 = new JPanel();
@@ -158,54 +159,20 @@ public class IhmGraph extends JFrame implements Observateur {
             listPanel.put(3, panel_joueur4);
             listPanel.put(4, panel_joueur5);
             listPanel.put(5, panel_joueur6);
-            
-            
-            /*for (int i=0; i<5*2 ; i++){
-               
-                c.gridx=1;
-                c.gridy=i+1;
-                listPanel.get(i/2).add(new JLabel("nom joueur"+((i+1)/2))); 
-                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder(""));
-                panel_joueur.add(listPanel.get(i),c);
-                this.add(panel_joueur,BorderLayout.WEST);
-                
-                
-                c.gridx=1;
-                c.gridy=i+2;
-                c.ipady=5;
-                panel_joueur.add(new JLabel("  "),c);
-                        
-                this.add(panel_joueur,BorderLayout.WEST);
-                i=i+1;
-            }*/
-            
-            
-            
-            /*for (int i=0; i<joueurs.size() ; i++){
-                c.gridx=1;
-                c.gridy=i+1;
-                listPanel.get(i).add(new JLabel(joueurs.get(i).getName()+":"));
-                listPanel.get(i).add(new JLabel(Integer.toString(joueurs.get(i).getCash())+"$"));
-                listPanel.get(i).setBorder(BorderFactory.createTitledBorder(""));
-                panel_joueur.add(listPanel.get(i),c);
-                
-                
-            }
-            this.add(panel_joueur,BorderLayout.WEST);*/
-            
+
             
         for (int i=0; i<joueurs.size()*2 ; i++){
                
              if ((i % 2) == 0){   
                 c.gridx=1;
                 c.gridy=i+1;
+                c.anchor = GridBagConstraints.LINE_START;
                 listPanel.get(i/2).add(new JLabel(joueurs.get(i/2).getName()+":")); 
                 listPanel.get(i/2).add(new JLabel(Integer.toString(joueurs.get(i/2).getCash())+"$"));
                 listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder("joueur "+(i/2+1)+":"));
                 panel_joueur.add(listPanel.get(i/2),c);
             }
             else{
-                
                 c.gridx=1;
                 c.gridy=i+1;
                 c.ipady=10;

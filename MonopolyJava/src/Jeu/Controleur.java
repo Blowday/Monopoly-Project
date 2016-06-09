@@ -142,7 +142,7 @@ public class Controleur {
                 //si au troisième tour toujours pas de double, le joueur paie et peut partir
                 if(j.enPrison() && j.getCompteurPrison() == 2) {
                     j.setPrison(false);
-                    j.payerLoyer(50);
+                    j.payer(50);
                 }
                 
                 //Un joueur en prison n'avance pas
@@ -188,7 +188,7 @@ public class Controleur {
                     boolean reponse = ihm.afficherProposition(e);
                     if (reponse){
                         ((CarreauAchetable) c).setProprio(j);
-                        j.payerLoyer(((CarreauAchetable) c).getPrixAchat());
+                        j.payer(((CarreauAchetable) c).getPrixAchat());
                         //ajout de la propriete dans la bonne liste
                         if(c instanceof Gare){
                             j.ajouterGare((Gare) c);
@@ -208,13 +208,13 @@ public class Controleur {
 
                         if(j.getCash()> ((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())){ //si le joueur peux payer
 
-                            j.payerLoyer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())); //le joueur paye
+                            j.payer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())); //le joueur paye
                             ((CarreauAchetable) c).getProprietaire().recevoirLoyer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())); //le propriétaire recoit le loyer
                         }
                         else{
                             ((CarreauAchetable) c).getProprietaire().recevoirLoyer(j.getCash()); //le propriétaire recoit l'argent restant du joueur
                             e.setLoyerCase(j.getCash());
-                            j.payerLoyer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2()));
+                            j.payer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2()));
                         }
         
                     ihm.afficherDebit(e);
@@ -232,7 +232,7 @@ public class Controleur {
         }
         else if(c instanceof ImpotsEtTaxes){
             //Si on tombe sur la case Impots ou sur la case Taxes, le joueur paie le montant indiqué
-            j.payerLoyer(((ImpotsEtTaxes) c).getMontant());
+            j.payer(((ImpotsEtTaxes) c).getMontant());
             
             //COMMUNICATION AVEC IHM
             Evenement e = new Evenement(c.getNom());
@@ -280,13 +280,26 @@ public class Controleur {
         Carte carte = monopoly.tirerUneCarte(type);
         
         if(carte instanceof CarteAnniversaire) {
-            // On gère ici la carte anniversaire (et pas dans la carte car besoin des autres joueurs)
+            //On retire à tous les joueurs 10 (même au joueur actuel car il récupère sa somme juste après)
+            for(Joueur temp : monopoly.getJoueurs()) {
+                temp.payer(10);
+            }
+            //On paie le joueur
+            j.recevoirLoyer(monopoly.getJoueurs().size() * 10);
         }
         else if(carte instanceof CarteSortiePrison) {
-            
+            j.getCartesSortiePrison().add((CarteSortiePrison) carte);
         }
         else if(carte instanceof CarteReparation) {
             // On gère ici la carte reparation
+            int nbMaisons = 0;
+            int nbHotels = 0;
+            for (ProprieteAConstruire pac : j.getProprieteAConstruires()){
+                nbMaisons+=pac.getNbMaisons();
+                nbHotels+=pac.getNbHotels();
+            }
+            j.payer(((CarteReparation) carte).getMontant()*nbMaisons+((CarteReparation) carte).getMontant2()*nbHotels);
+            
         }
         else if(carte instanceof CarteAllerEnPrison) {
             j.setPrison(true);

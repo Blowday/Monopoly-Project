@@ -20,6 +20,10 @@ public class CarteReparation extends CartePaiement {
         this.montant2 = m2;
         
     }
+
+    public int getMontant2() {
+        return montant2;
+    }
     
     
     

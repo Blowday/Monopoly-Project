@@ -11,12 +11,13 @@ public class Joueur {
     private ArrayList<Compagnie> mesCompagnies;
     private ArrayList<ProprieteAConstruire> mesProprietes;
     private String nomJoueur;
-    private int cash = 100000;
+    private int cash;
     private boolean perdu;
     private int d1;
     private int d2;
     private boolean enPrison;
     private int compteur;
+    private HashSet<CarteSortiePrison> cartesSortiePrison;
 
     //Constructeurs
     public Joueur(String s) {
@@ -25,6 +26,8 @@ public class Joueur {
         mesGares = new ArrayList<>();
         mesCompagnies = new ArrayList<>();
         perdu = false;
+        cartesSortiePrison=null;
+        cash = 1500;
     }
     
     //Méthodes
@@ -46,7 +49,7 @@ public class Joueur {
      *
      * @param l
      */
-    public void payerLoyer(int l) {
+    public void payer(int l) {
         this.setCash(this.getCash() - l);
 
     }
@@ -166,7 +169,12 @@ public class Joueur {
         this.perdu = true;
     }
 
+    public HashSet<CarteSortiePrison> getCartesSortiePrison() {
+        return cartesSortiePrison;
+    }
 
-	
+    
+    
+    
         
 }
