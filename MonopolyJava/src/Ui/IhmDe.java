@@ -84,7 +84,7 @@ public class IhmDe extends JPanel{
             this.remove(de);
             this.updateUI();
            }   
-            System.out.println("boucle finie");
+
             
             
 
@@ -110,7 +110,7 @@ public class IhmDe extends JPanel{
         }       
         
         this.add(de);
-        System.out.println("rajouté");
+   
         
   
     }

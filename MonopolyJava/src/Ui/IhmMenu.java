@@ -63,7 +63,7 @@ public class IhmMenu {
             window1 = new JFrame("Monopoly");
             window1.setSize(900, 700);
             window1.setLocationRelativeTo(null);
-                 
+  
       
             c.gridx=1;
             c.gridy=1;
@@ -89,6 +89,7 @@ public class IhmMenu {
             Font font1 = new Font("Arial",Font.BOLD,100);
             jouer.setFont(font1);
            
+            jouer.setFocusable(false);
             panel_accueil.add(jouer,c);
             
             
@@ -111,7 +112,7 @@ public class IhmMenu {
             Font font2 = new Font("Arial",Font.BOLD,70);
             quitter.setFont(font2);        
             
-            
+            quitter.setFocusable(false);
             panel_accueil.add(quitter,c);
             
             

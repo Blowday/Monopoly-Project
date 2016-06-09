@@ -71,13 +71,13 @@ public class Controleur {
     }
     
     
-    public void lancerPartie() {
+    public void lancerPartie() {//met le premier joueur et affiche le plateau de jeu
 
-        //essayer de pouvoir relance la partie
+
         
-        //ihmGraph.afficherJeu(); ///test graph
+        joueurSuivant();
         ihmGraph.notifier(new Evenement(3));
-        int joueursVivants;
+        /*int joueursVivants;
         
         joueursVivants=0;
         for(Joueur j: monopoly.getJoueurs()){
@@ -116,7 +116,9 @@ public class Controleur {
             
         }while(joueursVivants > 1);
         ihm.partiePerdue();*/
-        this.joueurSuivant();
+        
+        
+        //this.joueurSuivant();
         
         
     }
@@ -171,6 +173,7 @@ public class Controleur {
     }
     
     public void jouerUnCoup(Joueur j) {
+        ihm.afficherDebutTour(j); // a enlever
         Carreau c = lancerDesAvancer(j);
         jouerUnCoup(j,c);
     }
@@ -343,11 +346,9 @@ public class Controleur {
     }
 
     public void joueurSuivant(){
-        
-        
-      
+
         numJoueur += 1; 
-        if(numJoueur == monopoly.getJoueurs().size()+1){
+        if(numJoueur == monopoly.getJoueurs().size()){
             numJoueur = 0;
         }
         jCourant = monopoly.getJoueurs().get(numJoueur);

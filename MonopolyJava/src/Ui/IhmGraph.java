@@ -262,9 +262,10 @@ public class IhmGraph extends JFrame implements Observateur {
         lancer_des.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e){
-            controleur.lancerDesAvancer(controleur.getjCourant());
+            controleur.jouerUnCoup(controleur.getjCourant());
             de1.animation(controleur.getjCourant().getD1());
             de2.animation(controleur.getjCourant().getD2());
+            if(controleur.getjCourant().getD1() != controleur.getjCourant().getD2()){controleur.joueurSuivant();}
         }
         });  
     
@@ -283,8 +284,8 @@ public class IhmGraph extends JFrame implements Observateur {
             InputStream test = new FileInputStream("music.wav");
             BGM = new AudioStream(test);
             AudioPlayer.player.start(BGM);
-            //MD = BGM.getData();
-            //loop = new ContinuousAudioDataStream(MD);
+            MD = BGM.getData();
+            loop = new ContinuousAudioDataStream(MD);
 
         }
         catch(FileNotFoundException e){
