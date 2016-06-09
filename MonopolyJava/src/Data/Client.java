@@ -24,8 +24,7 @@ public class Client {
         try {
             socket = new Socket("localhost", 2009);
         } catch (IOException e) {
-
-            e.printStackTrace();
+            System.err.println("Erreur côté serveur (IOException)");
         }
     }
 }

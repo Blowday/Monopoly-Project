@@ -12,7 +12,6 @@ public class Controleur {
     //Attributs
     private IHM ihm;
     private Monopoly monopoly;
-
     
     private Observateur ihmGraph;
     
@@ -60,7 +59,6 @@ public class Controleur {
     
     public void inscrireJoueur() {
         //monopoly.inscrireJoueur(ihm.inscrireJoueur());  partie texte
-        
         ihmGraph.notifier(new Evenement(2));
    
     }
