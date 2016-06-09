@@ -6,27 +6,23 @@
 package Data;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 
-/**
- *
- * @author wyklandd
- */
 public class Client {
-
-    public void Connexion(){
-
-        Socket socket;
-
+    
+    private int port;
+    private InetAddress adresse;
+    private String nomJoueur;
+    private Joueur joueur;
+    private Socket socket;
+    
+    public Client(int port, InetAddress adresse, String nomJoueur){
+        port=this.port;
+        adresse=this.adresse;
+        this.nomJoueur=nomJoueur;
+        joueur=new Joueur(nomJoueur);
         try {
-            socket = new Socket(InetAddress.getLocalHost(), 2009);
-            socket.close();
-
-        } catch (UnknownHostException e) {
-
-            e.printStackTrace();
+            socket = new Socket("localhost", 2009);
         } catch (IOException e) {
 
             e.printStackTrace();

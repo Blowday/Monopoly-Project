@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Data;
+package Reseau.serveur;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -13,7 +13,7 @@ import java.net.Socket;
  *
  * @author wyklandd
  */
-public class Server {
+public class Serveur {
         ServerSocket socketserver  ;
 
         Socket socketduserveur ;
