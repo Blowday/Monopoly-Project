@@ -24,5 +24,11 @@ public class CartePaiement extends Carte {
     public void action(Joueur j) {
         j.recevoirLoyer(montant);
     }
+
+    public int getMontant() {
+        return montant;
+    }
+    
+    
     
 }
