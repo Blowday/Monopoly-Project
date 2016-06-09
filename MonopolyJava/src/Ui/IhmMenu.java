@@ -62,8 +62,8 @@ public class IhmMenu {
             
             window1 = new JFrame("Monopoly");
             window1.setSize(900, 700);
-            //window1.setContentPane(new JLabel(new ImageIcon("fond.png").getImage()));
-     
+            window1.setLocationRelativeTo(null);
+                 
       
             c.gridx=1;
             c.gridy=1;
@@ -174,7 +174,7 @@ public class IhmMenu {
             }
             
             panel_accueil.setOpaque(false);
-            window1.add(panel_accueil,BorderLayout.NORTH);
+            window1.add(panel_accueil);
             
             //icon
             icon = new ImageIcon("policier.gif");

@@ -122,6 +122,7 @@ public class IhmGraph extends JFrame implements Observateur {
     public void afficherJeu() {
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         setSize(1350, 940);
+        this.setLocationRelativeTo(null);
         setVisible(true); 
     }
 
@@ -143,7 +144,7 @@ public class IhmGraph extends JFrame implements Observateur {
             panel_joueur2 = new JPanel();
             panel_joueur2.setLayout(new GridBagLayout());
             panel_joueur3 = new JPanel();
-            panel_joueur3.setLayout(new GridBagLayout());;
+            panel_joueur3.setLayout(new GridBagLayout());
             panel_joueur4 = new JPanel();
             panel_joueur4.setLayout(new GridBagLayout());
             panel_joueur5 = new JPanel();
@@ -158,41 +159,7 @@ public class IhmGraph extends JFrame implements Observateur {
             listPanel.put(3, panel_joueur4);
             listPanel.put(4, panel_joueur5);
             listPanel.put(5, panel_joueur6);
-            
-            
-            /*for (int i=0; i<5*2 ; i++){
-               
-                c.gridx=1;
-                c.gridy=i+1;
-                listPanel.get(i/2).add(new JLabel("nom joueur"+((i+1)/2))); 
-                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder(""));
-                panel_joueur.add(listPanel.get(i),c);
-                this.add(panel_joueur,BorderLayout.WEST);
-                
-                
-                c.gridx=1;
-                c.gridy=i+2;
-                c.ipady=5;
-                panel_joueur.add(new JLabel("  "),c);
-                        
-                this.add(panel_joueur,BorderLayout.WEST);
-                i=i+1;
-            }*/
-            
-            
-            
-            /*for (int i=0; i<joueurs.size() ; i++){
-                c.gridx=1;
-                c.gridy=i+1;
-                listPanel.get(i).add(new JLabel(joueurs.get(i).getName()+":"));
-                listPanel.get(i).add(new JLabel(Integer.toString(joueurs.get(i).getCash())+"$"));
-                listPanel.get(i).setBorder(BorderFactory.createTitledBorder(""));
-                panel_joueur.add(listPanel.get(i),c);
-                
-                
-            }
-            this.add(panel_joueur,BorderLayout.WEST);*/
-            
+
             
         for (int i=0; i<joueurs.size()*2 ; i++){
                
@@ -200,9 +167,8 @@ public class IhmGraph extends JFrame implements Observateur {
                 c.gridx=1;
                 c.gridy=i+1;
                 c.anchor = GridBagConstraints.LINE_START;
-                listPanel.get(i/2).add(new JLabel(joueurs.get(i/2).getName()+":")); 
-                listPanel.get(i/2).add(new JLabel(Integer.toString(joueurs.get(i/2).getCash())+"$"));
-                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder("joueur "+(i/2+1)+":"));
+                listPanel.get(i/2).add(new JLabel("<html>"+joueurs.get(i/2).getName()+"<span>:</span>"+"<br>"+"<span>argent: </span>"+joueurs.get(i/2).getCash()+"<span>$</span>"+"</html>")); 
+                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder("<html>joueur"+(i/2+1)+":</html>"));
                 panel_joueur.add(listPanel.get(i/2),c);
             }
             else{
@@ -213,7 +179,9 @@ public class IhmGraph extends JFrame implements Observateur {
             }
             
         }   
-        this.add(panel_joueur,BorderLayout.WEST);   
+        this.add(panel_joueur,BorderLayout.WEST); 
+        //new JLabel("<html><span>mon texte bla bla bla bla bla bla</span></html>");
+        //"<html>valeur: "+ valeur +"</br>"+ "valeur2: "+ valeur2+"</br></html>"
     }
     
     
@@ -316,8 +284,8 @@ public class IhmGraph extends JFrame implements Observateur {
             InputStream test = new FileInputStream("music.wav");
             BGM = new AudioStream(test);
             AudioPlayer.player.start(BGM);
-            //MD = BGM.getData();
-            //loop = new ContinuousAudioDataStream(MD);
+            MD = BGM.getData();
+            loop = new ContinuousAudioDataStream(MD);
 
         }
         catch(FileNotFoundException e){

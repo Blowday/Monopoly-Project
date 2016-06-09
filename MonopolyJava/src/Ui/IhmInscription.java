@@ -6,10 +6,14 @@
 package Ui;
 
 import Data.Joueur;
+import static Ui.IhmMenu.setBackgroundImage;
+import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,7 +38,7 @@ public class IhmInscription {
     
     private ArrayList<Joueur> jTemp;
     private ImageIcon icon;
-
+    private JLabel image1,image2;
     
     
     JTextField joueur1,joueur2,joueur3,joueur4,joueur5,joueur6;
@@ -50,6 +54,7 @@ public class IhmInscription {
           
         window2.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);     
         window2.setSize(900, 700);
+        window2.setLocationRelativeTo(null);
         
         //icon
         icon = new ImageIcon("policier.gif");
@@ -151,7 +156,7 @@ public class IhmInscription {
             joueur6.setDocument(new JTextFieldLimit(10));
             panel_joueur.add(joueur6,c1);
                     
-                    
+            panel_joueur.setOpaque(false);       
                     
                     
             //****Bouton****
@@ -177,14 +182,26 @@ public class IhmInscription {
             JButton demarrer = new JButton ("Démarrer");
             retour_Demarrer.add(demarrer,c2);        
                     
+            retour_Demarrer.setOpaque(false);
             
             //****assemblage****
             
             //image
             c0.gridx=1;
             c0.gridy=1;
-            JLabel image = new JLabel(new ImageIcon("image_debut.png"));
-            panel_principal.add(image,c0);
+            image1 = new JLabel(new ImageIcon("image_debut.png"));
+            panel_principal.add(image1,c0);
+            
+            
+            
+            //image 2
+            //image2 = new JLabel(new ImageIcon("monopoly_man.jpg"));
+            //window2.add(image2,BorderLayout.WEST);
+            try {
+                JPanel panel = setBackgroundImage(window2, new File("monopoly_man2.jpg"));
+            } catch (IOException e){
+                
+            }
             
             //espace entre image et joueur
             c0.gridx=1;
@@ -269,7 +286,7 @@ public class IhmInscription {
         
         
         
-        
+         panel_principal.setOpaque(false);
          window2.add(panel_principal);
     }
     
