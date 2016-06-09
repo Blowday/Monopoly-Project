@@ -84,6 +84,22 @@ public class ProprieteAConstruire extends CarreauAchetable {
     public void setNbHotels(int nbHotels) {
         this.nbHotels = nbHotels;
     }
+
+    public int getPrixMaison() {
+        return prixMaison;
+    }
+
+    public void setPrixMaison(int prixMaison) {
+        this.prixMaison = prixMaison;
+    }
+
+    public int getPrixHotel() {
+        return prixHotel;
+    }
+
+    public void setPrixHotel(int prixHotel) {
+        this.prixHotel = prixHotel;
+    }
     
     
 }

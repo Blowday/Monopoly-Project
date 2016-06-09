@@ -353,5 +353,98 @@ public class Controleur {
         
        
     }
+    
+    
+    public boolean possibiliteConstruireMaison(Joueur j, ProprieteAConstruire c) {
+        boolean groupePossede = j.possedeLeGroupe(c);
+        if(groupePossede) {
+            if(c.getNbHotels() == 0 && c.getNbMaisons() < 4 && monopoly.getNbMaisonDispo()>0) {
+                if(j.getCash() >= c.getPrixMaison()) {
+                    boolean test = true;
+                    for(ProprieteAConstruire temp : c.getGroupe().getProprieteAConstruires()) {
+                        if( (c.getNbMaisons() - temp.getNbMaisons()) >0 ) {
+                            test = false;
+                        }
+                    }
+                    return test;
+                }
+                else {
+                    return false;
+                }                
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+        
+    }
+    
+    public boolean possibiliteConstruireHotel(Joueur j, ProprieteAConstruire c) {
+        boolean groupePossede = j.possedeLeGroupe(c);
+        if(groupePossede) {
+            if(c.getNbHotels() == 0 && c.getNbMaisons() == 4 && monopoly.getNbHotelDispo()>0) {
+                if(j.getCash() >= c.getPrixHotel()) {
+                    boolean test = true;
+                    for(ProprieteAConstruire temp : c.getGroupe().getProprieteAConstruires()) {
+                        if( temp.getNbHotels() == 0 && (c.getNbMaisons() - temp.getNbMaisons()) >0 ) {
+                            test = false;
+                        }
+                    }
+                    return test;
+                }
+                else {
+                    return false;
+                }                
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public void construireUneMaison(Joueur j, ProprieteAConstruire c) {
+        
+        j.setCash(j.getCash()-c.getPrixMaison());
+        
+        c.setNbMaisons(c.getNbMaisons()+1);
+        
+        monopoly.setNbMaisonDispo(monopoly.getNbMaisonDispo()-1);
+  
+    }
+    
+    public void construireUnHotel(Joueur j, ProprieteAConstruire c) {
+        
+        j.setCash(j.getCash()-c.getPrixHotel());
+        
+        c.setNbHotels(1);
+        
+        c.setNbMaisons(0);
+        
+        monopoly.setNbHotelDispo(monopoly.getNbHotelDispo()-1);
+        
+        monopoly.setNbMaisonDispo(monopoly.getNbMaisonDispo()+4);
+
+    }
+    
+    public void rendreMaisonHotel(Joueur j) {
+        int compteurMaison = 0;
+        int compteurHotel = 0;
+        for(ProprieteAConstruire temp : j.getProprieteAConstruires()) {
+            compteurMaison += temp.getNbMaisons();
+            compteurHotel += temp.getNbHotels();
+            temp.setNbMaisons(0);
+            temp.setNbHotels(0);
+        }
+        monopoly.setNbMaisonDispo(monopoly.getNbMaisonDispo() + compteurMaison);
+        monopoly.setNbHotelDispo(monopoly.getNbHotelDispo() + compteurHotel);
+    }
+    
+    
   
 }
