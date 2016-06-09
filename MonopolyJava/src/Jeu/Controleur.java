@@ -19,6 +19,8 @@ public class Controleur {
     private Joueur jCourant;
     private int numJoueur=-1;
     
+    private boolean reponse;
+    
     
     public void setObservateur(Observateur ob){
         this.ihmGraph = ob;
@@ -32,6 +34,7 @@ public class Controleur {
         ihmGraph = new IhmGraph(this);
         monopoly = new Monopoly();
         this.menu();
+        
         
         //ihmGraph.notifier(new Evenement(1));
         //while( c != 3) { 
@@ -122,20 +125,22 @@ public class Controleur {
         
         
     }
-    
+    public void lancerDes(Joueur j){
+        j.setD1(roll());
+        j.setD2(roll());
+    }
 
     
-    public Carreau lancerDesAvancer(Joueur j){
+    public Carreau lancerDesAvancer(Joueur j){ //ne lance plus les dés
          //ihm.afficherDebutTour(j);
           
         
                 //System.out.println(j.getPositionCourante().getNumero());
                 //j.getPositionCourante().getNumero();
-                j.setD1(roll());
-                j.setD2(roll());
+                
                 ihm.afficherDe(j.getD1(),j.getD2()); //a enlever
                 
-                ihmGraph.notifier(new Evenement(4));
+
                 
                 //En cas de double, on sort le joueur de prison (inutile si le jouer était déjà libre)
                 if (j.getD1() == j.getD2()) {
@@ -184,31 +189,17 @@ public class Controleur {
         //si le joueur arrive sur un carreau achetable
         if(c instanceof CarreauAchetable){
             Evenement e = ((CarreauAchetable) c).action(j);
-            //reponse = false n'a pas voulu acheter
-            //reponse = true a voulu acheter
+            
+            
             switch (e.getType()) {
                 case 1:
-                    boolean reponse = ihm.afficherProposition(e);
-                    if (reponse){
-                        ((CarreauAchetable) c).setProprio(j);
-                        j.payer(((CarreauAchetable) c).getPrixAchat());
-                        //ajout de la propriete dans la bonne liste
-                        if(c instanceof Gare){
-                            j.ajouterGare((Gare) c);
-                        }
-                        else if(c instanceof Compagnie){
-                            j.ajouterCompagnie((Compagnie) c);
-                        }
-                        else if(c instanceof ProprieteAConstruire){
-                            j.ajouterPropriete((ProprieteAConstruire) c);
-                        }
-                        ihm.afficherAchat(e);
-                        //System.out.println("Argent joueur:"+ j.getCash());//test
-                        //System.out.println(c.getNom() +":"+((CarreauAchetable) c).getProprietaire().getName());//test
-                    }   break;
+                    //boolean reponse = ihm.afficherProposition(e); a enlever ihmtext
+                    ihmGraph.notifier(new Evenement(4)); //arrivee sur carreau achetable
+                    
+                    break;
                 case 2:
                     //deduction du loyer
-
+                        
                         if(j.getCash()> ((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())){ //si le joueur peux payer
 
                             j.payer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2())); //le joueur paye
@@ -219,15 +210,17 @@ public class Controleur {
                             e.setLoyerCase(j.getCash());
                             j.payer(((CarreauAchetable) c).calculLoyer(j.getD1(),j.getD2()));
                         }
-        
-                    ihm.afficherDebit(e);
+                    ihmGraph.notifier(new Evenement(5));
+                    ihm.afficherDebit(e); //a enlever
                     break;
                 case 3:
                     //j == proprio
-                    ihm.afficherJproprio(e);
+                    ihm.afficherJproprio(e); //a enlever
+                    ihmGraph.notifier(new Evenement(6));
                     break;
                 case 4:
-                    ihm.afficherAchatImp(e);
+                    ihm.afficherAchatImp(e); //a enlever
+                    ihmGraph.notifier(new Evenement(7));
                 default:
                     break;
             }
@@ -240,7 +233,8 @@ public class Controleur {
             //COMMUNICATION AVEC IHM
             Evenement e = new Evenement(c.getNom());
             ihm.afficherPassage(e);
-            System.out.println("Vous avez payé des impots ou des taxes");      
+            System.out.println("Vous avez payé des impots ou des taxes");      //a enlever
+            ihmGraph.notifier(new Evenement(8));
                     
         }
         else if(c instanceof AllerEnPrison){
@@ -255,17 +249,18 @@ public class Controleur {
             Evenement e = new Evenement(c.getNom());
             ihm.afficherPassage(e);
             System.out.println("Vous êtes en prison");
-            
+            ihmGraph.notifier(new Evenement(9));
         }
         else if(c instanceof CarreauTirageCarte) {
             
             this.jouerUneCarte(j, ((CarreauTirageCarte) c).getType());
-            
+            // ihmGraph.notifier(new Evenement(10));
             
         }
         else {
             Evenement e = new Evenement(c.getNom());
             ihm.afficherPassage(e);
+            ihmGraph.notifier(new Evenement(11));
         }
     }
     
@@ -281,6 +276,8 @@ public class Controleur {
 
     private void jouerUneCarte(Joueur j, TypeCarte type) {
         Carte carte = monopoly.tirerUneCarte(type);
+        
+        ihmGraph.notifier(new Evenement(10)); //communication du texte de la carte
         
         if(carte instanceof CarteAnniversaire) {
             //On retire à tous les joueurs 10 (même au joueur actuel car il récupère sa somme juste après)
@@ -337,7 +334,10 @@ public class Controleur {
 
     }
 
-
+    public void setReponse(Boolean b){
+        reponse = b;
+    }
+    
     public Monopoly getMonopoly() {
         return monopoly;
     }
@@ -355,5 +355,24 @@ public class Controleur {
         
        
     }
-  
+    public void acheterCarreau(Joueur j,CarreauAchetable c){
+        //boolean reponse = ihm.afficherProposition(e); a enlever ihmtext
+                   
+                    //reponse = false n'a pas voulu acheter
+                    //reponse = true a voulu acheter
+                    
+                        ((CarreauAchetable) c).setProprio(j);
+                        j.payer(((CarreauAchetable) c).getPrixAchat());
+                        //ajout de la propriete dans la bonne liste
+                        if(c instanceof Gare){
+                            j.ajouterGare((Gare) c);
+                        }
+                        else if(c instanceof Compagnie){
+                            j.ajouterCompagnie((Compagnie) c);
+                        }
+                        else if(c instanceof ProprieteAConstruire){
+                            j.ajouterPropriete((ProprieteAConstruire) c);
+                        }
+                        
+    }
 }

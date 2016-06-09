@@ -5,6 +5,9 @@
  */
 package Ui;
 
+import java.awt.Graphics;
+import java.util.ArrayList;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,18 +20,28 @@ import javax.swing.JPanel;
  */
 public class IhmDe extends JPanel{
 
-    int d;
-    JLabel de;
+    //private int d;
+    private JLabel de;
+    private ArrayList<ImageIcon> faceDes;
 
-    public IhmDe(){ //passer un des dés en paramètre
+
+    public IhmDe(){ 
+        faceDes = new ArrayList();
+        faceDes.add(new ImageIcon("de1.gif"));
+        faceDes.add(new ImageIcon("de2.gif"));
+        faceDes.add(new ImageIcon("de3.gif"));
+        faceDes.add(new ImageIcon("de4.gif"));
+        faceDes.add(new ImageIcon("de5.gif"));
+        faceDes.add(new ImageIcon("de6.gif"));
         
+        de = new JLabel();
+        de.setIcon(faceDes.get(deAleatoire()-1));
+        //repaint();
         
-        JLabel de1 = new JLabel(new ImageIcon("de1.gif"));
-        de=de1;
         
         this.add(de);
 
-        System.out.println("Dé 1 : " + d);
+        //System.out.println("Dé 1 : " + d);
 
     }
 
@@ -36,18 +49,19 @@ public class IhmDe extends JPanel{
         return (int) (Math.random() * (7 - 1)) + 1;
     }
     
+    @Override
+    public void paint(Graphics g){
+        de.setIcon(faceDes.get(deAleatoire()-1));
+    }
+    
     public void animation(int dFinal){
-        this.removeAll();
+        /*this.removeAll();
         this.updateUI();
         //this.removeAll();
         
-        JLabel de1 = new JLabel(new ImageIcon("de1.gif"));
-        JLabel de2 = new JLabel(new ImageIcon("de2.gif"));
-        JLabel de3 = new JLabel(new ImageIcon("de3.gif"));
-        JLabel de4 = new JLabel(new ImageIcon("de4.gif"));
-        JLabel de5 = new JLabel(new ImageIcon("de5.gif"));
-        JLabel de6 = new JLabel(new ImageIcon("de6.gif"));
         
+        /*
+        de1.setIcon(icon);
         for (int i = 0; i < 20; i++) {
             d = deAleatoire();
             
@@ -83,34 +97,23 @@ public class IhmDe extends JPanel{
    
             this.remove(de);
             this.updateUI();
-           }   
-
+           }  */ 
+       for (int i = 0; i < 20; i++) {
+           //repaint();
+           de.setIcon(faceDes.get(deAleatoire()-1));
+          /* try {
+                Thread.sleep(i*10);
+            } catch (InterruptedException ex) {
+            }*/
+           
+       }
             
-            
 
-        switch (dFinal) {
-            case 1:
-                de = de1;
-                break;
-            case 2:
-                de = de2;
-                break;
-            case 3:
-                de = de3;
-                break;
-            case 4:
-                de = de4;
-                break;
-            case 5:
-                de = de5;
-                    break;
-            case 6:
-                de = de6;
-                break;
-        }       
-        
-        this.add(de);
-   
+       de.setIcon(faceDes.get(dFinal-1));
+       this.updateUI();
+       
+       //repaint();
+
         
   
     }

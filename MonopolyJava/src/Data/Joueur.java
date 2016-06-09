@@ -26,7 +26,7 @@ public class Joueur {
         mesGares = new ArrayList<>();
         mesCompagnies = new ArrayList<>();
         perdu = false;
-        cartesSortiePrison=null;
+        cartesSortiePrison= new HashSet();
         cash = 1500;
     }
     

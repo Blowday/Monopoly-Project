@@ -276,11 +276,11 @@ public class IhmInscription {
                         else{
                             window2.setVisible(false);
                             ihmGraph.setJoueurs(jTemp);
-                            ihmGraph.initListeJoueur(jTemp);
-                            
+                            //ihmGraph.getListeJoueurs().repaint();
+                            ihmGraph.getListeJoueurs().initListeJoueur(jTemp);
                             ihmGraph.lancerPartie();
                             
-                            ihmGraph.getListeJoueurs().updateUI();
+                            //ihmGraph.getListeJoueurs().updateUI();
                         }
                 }
             });

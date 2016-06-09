@@ -6,6 +6,7 @@
 package Ui;
 
 
+import Data.CarreauAchetable;
 import Data.Evenement;
 import Data.Joueur;
 import Jeu.Controleur;
@@ -44,11 +45,17 @@ public class IhmGraph extends JFrame implements Observateur {
     private ImageIcon icon;
     
     //initListeJoueur
-    private JPanel panel_joueur,panel_joueur1,panel_joueur2,panel_joueur3,panel_joueur4,panel_joueur5,panel_joueur6;
+    private IhmListeJoueurs panel_joueur;
     //informationTour
-    private JPanel panel_information,panel_de,panel_tour;
-    JButton lancer_des,fin_du_tour;
+    
+    
+    private JPanel panel_information,panel_de;
+    private IhmInfoTour panel_tour;
+    
+    private JButton lancer_des,fin_du_tour;
 
+    
+    //*****************Constructeur************************
     public IhmGraph(Controleur controleur){
         super("Monopoly");
         this.setLayout(new BorderLayout());
@@ -68,15 +75,14 @@ public class IhmGraph extends JFrame implements Observateur {
 
         //partie plateau a remplir
         IhmPlateau plateau = new IhmPlateau();
-        
         this.add(plateau, BorderLayout.CENTER);
         
-
+        panel_joueur = new IhmListeJoueurs(this);
+        this.add(panel_joueur,BorderLayout.WEST);
+         
         
         
         informationTour();
-        initListeJoueur(new ArrayList());
-        
         music();
         
          
@@ -85,7 +91,9 @@ public class IhmGraph extends JFrame implements Observateur {
     this.setIconImage(icon.getImage());
         
     }
-    public JPanel getListeJoueurs(){
+    
+    
+    public IhmListeJoueurs getListeJoueurs(){
         return panel_joueur;
     }
 
@@ -94,6 +102,7 @@ public class IhmGraph extends JFrame implements Observateur {
     }
     public void setJoueurs(ArrayList<Joueur> jTemp){
         controleur.setJoueur(jTemp);
+        
     }
     
     public void notifier(Evenement e){
@@ -114,7 +123,36 @@ public class IhmGraph extends JFrame implements Observateur {
                 break;
             case 3:
                 this.afficherJeu();
+                break;
+                
+                //Gestion des evènements à l'arrivée sur un carreau
+            case 4: //arrivee sur un carreau achetable
+                System.err.println(controleur.getjCourant().getPositionCourante().getNom());
+                fin_du_tour.setEnabled(false);
+                panel_tour.activerAchat();
+                controleur.acheterCarreau(controleur.getjCourant(), (CarreauAchetable) controleur.getjCourant().getPositionCourante());
+               
+
+       
+                break;
+            case 5: //notification de débit
+                break;
+            case 6://joueur propriétaire de la carte
+                break;
+            case 7://achat Impossible (griser le bouton achat)
+                break;
+            case 8://passage impots/taxe
+                break;
+            case 9://aller en prison
+                break;
+            case 10: //afficher texte de la carte tirée
+                break;
+            
         }
+    }
+
+    public JButton getFin_du_tour() {
+        return fin_du_tour;
     }
 
 
@@ -134,55 +172,7 @@ public class IhmGraph extends JFrame implements Observateur {
         controleur.lancerPartie();
     }
     
-    public void initListeJoueur(ArrayList<Joueur> joueurs){
-
-            panel_joueur = new JPanel();
-            panel_joueur.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            panel_joueur1 = new JPanel();
-            panel_joueur1.setLayout(new GridBagLayout());
-            panel_joueur2 = new JPanel();
-            panel_joueur2.setLayout(new GridBagLayout());
-            panel_joueur3 = new JPanel();
-            panel_joueur3.setLayout(new GridBagLayout());
-            panel_joueur4 = new JPanel();
-            panel_joueur4.setLayout(new GridBagLayout());
-            panel_joueur5 = new JPanel();
-            panel_joueur5.setLayout(new GridBagLayout());
-            panel_joueur6 = new JPanel(); 
-            panel_joueur6.setLayout(new GridBagLayout());
-            
-            HashMap<Integer,JPanel> listPanel = new HashMap();
-            listPanel.put(0, panel_joueur1);
-            listPanel.put(1, panel_joueur2);
-            listPanel.put(2, panel_joueur3);
-            listPanel.put(3, panel_joueur4);
-            listPanel.put(4, panel_joueur5);
-            listPanel.put(5, panel_joueur6);
-
-            
-        for (int i=0; i<joueurs.size()*2 ; i++){
-               
-             if ((i % 2) == 0){   
-                c.gridx=1;
-                c.gridy=i+1;
-                c.anchor = GridBagConstraints.LINE_START;
-                listPanel.get(i/2).add(new JLabel("<html>"+joueurs.get(i/2).getName()+"<span>:</span>"+"<br>"+"<span>argent: </span>"+joueurs.get(i/2).getCash()+"<span>$</span>"+"</html>")); 
-                listPanel.get(i/2).setBorder(BorderFactory.createTitledBorder("<html>joueur"+(i/2+1)+":</html>"));
-                panel_joueur.add(listPanel.get(i/2),c);
-            }
-            else{
-                c.gridx=1;
-                c.gridy=i+1;
-                c.ipady=10;
-                panel_joueur.add(new JLabel("  "),c);
-            }
-            
-        }   
-        this.add(panel_joueur,BorderLayout.WEST); 
-        //new JLabel("<html><span>mon texte bla bla bla bla bla bla</span></html>");
-        //"<html>valeur: "+ valeur +"</br>"+ "valeur2: "+ valeur2+"</br></html>"
-    }
+    
     
     
     
@@ -196,7 +186,7 @@ public class IhmGraph extends JFrame implements Observateur {
         panel_de.setLayout(new GridBagLayout());
         GridBagConstraints c1 = new GridBagConstraints();
         
-        panel_tour= new JPanel();
+        panel_tour= new IhmInfoTour(this);
         panel_tour.setLayout(new GridBagLayout());
         GridBagConstraints c2 = new GridBagConstraints();
         
@@ -239,13 +229,10 @@ public class IhmGraph extends JFrame implements Observateur {
         c2.gridy=1;
         panel_tour.add(new JLabel("info tour"));
         
-        //bouton fin du tour
-        c2.gridx=1;
-        c2.gridy=2;
-        fin_du_tour = new JButton ("fin du tour");
-        panel_tour.add(fin_du_tour,c2);
-   
         
+        
+        
+    
         //mettre tous dans panel_information
         c.gridx=1;
         c.gridy=1;
@@ -254,7 +241,13 @@ public class IhmGraph extends JFrame implements Observateur {
         c.gridx=1;
         c.gridy=2;
         panel_information.add(panel_tour,c);
-    
+        
+        //bouton fin du tour
+        c.gridx=1;
+        c.gridy=3;
+        fin_du_tour = new JButton ("fin du tour");
+        panel_information.add(fin_du_tour,c);
+        
         this.add(panel_information,BorderLayout.EAST);
     
     
@@ -263,12 +256,27 @@ public class IhmGraph extends JFrame implements Observateur {
         lancer_des.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e){
-            controleur.jouerUnCoup(controleur.getjCourant());
+            controleur.lancerDes(controleur.getjCourant());
+            
             de1.animation(controleur.getjCourant().getD1());
             de2.animation(controleur.getjCourant().getD2());
-            if(controleur.getjCourant().getD1() != controleur.getjCourant().getD2()){controleur.joueurSuivant();}
+            controleur.jouerUnCoup(controleur.getjCourant());
+            
+            if(controleur.getjCourant().getD1() != controleur.getjCourant().getD2()){
+                lancer_des.setEnabled(false);
+            }
         }
         });  
+        
+        fin_du_tour.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e){
+
+            controleur.joueurSuivant();
+            lancer_des.setEnabled(true);
+        }
+        });  
+        
     
         
     }
