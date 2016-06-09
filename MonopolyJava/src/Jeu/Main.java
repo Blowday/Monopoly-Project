@@ -15,7 +15,7 @@ public class Main {
         // Instancie un contrôleur qui se chargera de lancer tout ce qu'il faut
         
         //new TestPayerLoyer();  //A REMETTRE CONTROLEUR(); 
-        new Controleur();
+        new ControleurServeur();
         
         
         

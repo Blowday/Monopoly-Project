@@ -135,7 +135,7 @@ public class Joueur {
         return compteur;
     }
     
-    public boolean possedeLaRue(ProprieteAConstruire c) {
+    public boolean possedeLeGroupe(ProprieteAConstruire c) {
                
         int nbPACGroupe = ((ProprieteAConstruire)c).getGroupe().getProprieteAConstruires().size(); 
         int compteur =0;

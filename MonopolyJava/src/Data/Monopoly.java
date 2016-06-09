@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Monopoly {
@@ -17,7 +16,9 @@ public class Monopoly {
         private HashMap<CouleurPropriete,Groupe> groupes;
         private LinkedList<Carte> cartesChance;
         private LinkedList<Carte> cartesCommunaute;
-
+        private int nbMaisonDispo;
+        private int nbHotelDispo;
+        
         //Constructeurs
         public Monopoly() {
             joueurs = new ArrayList<>();
@@ -26,8 +27,17 @@ public class Monopoly {
             cartesChance = new LinkedList<>();
             cartesCommunaute = new LinkedList<>();
             creerPlateau("data.txt", "dataChance.txt", "dataCommunaute.txt");
-            
+            nbMaisonDispo = 32;
+            nbHotelDispo = 12;
         }
+
+    public int getNbHotelDispo() {
+        return nbHotelDispo;
+    }
+
+    public void setNbHotelDispo(int nbHotelDispo) {
+        this.nbHotelDispo = nbHotelDispo;
+    }
         
         //Méthodes
         
@@ -234,6 +244,14 @@ public class Monopoly {
             this.shuffleDeck();
             
 	}
+
+    public int getNbMaisonDispo() {
+        return nbMaisonDispo;
+    }
+
+    public void setNbMaisonDispo(int nbMaison) {
+        this.nbMaisonDispo = nbMaison;
+    }
         
         
 	
