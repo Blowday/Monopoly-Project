@@ -139,14 +139,14 @@ public class IhmMenu {
             multi.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    ihmClient = new IhmClient();
+                    ihmClient = new IhmClient(ihmGraph);
                 }
              });
             
             serveur.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    ihmServeur = new IhmServeur();
+                    ihmServeur = new IhmServeur(ihmGraph);
                 }
              });
            

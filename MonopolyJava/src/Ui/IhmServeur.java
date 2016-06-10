@@ -23,15 +23,17 @@ public class IhmServeur {
     private JLabel lport;
     private JTextField port;
     private JButton Demerrer_srv;
+    private IhmGraph ihmGraph;
     
     
     
     
     
     
-    public IhmServeur(){
+    public IhmServeur(IhmGraph ihmGraph){
+        this.ihmGraph = ihmGraph;
         
-        windowServeur = new JFrame("IHM client");
+        windowServeur = new JFrame("IHM serveur");
         windowServeur.setDefaultCloseOperation(javax.swing.JFrame.HIDE_ON_CLOSE);
         windowServeur.setSize(300, 200);
         windowServeur.setLocationRelativeTo(null);
@@ -47,7 +49,7 @@ public class IhmServeur {
             //adresse
             c.gridx=1;
             c.gridy=1;
-            lport = new JLabel("adresse :");
+            lport = new JLabel("port :");
             panel_serveur.add(lport,c);
                     
             c.gridx=2;

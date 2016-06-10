@@ -112,6 +112,7 @@ public class IhmGraph extends JFrame implements Observateur {
         
     }
     
+    @Override
     public void notifier(Evenement e){
     //liste des evènements à gerer
     

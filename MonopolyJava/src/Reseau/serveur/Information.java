@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Jeu;
-
-import Data.Evenement;
+package Reseau.serveur;
 
 /**
  *
  * @author mugnijea
  */
-public class ControleurServeur extends Controleur{
-    public ControleurServeur(){
-        super();
-    }
+
+import java.rmi.*;
+
+public interface Information extends Remote {
+
+    public String getInformation() throws RemoteException;
+
 }

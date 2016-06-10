@@ -10,7 +10,7 @@ public class Serveur {
         ServerSocket socket;
         try {
             socket = new ServerSocket(2009);
-            Thread t = new Thread(new Accepter_clients(socket));
+            Thread t = new Thread(new AccepterClients(socket));
             t.start();
             System.out.println("Mes employeurs sont prêts !");
 
@@ -21,13 +21,13 @@ public class Serveur {
     }
 }
 
-class Accepter_clients implements Runnable {
+class AccepterClients implements Runnable {
 
     private ServerSocket socketserver;
     private Socket socket;
     private int nbrclient = 1;
 
-    public Accepter_clients(ServerSocket s) {
+    public AccepterClients(ServerSocket s) {
         socketserver = s;
     }
 
