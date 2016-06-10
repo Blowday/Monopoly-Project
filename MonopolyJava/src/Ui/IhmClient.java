@@ -23,15 +23,16 @@ public class IhmClient {
     private JLabel ladresse,lport,lnom_joueur;
     private JTextField adresse,port,nom_joueur;
     private JButton lancer;
+    private IhmGraph ihmGraph;
     
     
     
     
     
-    
-    public IhmClient(){
+    public IhmClient(IhmGraph ihmGraph){
+        this.ihmGraph=ihmGraph;
         
-        windowClient = new JFrame("IHM serveur");
+        windowClient = new JFrame("IHM client");
         windowClient.setDefaultCloseOperation(javax.swing.JFrame.HIDE_ON_CLOSE);
         windowClient.setSize(300, 200);
         windowClient.setLocationRelativeTo(null);

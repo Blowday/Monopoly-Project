@@ -35,8 +35,8 @@ public class IhmPlateau extends JPanel implements MouseListener{
     
     @Override
     public void mousePressed(MouseEvent e) {
-        int LONGUEUR_CASE = 118;
-        int LARGEUR_CASE = 74;
+        int LONGUEUR_CASE = 128;
+        int LARGEUR_CASE = 80;
         int NB_CASES = 40;
         
         //Obtenir les coordonnées (x,y) d'une case
@@ -71,9 +71,9 @@ public class IhmPlateau extends JPanel implements MouseListener{
         if (num>=NB_CASES){
             num-=NB_CASES;
         }
-        /*if (num==20 && (x!=0 || y!=0)){
+        if (num==20 && (x!=0 || y!=0)){
             num=-1;
-        }*/
+        }
         System.out.println(num);
     }
 
