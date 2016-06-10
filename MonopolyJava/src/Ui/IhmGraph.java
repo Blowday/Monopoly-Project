@@ -49,10 +49,10 @@ public class IhmGraph extends JFrame implements Observateur {
     //informationTour
     
     
-    private JPanel panel_information,panel_de,panel_milieu,panel_batiment;
+    private JPanel panel_information,panel_de,panel_milieu,panel_batiment,panelReponse;
     private IhmInfoTour panel_tour;
     
-    private JButton lancer_des,fin_du_tour;
+    private JButton lancer_des,fin_du_tour, acheter,refuser;
     private JLabel nb_maison,nb_hotel;
     GridBagConstraints constraintGenerale;
 
@@ -186,6 +186,11 @@ public class IhmGraph extends JFrame implements Observateur {
     
     
     public void informationTour(){
+        acheter = new JButton("Acheter");
+        refuser = new JButton("Refuser");
+        acheter.setEnabled(false);
+        refuser.setEnabled(false);
+        
         panel_information = new JPanel();
         panel_information.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -195,10 +200,11 @@ public class IhmGraph extends JFrame implements Observateur {
         GridBagConstraints c1 = new GridBagConstraints();
         
         panel_tour= new IhmInfoTour(this);
-        panel_tour.setLayout(new GridBagLayout());
-        GridBagConstraints c2 = new GridBagConstraints();
+       
         
-
+        panelReponse= new JPanel();
+        panelReponse.setLayout(new GridBagLayout());
+        GridBagConstraints c3 = new GridBagConstraints();
 
         //*****dés*****
         
@@ -221,38 +227,52 @@ public class IhmGraph extends JFrame implements Observateur {
         c1.gridy=1;
         panel_de.add(de2,c1);
         
-        //bouton lancer dés
-        c1.gridx=1;
-        c1.gridy=2;
         
-        lancer_des = new JButton ("lancer les dés");
-        panel_de.add(lancer_des,c1);
-        
-        panel_information.add(panel_de);
-        
-        //*****tour*****
-        
-        //info_tour
-        c2.gridx=1;
-        c2.gridy=1;
-        panel_tour.add(new JLabel("info tour"));
-        
-        
-        
-        
+
     
-        //mettre tous dans panel_information
+        //mettre tout dans panel_information
+        
+        
+        
         c.gridx=1;
         c.gridy=1;
         panel_information.add(panel_de,c);
         
+        //bouton lancer dés
         c.gridx=1;
         c.gridy=2;
+        lancer_des = new JButton ("lancer les dés");
+        panel_information.add(lancer_des,c);
+        
+        
+        
+        
+        c.gridx=1;
+        c.gridy=3;
         panel_information.add(panel_tour,c);
+        //Boutons Acheter/Refuser
+        
+        c3.gridx=1;
+        c3.gridy=1;
+        panelReponse.add(acheter,c3);
+        
+        c3.gridx=2;
+        c3.gridy=1;
+        panelReponse.add(refuser,c3);
+        
+        //
+        c.gridx=1;
+        c.gridy=4;
+        c.ipady=15;
+        panel_information.add(new JLabel("  "),c);
+        
+        c.gridx=1;
+        c.gridy=5;
+        panel_information.add(panelReponse,c);
         
         //bouton fin du tour
         c.gridx=1;
-        c.gridy=3;
+        c.gridy=6;
         fin_du_tour = new JButton ("fin du tour");
         panel_information.add(fin_du_tour,c);
         
@@ -269,7 +289,7 @@ public class IhmGraph extends JFrame implements Observateur {
         @Override
         public void actionPerformed(ActionEvent e){
             controleur.lancerDes(controleur.getjCourant());
-            
+            fin_du_tour.setEnabled(true);
             de1.animation(controleur.getjCourant().getD1());
             de2.animation(controleur.getjCourant().getD2());
             controleur.jouerUnCoup(controleur.getjCourant());
@@ -279,6 +299,7 @@ public class IhmGraph extends JFrame implements Observateur {
             }
             else{
                 fin_du_tour.setEnabled(false);
+                
             }
         }
         });  
@@ -290,7 +311,33 @@ public class IhmGraph extends JFrame implements Observateur {
             controleur.joueurSuivant();
             lancer_des.setEnabled(true);
             panel_tour.clearInfos();
+            fin_du_tour.setEnabled(false);
         }
+        });
+        
+        
+        acheter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                getListeJoueurs().initListeJoueur(getControleur().getMonopoly().getJoueurs());
+                getListeJoueurs().updateUI();
+                //ihmGraph.getListeJoueurs().repaint();
+                acheter.setEnabled(false);
+                refuser.setEnabled(false);
+                if(getControleur().getjCourant().getD1() != getControleur().getjCourant().getD2()){
+                    getFin_du_tour().setEnabled(true);
+                }
+            }
+        });
+        refuser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getControleur().setReponse(false);
+                acheter.setEnabled(false);
+                refuser.setEnabled(false);
+                getFin_du_tour().setEnabled(true);
+            }
         });
         
     }
@@ -353,6 +400,14 @@ public class IhmGraph extends JFrame implements Observateur {
         constraintGenerale.gridy=1;
         this.add(panel_milieu,constraintGenerale);   
         
+    }
+    
+     public JButton getAcheter() {
+        return acheter;
+    }
+
+    public JButton getRefuser() {
+        return refuser;
     }
     
      public static void music() 
