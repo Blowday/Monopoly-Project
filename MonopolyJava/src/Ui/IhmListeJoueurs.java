@@ -40,9 +40,9 @@ public class IhmListeJoueurs extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
         c.gridy = 1;
-        
+        c.weighty=1;
         for(Joueur j: joueurs){
-            joueur.setBorder(BorderFactory.createTitledBorder(""));
+            joueur.setBorder(BorderFactory.createTitledBorder("Joueurs :"));
             joueur.add(new JLabel("<html>"+j.getName()+"<span>:</span>"+"<br>"+"<span>argent: </span>"+j.getCash()+"<span>$</span>"+"</html>"),c); 
                 
             joueur.setBorder(BorderFactory.createTitledBorder(""));

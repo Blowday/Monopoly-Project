@@ -54,13 +54,14 @@ public class IhmGraph extends JFrame implements Observateur {
     
     private JButton lancer_des,fin_du_tour;
     private JLabel nb_maison,nb_hotel;
+    GridBagConstraints constraintGenerale;
 
     
     //*****************Constructeur************************
     public IhmGraph(Controleur controleur){
         super("Monopoly");
-        this.setLayout(new BorderLayout());
-       
+        this.setLayout(new GridBagLayout());
+        constraintGenerale = new GridBagConstraints();
         
         this.controleur = controleur;
         controleur.setObservateur(this);
@@ -79,7 +80,11 @@ public class IhmGraph extends JFrame implements Observateur {
 
         
         panel_joueur = new IhmListeJoueurs(this);
-        this.add(panel_joueur,BorderLayout.WEST);
+        
+        
+        constraintGenerale.gridx=1;
+        constraintGenerale.gridy=1;
+        this.add(panel_joueur,constraintGenerale);
          
         
         
@@ -161,7 +166,7 @@ public class IhmGraph extends JFrame implements Observateur {
     
     public void afficherJeu() {
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        setSize(1350, 940);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);
         setVisible(true); 
     }
@@ -250,7 +255,11 @@ public class IhmGraph extends JFrame implements Observateur {
         fin_du_tour = new JButton ("fin du tour");
         panel_information.add(fin_du_tour,c);
         
-        this.add(panel_information,BorderLayout.EAST);
+        
+        
+        constraintGenerale.gridx=3;
+        constraintGenerale.gridy=1;
+        this.add(panel_information,constraintGenerale);
     
     
     
@@ -266,6 +275,9 @@ public class IhmGraph extends JFrame implements Observateur {
             
             if(controleur.getjCourant().getD1() != controleur.getjCourant().getD2()){
                 lancer_des.setEnabled(false);
+            }
+            else{
+                fin_du_tour.setEnabled(false);
             }
         }
         });  
@@ -335,7 +347,10 @@ public class IhmGraph extends JFrame implements Observateur {
         c.gridy=2;
         panel_milieu.add(panel_batiment,c);
         
-        this.add(panel_milieu,BorderLayout.CENTER);   
+        
+        constraintGenerale.gridx=2;
+        constraintGenerale.gridy=1;
+        this.add(panel_milieu,constraintGenerale);   
         
     }
     

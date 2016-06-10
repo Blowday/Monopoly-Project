@@ -63,7 +63,9 @@ public class IhmPropriete {
         panelPropriete.add(new JLabel("  "),c);
         
         //nombre de batiment
-        int nb_maison=4;/*mettre le nombre de batiment sur cette case*/
+        int nb_maison=4;/*mettre le nombre de batiment sur cette case (renplacé le 4 par le nombre de maison (integer))*/
+        
+        
         
         if(nb_maison<5){
             for(int i=0; i<nb_maison; i++) {
