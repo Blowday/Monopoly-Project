@@ -76,6 +76,7 @@ public class IhmGraph extends JFrame implements Observateur {
         //partie plateau a remplir
         IhmPlateau plateau = new IhmPlateau();
         this.add(plateau, BorderLayout.CENTER);
+        plateau.setSize(900, 900);
         
         panel_joueur = new IhmListeJoueurs(this);
         this.add(panel_joueur,BorderLayout.WEST);
@@ -274,10 +275,9 @@ public class IhmGraph extends JFrame implements Observateur {
 
             controleur.joueurSuivant();
             lancer_des.setEnabled(true);
+            panel_tour.clearInfos();
         }
-        });  
-        
-    
+        });
         
     }
      public static void music() 

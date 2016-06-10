@@ -49,10 +49,10 @@ public class IhmDe extends JPanel{
         return (int) (Math.random() * (7 - 1)) + 1;
     }
     
-    @Override
+    /*@Override
     public void paint(Graphics g){
         de.setIcon(faceDes.get(deAleatoire()-1));
-    }
+    }*/
     
     public void animation(int dFinal){
         /*this.removeAll();

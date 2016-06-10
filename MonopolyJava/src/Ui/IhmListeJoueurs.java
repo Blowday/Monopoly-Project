@@ -21,24 +21,29 @@ import javax.swing.JPanel;
  */
 public class IhmListeJoueurs extends JPanel {
     private IhmGraph ihmGraph;
+    JPanel joueur;
 
     
-    public IhmListeJoueurs(IhmGraph ihmgraph){
+    public IhmListeJoueurs(IhmGraph ihmGraph){
         this.ihmGraph = ihmGraph;
         
+        joueur = new JPanel();
+        
+        joueur.setLayout(new GridBagLayout());
         this.setLayout(new GridBagLayout());
+        //repaint();
+        initListeJoueur(new ArrayList());
     }
     
     public void initListeJoueur(ArrayList<Joueur> joueurs){
-
+        joueur.removeAll();
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
         c.gridy = 1;
         
         for(Joueur j: joueurs){
-            JPanel joueur = new JPanel();
             joueur.setBorder(BorderFactory.createTitledBorder(""));
-            joueur.add(new JLabel("<html>"+j.getName()+"<span>:</span>"+"<br>"+"<span>argent: </span>"+j.getCash()+"<span>$</span>"+"</html>")); 
+            joueur.add(new JLabel("<html>"+j.getName()+"<span>:</span>"+"<br>"+"<span>argent: </span>"+j.getCash()+"<span>$</span>"+"</html>"),c); 
                 
             joueur.setBorder(BorderFactory.createTitledBorder(""));
             this.add(joueur,c);
@@ -50,10 +55,15 @@ public class IhmListeJoueurs extends JPanel {
         }
      
     }
-    /*public void paint(Graphics g){
-        if(ihmGraph.getControleur().getMonopoly().getJoueurs() != null){
+    
+    /*public void refreshJ(){
+        repaint();
+    }
+    public void paint(Graphics g){
+
+            System.out.println("besfkdf,nlmsdktgnm");
             this.initListeJoueur(ihmGraph.getControleur().getMonopoly().getJoueurs());
             
-        }
+        
     }*/
 }

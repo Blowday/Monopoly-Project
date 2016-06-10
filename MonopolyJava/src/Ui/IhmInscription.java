@@ -277,7 +277,11 @@ public class IhmInscription {
                             window2.setVisible(false);
                             ihmGraph.setJoueurs(jTemp);
                             //ihmGraph.getListeJoueurs().repaint();
-                            ihmGraph.getListeJoueurs().initListeJoueur(jTemp);
+                            //ihmGraph.getListeJoueurs().initListeJoueur(jTemp);
+                            //ihmGraph.getListeJoueurs().refreshJ();
+                            ihmGraph.getListeJoueurs().initListeJoueur(ihmGraph.getControleur().getMonopoly().getJoueurs());
+                            ihmGraph.getListeJoueurs().updateUI();
+                            
                             ihmGraph.lancerPartie();
                             
                             //ihmGraph.getListeJoueurs().updateUI();

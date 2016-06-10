@@ -5,6 +5,7 @@
  */
 package Ui;
 
+import Data.Joueur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -34,8 +35,9 @@ public class IhmInfoTour extends JPanel {
         acheter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //ihmGraph.getListeJoueurs().initListeJoueur(ihmGraph.getControleur().getMonopoly().getJoueurs());
-                //ihmGraph.getListeJoueurs().updateUI();
+                
+                ihmGraph.getListeJoueurs().initListeJoueur(ihmGraph.getControleur().getMonopoly().getJoueurs());
+                ihmGraph.getListeJoueurs().updateUI();
                 //ihmGraph.getListeJoueurs().repaint();
                 acheter.setEnabled(false);
                 refuser.setEnabled(false);
@@ -64,6 +66,13 @@ public class IhmInfoTour extends JPanel {
                this.getAcheter().setEnabled(true);
                this.getRefuser().setEnabled(true);
                this.updateUI();
+               //ihmGraph.getListeJoueurs().repaint();
+    }
+    public void clearInfos(){
+        this.getInfos().setText("");
+               
+               this.updateUI();
+               //ihmGraph.getListeJoueurs().repaint();
     }
     
     //getters/setters
