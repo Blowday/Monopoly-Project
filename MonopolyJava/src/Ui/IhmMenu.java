@@ -38,14 +38,14 @@ public class IhmMenu {
     
 
     private static JFrame window1;
-    private JPanel panel_accueil;
+    private JPanel panel_accueil, panel_multi;
     
     private IhmGraph ihmGraph;
     
     private ArrayList<Joueur> jtemp;
     private ImageIcon icon;
-    
-    
+    private IhmClient ihmClient;
+    private IhmServeur ihmServeur;
 
     
     public IhmMenu(IhmGraph ihmGraph){
@@ -54,24 +54,28 @@ public class IhmMenu {
         
             
             panel_accueil = new JPanel();
+            
+            
             panel_accueil.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
       
             
-            
+            panel_multi = new JPanel();
+            panel_accueil.setLayout(new GridBagLayout());
+            GridBagConstraints c2 = new GridBagConstraints();
             
             window1 = new JFrame("Monopoly");
             window1.setSize(900, 700);
             window1.setLocationRelativeTo(null);
-  
-      
+                 
+            
             c.gridx=1;
             c.gridy=1;
             //image
             JLabel image = new JLabel(new ImageIcon("image_debut.png"));
             panel_accueil.add(image,c);
             
-            //espace entre les boutons
+            //espace entre image et boutons
             c.gridx=1;
             c.gridy=2;
             c.ipady=80;
@@ -89,21 +93,36 @@ public class IhmMenu {
             Font font1 = new Font("Arial",Font.BOLD,100);
             jouer.setFont(font1);
            
-            jouer.setFocusable(false);
             panel_accueil.add(jouer,c);
             
             
-            //espace entre les boutons
+            
+            
+            //partie multi
+            c2.gridx=1;
+            c2.gridy=1;
+            JButton multi = new JButton ("Jouer en multijoueur");
+            panel_multi.add(multi,c2);
+            
+            c2.gridx=2;
+            c2.gridy=1;
+            JButton serveur = new JButton ("Lancer serveur");
+            panel_multi.add(serveur,c2);
+            panel_multi.setOpaque(false);
+            
             c.gridx=1;
             c.gridy=4;
-            c.ipady=15;
+            panel_accueil.add(panel_multi,c);
+            
+            //espace entre les boutons
+            c.gridx=1;
+            c.gridy=5;
+            c.ipady=0;
             panel_accueil.add(new JLabel("  "),c);
-            
-            
             
             //quitter
             c.gridx=1;
-            c.gridy=5;
+            c.gridy=6;
             c.ipadx=200;
             c.ipady=25;
             JButton quitter = new JButton ("Quitter");
@@ -112,13 +131,26 @@ public class IhmMenu {
             Font font2 = new Font("Arial",Font.BOLD,70);
             quitter.setFont(font2);        
             
-            quitter.setFocusable(false);
+            
             panel_accueil.add(quitter,c);
             
             
+            //multijoueur
+            multi.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    ihmClient = new IhmClient();
+                }
+             });
             
+            serveur.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    ihmServeur = new IhmServeur();
+                }
+             });
            
-            
+            //partie local
             jouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
@@ -168,6 +200,8 @@ public class IhmMenu {
             //window1.add(new JLabel(new ImageIcon("dollar.jpg")));
             //window1.pack();
             //window1.add(fond,BorderLayout.CENTER);
+            
+            //fond
             try {
                 JPanel panel = setBackgroundImage(window1, new File("dollar.jpg"));
             } catch (IOException e){
@@ -180,6 +214,10 @@ public class IhmMenu {
             //icon
             icon = new ImageIcon("policier.gif");
             window1.setIconImage(icon.getImage());
+            
+            
+            
+            
             
 
     }

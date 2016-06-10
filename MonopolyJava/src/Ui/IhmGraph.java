@@ -49,10 +49,11 @@ public class IhmGraph extends JFrame implements Observateur {
     //informationTour
     
     
-    private JPanel panel_information,panel_de;
+    private JPanel panel_information,panel_de,panel_milieu,panel_batiment;
     private IhmInfoTour panel_tour;
     
     private JButton lancer_des,fin_du_tour;
+    private JLabel nb_maison,nb_hotel;
 
     
     //*****************Constructeur************************
@@ -73,18 +74,18 @@ public class IhmGraph extends JFrame implements Observateur {
         JPanel jeu = new JPanel(new BorderLayout());
 
 
-        //partie plateau a remplir
-        IhmPlateau plateau = new IhmPlateau();
-        this.add(plateau, BorderLayout.CENTER);
-        plateau.setSize(900, 900);
+
+       
+
         
         panel_joueur = new IhmListeJoueurs(this);
         this.add(panel_joueur,BorderLayout.WEST);
          
         
         
-        informationTour();
-        music();
+        informationTour(); //intialisation du panel information tour
+        music(); 
+        plateau(); //intialisation du panel milieu (plateau + batiments)
         
          
     //icon
@@ -128,7 +129,7 @@ public class IhmGraph extends JFrame implements Observateur {
                 
                 //Gestion des evènements à l'arrivée sur un carreau
             case 4: //arrivee sur un carreau achetable
-                System.err.println(controleur.getjCourant().getPositionCourante().getNom());
+                System.err.println(controleur.getjCourant().getPositionCourante().getNom()); //a enlever
                 fin_du_tour.setEnabled(false);
                 panel_tour.activerAchat();
                 controleur.acheterCarreau(controleur.getjCourant(), (CarreauAchetable) controleur.getjCourant().getPositionCourante());
@@ -280,6 +281,64 @@ public class IhmGraph extends JFrame implements Observateur {
         });
         
     }
+    
+    private void plateau() {
+        panel_milieu = new JPanel();
+        panel_milieu.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        
+        panel_batiment = new JPanel();
+        panel_batiment.setLayout(new GridBagLayout());
+        GridBagConstraints c1 = new GridBagConstraints();
+        
+        //plateau
+        plateau = new IhmPlateau();
+       
+        //nombre de maison et d'immeuble
+        //maison
+        c1.gridx=1;
+        c1.gridy=1;
+        JLabel img_maison = new JLabel(new ImageIcon("maison.gif"));
+        panel_batiment.add(img_maison,c1);
+        
+        c1.gridx=2;
+        c1.gridy=1;
+        nb_maison = new JLabel(": "+"**nombre de maison restant**");
+        panel_batiment.add(nb_maison,c1);
+        
+        //espace entre maison et immeuble
+        c.gridx=3;
+        c.gridy=1;
+        c.ipadx=150;
+        panel_batiment.add(new JLabel("  "),c);
+        
+        
+        //immeuble
+        c1.gridx=4;
+        c1.gridy=1;
+        JLabel img_hotel = new JLabel(new ImageIcon("hotel.gif"));
+        panel_batiment.add(img_hotel,c1);
+        
+        c1.gridx=5;
+        c1.gridy=1;
+        nb_hotel = new JLabel(": "+"**nombre d'hotel restant**");
+        panel_batiment.add(nb_hotel,c1);
+        
+       
+        plateau.setSize(900, 900);
+        //assemblage
+        c.gridx=1;
+        c.gridy=1;
+        panel_milieu.add(plateau,c);
+        
+        c.gridx=1;
+        c.gridy=2;
+        panel_milieu.add(panel_batiment,c);
+        
+        this.add(panel_milieu,BorderLayout.CENTER);   
+        
+    }
+    
      public static void music() 
     {       
         AudioPlayer MGP = AudioPlayer.player;
