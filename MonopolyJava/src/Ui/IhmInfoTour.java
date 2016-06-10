@@ -41,7 +41,9 @@ public class IhmInfoTour extends JPanel {
                 //ihmGraph.getListeJoueurs().repaint();
                 acheter.setEnabled(false);
                 refuser.setEnabled(false);
-                ihmGraph.getFin_du_tour().setEnabled(true);
+                if(ihmGraph.getControleur().getjCourant().getD1() != ihmGraph.getControleur().getjCourant().getD2()){
+                    ihmGraph.getFin_du_tour().setEnabled(true);
+                }
             }
         });
         refuser.addActionListener(new ActionListener() {
@@ -50,7 +52,7 @@ public class IhmInfoTour extends JPanel {
                 ihmGraph.getControleur().setReponse(false);
                 acheter.setEnabled(false);
                 refuser.setEnabled(false);
-                 ihmGraph.getFin_du_tour().setEnabled(true);
+                ihmGraph.getFin_du_tour().setEnabled(true);
             }
         });
         this.add(acheter);
