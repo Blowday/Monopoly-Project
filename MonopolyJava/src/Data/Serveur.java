@@ -4,19 +4,19 @@ import java.io.IOException;
 import java.net.*;
 
 public class Serveur {
-
-    public static void main(String[] zero) {
-
+    int port;
+    public Serveur(int port){
+        if (port==0){
+            port=11111;
+        }
         ServerSocket socket;
         try {
-            socket = new ServerSocket(2009);
+            socket = new ServerSocket(port);
             Thread t = new Thread(new AccepterClients(socket));
             t.start();
-            System.out.println("Mes employeurs sont prêts !");
+            System.out.println("Demarrage du serveur");
 
         } catch (IOException e) {
-
-            e.printStackTrace();
         }
     }
 }
@@ -41,7 +41,6 @@ class AccepterClients implements Runnable {
                 socket.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

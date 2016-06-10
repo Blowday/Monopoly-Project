@@ -5,8 +5,11 @@
  */
 package Ui;
 
+import Data.Serveur;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,9 +25,9 @@ public class IhmServeur {
     private JPanel panel_serveur;
     private JLabel lport;
     private JTextField port;
-    private JButton Demerrer_srv;
+    private JButton Demarrer_srv;
     private IhmGraph ihmGraph;
-    
+    private Serveur serveur;
     
     
     
@@ -63,9 +66,21 @@ public class IhmServeur {
             //bouton lancer
             c.gridx=1;
             c.gridy=2;
-            Demerrer_srv = new JButton ("Lancer");
-            panel_serveur.add(Demerrer_srv,c);
+            Demarrer_srv = new JButton ("Lancer");
+            panel_serveur.add(Demarrer_srv,c);
     
+            Demarrer_srv.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    if ("".equals(port.getText())){
+                        Serveur serveur = new Serveur(0);
+                    } else {
+                        Serveur serveur = new Serveur(Integer.valueOf(port.getText()));
+                    }
+                    
+                }
+             });
+            
         windowServeur.add(panel_serveur);
         windowServeur.setVisible(true);
 }

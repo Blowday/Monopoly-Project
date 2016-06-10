@@ -5,8 +5,11 @@
  */
 package Ui;
 
+import Data.Clients;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,6 +27,7 @@ public class IhmClient {
     private JTextField adresse,port,nom_joueur;
     private JButton lancer;
     private IhmGraph ihmGraph;
+    private Clients clients;
     
     
     
@@ -84,6 +88,18 @@ public class IhmClient {
             c.gridy=4;
             lancer = new JButton ("Lancer");
             panel_client.add(lancer,c);
+            
+            lancer.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    if ("".equals(port.getText())){
+                        Clients client = new Clients(0,adresse.getText(),nom_joueur.getText());
+                    } else {
+                        Clients client = new Clients(Integer.valueOf(port.getText()),adresse.getText(),nom_joueur.getText());
+                    }
+                    
+                }
+             });
             
         windowClient.add(panel_client);
         windowClient.setVisible(true);

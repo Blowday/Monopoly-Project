@@ -180,6 +180,7 @@ public class IhmMenu {
             
             //message de validation quand on appuie sur la croix pour fermer
             window1.addWindowListener( new WindowAdapter() {
+                @Override
                 public void windowClosing(WindowEvent e) {
                     
                     int reponse = JOptionPane.showConfirmDialog(window1,
