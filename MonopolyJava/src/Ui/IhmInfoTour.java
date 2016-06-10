@@ -6,9 +6,13 @@
 package Ui;
 
 import Data.Joueur;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -20,44 +24,24 @@ public class IhmInfoTour extends JPanel {
     
     private IhmGraph ihmGraph;
     private JTextArea infos;
-    private JButton acheter,refuser;
+   
+    private GridBagConstraints c;
     
     public IhmInfoTour(IhmGraph ihmGraph){
+        this.setLayout(new GridBagLayout());
+        c = new GridBagConstraints();
         this.ihmGraph = ihmGraph;
         
         infos = new JTextArea("");
-        acheter = new JButton("Acheter");
-        refuser = new JButton("Refuser");
-        acheter.setEnabled(false);
-        refuser.setEnabled(false);
         
         
-        acheter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                ihmGraph.getListeJoueurs().initListeJoueur(ihmGraph.getControleur().getMonopoly().getJoueurs());
-                ihmGraph.getListeJoueurs().updateUI();
-                //ihmGraph.getListeJoueurs().repaint();
-                acheter.setEnabled(false);
-                refuser.setEnabled(false);
-                if(ihmGraph.getControleur().getjCourant().getD1() != ihmGraph.getControleur().getjCourant().getD2()){
-                    ihmGraph.getFin_du_tour().setEnabled(true);
-                }
-            }
-        });
-        refuser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ihmGraph.getControleur().setReponse(false);
-                acheter.setEnabled(false);
-                refuser.setEnabled(false);
-                ihmGraph.getFin_du_tour().setEnabled(true);
-            }
-        });
-        this.add(acheter);
-        this.add(refuser);
-        this.add(infos);
+        
+        c.gridx = 1;
+        c.gridy = 1;
+        infos.setPreferredSize(new Dimension(350,50));
+        infos.setMinimumSize(new Dimension(350,50));
+        infos.setMaximumSize(new Dimension(350,50));
+        this.add(infos,c);        
         
     }
     //methodes
@@ -65,26 +49,20 @@ public class IhmInfoTour extends JPanel {
         this.getInfos().setText(
                         "Vous êtes arrivé sur la case: "+ ihmGraph.getControleur().getjCourant().getPositionCourante().getNom()+"\n"
                         +"Cette case n'a pas de propriétaire \n"+ihmGraph.getControleur().getjCourant().getCash());
-               this.getAcheter().setEnabled(true);
-               this.getRefuser().setEnabled(true);
+               ihmGraph.getAcheter().setEnabled(true);
+               ihmGraph.getRefuser().setEnabled(true);
                this.updateUI();
                //ihmGraph.getListeJoueurs().repaint();
     }
     public void clearInfos(){
-        this.getInfos().setText("");
+        this.getInfos().setText(" ");
                
                this.updateUI();
                //ihmGraph.getListeJoueurs().repaint();
     }
     
     //getters/setters
-    public JButton getAcheter() {
-        return acheter;
-    }
-
-    public JButton getRefuser() {
-        return refuser;
-    }
+   
     
     public JTextArea getInfos(){
         return infos;
