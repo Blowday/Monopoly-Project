@@ -5,7 +5,8 @@
  */
 package Ui;
 
-import Data.Serveur;
+import Reseau.serveur.AccepterClients;
+import Serveur.Serveur;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -25,7 +26,7 @@ public class IhmServeur {
     private JPanel panel_serveur;
     private JLabel lport;
     private JTextField port;
-    private JButton Demarrer_srv;
+    private JButton Demarrer_srv,demarrerPartie;
     private IhmGraph ihmGraph;
     private Serveur serveur;
     
@@ -68,6 +69,14 @@ public class IhmServeur {
             c.gridy=2;
             Demarrer_srv = new JButton ("Lancer");
             panel_serveur.add(Demarrer_srv,c);
+            
+            //bouton demarrer partie
+            c.gridx=1;
+            c.gridy=4;
+            demarrerPartie = new JButton ("Demarrer la partie");
+            panel_serveur.add(demarrerPartie,c);
+            
+            
     
             Demarrer_srv.addActionListener(new ActionListener() {
                 @Override
@@ -77,7 +86,6 @@ public class IhmServeur {
                     } else {
                         Serveur serveur = new Serveur(Integer.valueOf(port.getText()));
                     }
-                    
                 }
              });
             

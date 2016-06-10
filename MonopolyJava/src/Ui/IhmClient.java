@@ -5,7 +5,7 @@
  */
 package Ui;
 
-import Data.Clients;
+import Client.Clients;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -89,17 +89,21 @@ public class IhmClient {
             lancer = new JButton ("Lancer");
             panel_client.add(lancer,c);
             
+            
+            
             lancer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     if ("".equals(port.getText())){
-                        Clients client = new Clients(0,adresse.getText(),nom_joueur.getText());
+                        Clients client = new Clients(0,adresse.getText(),nom_joueur.getText(),ihmGraph);
                     } else {
-                        Clients client = new Clients(Integer.valueOf(port.getText()),adresse.getText(),nom_joueur.getText());
+                        Clients client = new Clients(Integer.valueOf(port.getText()),adresse.getText(),nom_joueur.getText(),ihmGraph);
                     }
-                    
+     
                 }
              });
+            
+            
             
         windowClient.add(panel_client);
         windowClient.setVisible(true);
